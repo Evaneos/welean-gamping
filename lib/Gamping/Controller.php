@@ -16,9 +16,23 @@ abstract class Controller
      * @var Request
      */
     private $request;
+    
+    private $datas = array();
+    
+    protected abstract function executeAction();
 
-    protected abstract function executeAction(array $data);
-
+    public function getDatas()
+    {
+        return $this->datas;
+    }
+    
+    public function setData($key, $value)
+    {
+        $this->datas[$key] = $value;
+        
+        return $this->datas;
+    }
+    
     /**
      * Sets the request object.
      * @param Request $request
@@ -79,8 +93,8 @@ abstract class Controller
      * Executes the controller action.
      * @return string Response output.
      */
-    public function execute(array $data)
+    public function execute()
     {
-    	return $this->executeAction($data);
+    	$this->executeAction();
     }
 }

@@ -1,5 +1,6 @@
+default-layout: landing
 layouts:
-    landing: /path/to/file
+    landing: app/views/landing.phtml
 
 routes:
     home:
@@ -8,6 +9,7 @@ routes:
         methods: [ get, post, put, delete ]
         output:
             html:
+                layout: landing
                 view: app/views/home/home.phtml
                 before-run:
                 after-run: [ afterRun ]

@@ -38,7 +38,19 @@ class Application
      * 
      * @var array
      */
+    private $data = null;
+    
+    /**
+     * 
+     * @var array
+     */
     private $routeData;
+        
+    /**
+     * 
+     * @var LayoutSelector
+     */
+    private $layoutSelector;
     
     /**
      * 
@@ -48,6 +60,7 @@ class Application
 
     /**
      * Initialize a new instance.
+     * 
      * @param \Silex\Application $application
      * @param \DICIT\Container $container
      * @param \Symfony\Component\Yaml\Yaml $yaml Yaml parser used for routes.
@@ -99,10 +112,28 @@ class Application
         
         foreach ($outputData as $name => $output) {
             $view = $this->extractValue($output, 'view', '');
-            $selector->addOutput($name, ROOT_DIR . DIRECTORY_SEPARATOR . $view); 
+            $layout = $this->extractValue($output, 'layout', '');
+            
+            $selector->addOutput($name, $layout, ROOT_DIR . DIRECTORY_SEPARATOR . $view); 
         }
         
+        $selector->setLayoutSelector($this->getLayoutSelector($routeName));
+        
         return $selector;
+    }
+    
+    public function getLayoutSelector()
+    {
+        $this->loadData();
+        $layoutSelector = new LayoutSelector();
+        
+        foreach ($this->data['layouts'] as $layout => $template) {
+            $layoutSelector->addLayout($layout, ROOT_DIR . DIRECTORY_SEPARATOR . $template);
+        }
+        
+        $layoutSelector->setDefaultLayout($this->data['default-layout']);
+                
+        return $layoutSelector;
     }
     
     public function getControllerHooks($routeName, $outputName)
@@ -154,15 +185,21 @@ class Application
         return $this->routeData[$routeName];
     }
     
+    private function loadData()
+    {
+        if ($this->data === null) {
+            if (trim($this->routeFile) == '') {
+                throw new \RuntimeException('Route file is not set.');
+            }
+            
+            $this->data = $this->yaml->parse($this->routeFile);
+        }
+    }
+    
     private function registerRoutes()
     {
-        if (trim($this->routeFile) == '') {
-            throw new \RuntimeException('Route file is not set.');
-        }
-        
-        $data = $this->yaml->parse($this->routeFile);
-        
-        $routes = $data['routes'];
+        $this->loadData();
+        $routes = $this->data['routes'];
         
         foreach ($routes as $name => $route) {
             $this->registerRoute($name, $route);
@@ -181,21 +218,23 @@ class Application
         $to = function () use($app, $container, $routeName, $controllerName)
         {
             $request = $app->getRequest();
+            
             $controller = $container->get($controllerName);
             $controller->setRequest($request);
+            
             $responseSelector = $app->getResponseSelector($routeName);
             $outputName = $responseSelector->getOutputName($request);
             
             /* @var $hooks  \Gamping\ControllerHookCollection */
             $hooks = $app->getControllerHooks($routeName, $outputName);
             
-            $data = $hooks->runBefore($controller, $outputName);
-            $data = $controller->execute($data);
-            $data = $hooks->runAfter($controller, $outputName, $data);
+            $hooks->runBefore($controller, $outputName);
+            $controller->execute();
+            $hooks->runAfter($controller, $outputName);
            
             $response = $responseSelector->getResponse($app->getRequest());
             
-            return $response->render($data);
+            return $response->render($controller->getDatas());
         };
         
         $methods = $this->extractValue($route, 'methods');

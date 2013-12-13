@@ -9,31 +9,46 @@ class ResponseSelector
 
     private $outputs = array();
     
+    private $layouts = array();
+    
+    private $layoutSelector;
+    
+    public function getLayoutSelector()
+    {
+        return $this->layoutSelector;
+    }
+    
+    public function setLayoutSelector(LayoutSelector $selector)
+    {
+        $this->layoutSelector = $selector;
+    }
+    
     public function getResponse(Request $request)
     {
-        $view = null;
+        $response = null;
         $outputName = $this->getOutputName($request);
         
         if ($outputName == 'html') {
-            $view = new Html();
+            $response = new Html();
             $viewName = $this->outputs['html'];
         }
         
         if ($outputName == 'json') {
-            $view = new Json();
+            $response = new Json();
             $viewName = $this->outputs['json'];
         }
         
         if ($outputName == 'xml') {
-            $view = new Xml();
+            $response = new Xml();
             $viewName = $this->outputs['xml'];
         }
         
-        if ($view != null) {
-            $view->setViewFile($viewName);
+        if ($response != null) {
+            $response->setLayout($this->layoutSelector->getLayout($this->layouts[$outputName]));
+            $response->setViewFile($viewName);
         }
         
-        return $view;
+        return $response;
     }
     
     public function getOutputName(Request $request)
@@ -57,8 +72,9 @@ class ResponseSelector
         throw new \RuntimeException('Unable to find a compatible output.');
     }
     
-    public function addOutput($name, $view)
+    public function addOutput($name, $layout, $view)
     {
+        $this->layouts[$name] = $layout;
         $this->outputs[$name] = $view;
     }
 }

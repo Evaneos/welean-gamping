@@ -38,15 +38,15 @@ class ControllerHookCollection {
     
     public function runBefore(Controller $controller, $output)
     {
-        return $this->runMethods($controller, $this->before, $output, array());
+        $this->runMethods($controller, $this->before, $output);
     }
     
-    public function runAfter(Controller $controller, $output, array $data)
+    public function runAfter(Controller $controller, $output)
     {
-        return $this->runMethods($controller, $this->after, $output, $data);
+        $this->runMethods($controller, $this->after, $output);
     }
     
-    private function runMethods($controller, array $when, $output, array $data)
+    private function runMethods($controller, array $when, $output)
     {
         if (! array_key_exists($output, $when)) {
             return;
@@ -54,7 +54,7 @@ class ControllerHookCollection {
 
         foreach ($when[$output] as $method) {
             $this->checkMethod($controller, $method);
-            $data = call_user_func(array($controller, $method), $data);
+            $data = call_user_func(array($controller, $method));
         }
         
         return $data;
