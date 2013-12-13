@@ -5,7 +5,7 @@ class Home extends \Gamping\Controller
 {
     public $userManager = null;
 
-    protected function executeAction()
+    protected function executeAction(array $data)
     {
         $this->getAllParams();
 
@@ -13,5 +13,10 @@ class Home extends \Gamping\Controller
         var_dump($this->userManager->getById(2));
 
         return array('data' => 'Hello World');
+    }
+    
+    public function afterRun(array $data)
+    {
+        return $data;
     }
 }
