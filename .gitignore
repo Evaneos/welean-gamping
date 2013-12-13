@@ -1,3 +1,4 @@
 vendor/
 composer.lock
+config/part/parameters.yml
 *~

@@ -1,0 +1,30 @@
+classes :
+    ParcelManager :
+        class : \Gamping\Model\Parcel\Manager
+        call :
+            setStorage : [ @ParcelStorage ]
+            setValidator : [ @ParcelValidator ]
+        interceptor : [ @ExceptionInterceptor ]
+    ParcelValidator :
+        class : \Gamping\Model\Parcel\Validator
+    ParcelStorage :
+        class : \Gamping\Model\Parcel\Storage
+        call :
+            setStoreVolatile : [ @ParcelStoreMemcached ]
+            setStorePersistent : [ @ParcelStoreDatabase ]
+            setStoreLevel1 : [ @StoreArray ]
+    ParcelStoreMemcached :
+        class : \Berthe\DAL\StoreMemcached
+    ParcelStoreDatabase :
+        class : \Berthe\DAL\StoreDatabase
+        call :
+            setReader : [ @ParcelReader ]
+            setWriter : [ @ParcelWriter ]
+    ParcelReader :
+        class : \Gamping\Model\Parcel\Reader
+        call :
+            setDb : [ @DbReader ]
+    ParcelWriter :
+        class : \Gamping\Model\Parcel\Writer
+        call :
+            setDb : [ @DbWriter ]

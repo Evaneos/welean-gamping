@@ -1,6 +1,6 @@
 include :
     - part/parameters.yml
     - part/controllers.yml
-    - part/berthe.yml
+    - part/modules.yml
     - part/interceptor.yml
     - part/classes.yml
