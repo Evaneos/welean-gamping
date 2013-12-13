@@ -14,6 +14,8 @@ $silex['debug'] = true;
 $containerConfig = new \DICIT\Config\YML($injections);
 $container = new \DICIT\Container($containerConfig);
 
+$container->get('TranslationEngine');
+
 $yaml = new Symfony\Component\Yaml\Yaml();
 
 $app = new Gamping\Application($silex, $container, $yaml);

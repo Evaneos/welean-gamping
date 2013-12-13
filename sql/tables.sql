@@ -1,4 +1,4 @@
-CREATE TABLE `country` (
+CREATE TABLE IF NOT EXISTS `country` (
     `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(255) NOT NULL,
     PRIMARY KEY (`id`)
@@ -7,7 +7,7 @@ COLLATE='latin1_swedish_ci'
 ENGINE=InnoDB;
 
 
-CREATE TABLE `parcel_has_picture` (
+CREATE TABLE IF NOT EXISTS `parcel_has_picture` (
     `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
     `parcel_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
     `picture_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
@@ -21,7 +21,7 @@ COLLATE='latin1_swedish_ci'
 ENGINE=InnoDB;
 
 
-CREATE TABLE `picture` (
+CREATE TABLE IF NOT EXISTS `picture` (
     `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
     `url` VARCHAR(255) NOT NULL,
     PRIMARY KEY (`id`)
@@ -30,7 +30,7 @@ COLLATE='latin1_swedish_ci'
 ENGINE=InnoDB;
 
 
-CREATE TABLE `place` (
+CREATE TABLE IF NOT EXISTS `place` (
     `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(255) NULL DEFAULT NULL,
     PRIMARY KEY (`id`)
@@ -39,7 +39,7 @@ COLLATE='latin1_swedish_ci'
 ENGINE=InnoDB;
 
 
-CREATE TABLE `place_has_situation_geo` (
+CREATE TABLE IF NOT EXISTS `place_has_situation_geo` (
     `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
     `place_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
     `situation_geo_id` INT(10) UNSIGNED NOT NULL DEFAULT '0',
@@ -53,7 +53,7 @@ COLLATE='latin1_swedish_ci'
 ENGINE=InnoDB;
 
 
-CREATE TABLE `region` (
+CREATE TABLE IF NOT EXISTS `region` (
     `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(255) NOT NULL,
     PRIMARY KEY (`id`),
@@ -63,7 +63,7 @@ COLLATE='latin1_swedish_ci'
 ENGINE=InnoDB;
 
 
-CREATE TABLE `situation_geo` (
+CREATE TABLE IF NOT EXISTS `situation_geo` (
     `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(255) NOT NULL,
     PRIMARY KEY (`id`)

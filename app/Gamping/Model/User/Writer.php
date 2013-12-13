@@ -84,7 +84,6 @@ SQL;
         else {
             return false;
         }
-        }
     }
 
     public function delete(\Berthe\AbstractVO $object) {

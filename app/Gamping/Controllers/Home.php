@@ -4,9 +4,9 @@ namespace Gamping\Controllers;
 class Home extends \Gamping\Controller
 {
     public $userManager = null;
-    
+
     /**
-     * 
+     *
      * @var \Gamping\Model\Parcel\Manager
      */
     public $parcelManager = null;
@@ -15,6 +15,7 @@ class Home extends \Gamping\Controller
     {
         $this->getAllParams();
 
+        echo \t('chaud', 'en');
 
         $fetcher = new \Berthe\Fetcher(-1, -1);
         $resultSet = $this->userManager->getByPaginator($fetcher)->getResultSet();
@@ -24,7 +25,7 @@ class Home extends \Gamping\Controller
         var_dump($this->userManager->getById(2));
 
         var_dump($this->parcelManager->getById(1));
-        
+
         return array('data' => 'Hello World');
     }
 

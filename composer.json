@@ -3,14 +3,18 @@
         "silex/silex": "~1.1",
         "symfony/yaml": "2.5.*@dev",
         "oliviermadre/dic-it" : "dev-master",
-        "oliviermadre/berthe" : "dev-ns"
+        "oliviermadre/berthe" : "dev-ns",
+        "oliviermadre/translations": "dev-master"
     },
     "autoload": {
         "psr-0": {
             "Gamping\\": "lib",
             "Gamping\\Controller": "app",
             "Gamping\\Model" : "app"
-        }
+        },
+        "files": [
+            "lib/functions/translation.php"
+        ]
     }
 
 }

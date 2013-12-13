@@ -14,3 +14,15 @@ classes :
         arguments : [ %db.adapter, %db.params ]
     StoreArray :
         class : \Berthe\DAL\StoreArray
+    TranslationEngine :
+        class : Translation_Manager
+        builder : \Gamping\Translation\InstanceCreator::factory
+        singleton : true
+        call :
+            setEnableNotice : false
+            registerStorage : [ dbString, @TranslationStringDatabaseEngine ]
+    TranslationStringDatabaseEngine :
+        class : \Gamping\Translation\StringDatabaseEngine
+        singleton : true
+        call :
+            setDbAdapter : [ @DbWriter ]
