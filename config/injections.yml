@@ -1,4 +1,6 @@
-classes:
-    homeController:
-        class: Gamping\Controllers\Home
-        
+include :
+    - part/parameters.yml
+    - part/controllers.yml
+    - part/berthe.yml
+    - part/interceptor.yml
+    - part/classes.yml

@@ -1,0 +1,16 @@
+classes :
+    DbReader :
+        class : \Berthe\DAL\DbReader
+        singleton : true
+        arguments : [ @MysqlAdapter ]
+    DbWriter :
+        class : \Berthe\DAL\DbWriter
+        singleton : true
+        arguments : [ @MysqlAdapter ]
+    MysqlAdapter :
+        class : Zend_Db_Adapter_Abstract
+        singleton : true
+        builder : \Zend_Db::factory
+        arguments : [ %db.adapter, %db.params ]
+    StoreArray :
+        class : \Berthe\DAL\StoreArray

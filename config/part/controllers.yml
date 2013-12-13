@@ -1,0 +1,5 @@
+classes:
+    homeController:
+        class: Gamping\Controllers\Home
+        props :
+            userManager : @UserManager

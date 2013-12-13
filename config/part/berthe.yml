@@ -1,0 +1,30 @@
+classes :
+    UserManager :
+        class : \Gamping\Model\User\Manager
+        call :
+            setStorage : [ @UserStorage ]
+            setValidator : [ @UserValidator ]
+        interceptor : [ @ExceptionInterceptor ]
+    UserValidator :
+        class : \Gamping\Model\User\Validator
+    UserStorage :
+        class : \Gamping\Model\User\Storage
+        call :
+            setStoreVolatile : [ @UserStoreMemcached ]
+            setStorePersistent : [ @UserStoreDatabase ]
+            setStoreLevel1 : [ @StoreArray ]
+    UserStoreMemcached :
+        class : \Berthe\DAL\StoreMemcached
+    UserStoreDatabase :
+        class : \Berthe\DAL\StoreDatabase
+        call :
+            setReader : [ @UserReader ]
+            setWriter : [ @UserWriter ]
+    UserReader :
+        class : \Gamping\Model\User\Reader
+        call :
+            setDb : [ @DbReader ]
+    UserWriter :
+        class : \Gamping\Model\User\Writer
+        call :
+            setDb : [ @DbWriter ]
