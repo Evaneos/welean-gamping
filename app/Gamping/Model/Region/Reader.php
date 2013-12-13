@@ -1,14 +1,14 @@
 <?php
-namespace Gamping\Model\User;
+namespace Gamping\Model\Region;
 
 class Reader extends \Berthe\DAL\AbstractReader {
-    const VO_CLASS = '\Gamping\Model\User\VO';
+    const VO_CLASS = '\Gamping\Model\Region\VO';
 
     public function getSelectQuery() {
-        return "SELECT * FROM user";
+        return "SELECT * FROM region";
     }
 
     public function getTableName() {
-        return 'user';
+        return 'region';
     }
 }
