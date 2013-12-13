@@ -1,3 +1,6 @@
+layouts:
+    landing: /path/to/file
+
 routes:
     home:
         pattern: "/"
@@ -6,7 +9,7 @@ routes:
         output:
             html:
                 view: app/views/home/home.phtml
-                before-run: 
+                before-run:
                 after-run:
             json:
                 before-run:

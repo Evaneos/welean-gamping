@@ -1,104 +1,125 @@
 <?php
-
 namespace Gamping;
 
-class View {
-	protected $file = '';
-	protected $replacements = array();
-	protected $enabled = true;
+class View
+{
 
-	static protected $partials = array();
+    protected $file = '';
 
-	public function __construct($file=null) {
-		if(null!==$file) {
-			$this->setFile($file);
-		}
-	}
+    protected $replacements = array();
 
-	public function enable() {
-		$this->enabled = true;
-		return $this;
-	}
+    protected $enabled = true;
 
-	public function disable() {
-		$this->enabled = false;
-		return $this;
-	}
+    protected static $partials = array();
 
-	public function isEnabled() {
-		return $this->enabled;
-	}
+    public function __construct($file = null)
+    {
+        if (null !== $file) {
+            $this->setFile($file);
+        }
+    }
 
-	public function setFile($file) {
-		$this->file = $file;
-		return $this;
-	}
+    public function enable()
+    {
+        $this->enabled = true;
+        return $this;
+    }
 
-	public function assign($key, $val) {
-		$this->replacements[$key] = $val;
-		return $this;
-	}
+    public function disable()
+    {
+        $this->enabled = false;
+        return $this;
+    }
 
-	public function assignx($assocArray) {
-		foreach($assocArray as $k=>$v) {
-			$this->assign($k, $v);
-		}
-		return $this;
-	}
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
 
-	public function resetReplacements() {
-		$this->replacements = array();
-	}
+    public function setFile($file)
+    {
+        $this->file = $file;
+        return $this;
+    }
 
-	public function has($k) {
-		return array_key_exists($k, $this->replacements);
-	}
+    public function assign($key, $val)
+    {
+        $this->replacements[$key] = $val;
+        return $this;
+    }
 
-	public function get($k, $default=null) {
-		return  $this->has($k) ? $this->replacements[$k] : $default;
-	}
+    public function assignx($assocArray)
+    {
+        foreach ($assocArray as $k => $v) {
+            $this->assign($k, $v);
+        }
+        return $this;
+    }
 
-	public function __set($k, $v) {
-		$this->assign($k, $v);
-	}
+    public function resetReplacements()
+    {
+        $this->replacements = array();
+    }
 
-	public function __get($k) {
-		return $this->get($k);
-	}
+    public function has($k)
+    {
+        return array_key_exists($k, $this->replacements);
+    }
 
-	protected function partial($file, $data=null) {
-		$partial = new self($file);
-		if(null!==$data) {
-			$partial->assignx($data);
-		}
-		return $partial->compile();
-	}
+    public function get($k, $default = null)
+    {
+        return $this->has($k) ? $this->replacements[$k] : $default;
+    }
 
-	protected function partialLoop($file, $dataSet) {
-		$partial = new self($file);
-		$return = '';
-		foreach($dataSet as $data) {
-			$partial->assignx($data);
-			$return.=$partial->compile();
-			$partial-resetReplacements();
-		}
-		return $return;
-	}
+    public function __set($k, $v)
+    {
+        $this->assign($k, $v);
+    }
 
-	public function compile() {
-		if(false==$this->enabled) {
-			return '';
-		}
+    public function __get($k)
+    {
+        return $this->get($k);
+    }
 
-		ob_start();
-		if(false===include($this->file)) {
-			ob_get_clean();
-			throw new \RuntimeException('Unable to include the view file '.$this->file);
-		}
-		return ob_get_clean();
-	}
+    protected function partial($file, $data = null)
+    {
+        $partial = new self($file);
+        
+        if (null !== $data) {
+            $partial->assignx($data);
+        }
+        
+        return $partial->compile();
+    }
 
-	public function display() {
-		echo $this->compile();
-	}
+    protected function partialLoop($file, $dataSet)
+    {
+        $partial = new self($file);
+        $return = '';
+        foreach ($dataSet as $data) {
+            $partial->assignx($data);
+            $return .= $partial->compile();
+            $partial - $this->resetReplacements();
+        }
+        return $return;
+    }
+
+    public function compile()
+    {
+        if (false == $this->enabled) {
+            return '';
+        }
+        
+        ob_start();
+        if (false === include ($this->file)) {
+            ob_get_clean();
+            throw new \RuntimeException('Unable to include the view file ' . $this->file);
+        }
+        return ob_get_clean();
+    }
+
+    public function display()
+    {
+        echo $this->compile();
+    }
 }
