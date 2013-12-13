@@ -94,7 +94,7 @@ class Application
     public function getResponseSelector($routeName)
     {      
         $routeData = $this->getRouteData($routeName);
-        $outputData = $this->extractValue($routeData, 'output');
+        $outputData = $this->extractValue($routeData, 'output', array());
         $selector = new ResponseSelector();
         
         foreach ($outputData as $name => $output) {
@@ -103,6 +103,23 @@ class Application
         }
         
         return $selector;
+    }
+    
+    public function getControllerHooks($routeName, $outputName)
+    {
+        $hooks = new ControllerHookCollection();
+        $routeData = $this->getRouteData($routeName);
+        $outputData = $this->extractValue($routeData, 'output', array());
+        
+        foreach ($outputData as $output => $data) {
+            $before = $this->extractValue($data, 'before-run', array()) ?: array();
+            $after = $this->extractValue($data, 'after-run', array()) ?: array();
+            
+            $hooks->setBeforeHooks($output, $before);
+            $hooks->setAfterHooks($output, $after);
+        }
+            
+        return $hooks;
     }
     
     /**
@@ -163,13 +180,19 @@ class Application
         
         $to = function () use($app, $container, $routeName, $controllerName)
         {
+            $request = $app->getRequest();
             $controller = $container->get($controllerName);
-            
-            $controller->setRequest($app->getRequest());
-            
-            $data = $controller->execute();
-            
+            $controller->setRequest($request);
             $responseSelector = $app->getResponseSelector($routeName);
+            $outputName = $responseSelector->getOutputName($request);
+            
+            /* @var $hooks  \Gamping\ControllerHookCollection */
+            $hooks = $app->getControllerHooks($routeName, $outputName);
+            
+            $data = $hooks->runBefore($controller, $outputName);
+            $data = $controller->execute($data);
+            $data = $hooks->runAfter($controller, $outputName, $data);
+           
             $response = $responseSelector->getResponse($app->getRequest());
             
             return $response->render($data);
