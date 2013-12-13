@@ -8,6 +8,6 @@ class Home extends \Gamping\Controller
     {
         $this->getAllParams();
         
-        return 'Hello World';
+        return array('data' => 'Hello World');
     }
 }

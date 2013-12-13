@@ -3,23 +3,55 @@ namespace Gamping;
 
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Base controller for all application controllers.
+ * @author thibaud
+ *
+ */
 abstract class Controller
 {
 
+    /**
+     * 
+     * @var Request
+     */
     private $request;
+    
+    /**
+     * 
+     * @var ResponseSelector
+     */
+    private $responseSelector;
 
     protected abstract function executeAction();
-    
+
+    /**
+     * Sets the request object.
+     * @param Request $request
+     */
     public function setRequest(Request $request)
     {
         $this->request = $request;
     }
 
+    public function setResponseSelector(ResponseSelector $selector)
+    {
+        $this->responseSelector = $selector;
+    }
+    
+    /**
+     * Returns the current request object.
+     * @return Request
+     */
     public function getRequest()
     {
         return $this->request;
     }
 
+    /**
+     * Gets all request parameters from post, get, and url.
+     * @return multitype:
+     */
     public function getAllParams()
     {
         $post = $this->request->request->all();
@@ -29,6 +61,13 @@ abstract class Controller
         return array_merge($url, $get, $post);
     }
     
+    /**
+     * Gets a param identified by its name (looking in post, get, and url in that order)
+     * and returns its value or the default value if the param does not exist in the request.
+     * @param string $name Name of the parameter.
+     * @param mixed $default [opt] Default value to return if the parameter is not found. 
+     * @return mixed|null
+     */
     public function getParam($name, $default = null)
     {
         if ($this->request->request->has($name)) {
@@ -47,10 +86,15 @@ abstract class Controller
         return $default;
     }
     
+    /**
+     * Executes the controller action.
+     * @return string Response output.
+     */
     public function execute()
     {
     	$data = $this->executeAction();
+    	$response = $this->responseSelector->getResponse($this->request);
         
-    	return $data;
+    	return $response->render($data);
     }
 }

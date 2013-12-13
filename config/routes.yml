@@ -14,3 +14,19 @@ routes:
             xml:
                 before-run:
                 after-run:
+                
+    page:
+        pattern: "/home"
+        controller: homeController
+        methods: [ get, post, put, delete ]
+        output:
+            html:
+                view: app/views/home/home.phtml
+                before-run: 
+                after-run:
+            json:
+                before-run:
+                after-run:
+            xml:
+                before-run:
+                after-run:

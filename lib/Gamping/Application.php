@@ -1,6 +1,12 @@
 <?php
 namespace Gamping;
 
+use Symfony\Component\HttpFoundation\Request;
+/**
+ * Global application object providing dependency injection for controllers
+ * @author thibaud
+ *
+ */
 class Application
 {
 
@@ -27,6 +33,12 @@ class Application
      * @var string
      */
     private $routeFile = '';
+    
+    /**
+     * 
+     * @var Request
+     */
+    private $request = null;
 
     /**
      * Initialize a new instance.
@@ -41,6 +53,11 @@ class Application
         $this->yaml = $yaml;
     }
 
+    /**
+     * Sets the file name that contains the route definitions.
+     * @param string $filename
+     * @throws \RuntimeException when $filename does not exist. 
+     */
     public function setRouteFile($filename)
     {
         if (! file_exists($filename)) {
@@ -50,10 +67,25 @@ class Application
         $this->routeFile = $filename;
     }
 
+    public function getRequest()
+    {
+        return $this->request;
+    }
+    
+    public function setRequest(Request $request)
+    {
+        $this->request = $request;
+    }
+    
+    /**
+     * Registers all routes and runs the application.
+     */
     public function run()
     {
         $this->registerRoutes();
-        $this->app->run();
+        $this->setRequest(Request::createFromGlobals());
+        
+        $this->app->run($this->getRequest());
     }
 
     /**
@@ -85,17 +117,18 @@ class Application
 
     private function registerRoute(array $route)
     {
-        $pattern = $this->extractValue($route, 'pattern');
-        $controllerName = $this->extractValue($route, 'controller');
-        $controller = $this->container->get($controllerName);
+        $app = $this;
+        $container = $this->container;
+        $pattern = $app->extractValue($route, 'pattern');
         
-        $this->app->before(function (\Symfony\Component\HttpFoundation\Request $request) use($controller)
+        $to = function () use($app, $container, $route)
         {
-            $controller->setRequest($request);
-        });
-        
-        $to = function () use($controller)
-        {
+            $controllerName = $app->extractValue($route, 'controller');
+            $controller = $container->get($controllerName);
+            
+            $controller->setResponseSelector(new ResponseSelector());
+            $controller->setRequest($app->getRequest());
+            
             return $controller->execute();
         };
         
@@ -112,7 +145,13 @@ class Application
         }
     }
 
-    private function extractValue(array $data, $path)
+    /**
+     * FIXME : Move out of this class by wrapping route data in a class. See registerRoute method.
+     * @param array $data
+     * @param unknown $path
+     * @return unknown
+     */
+    public function extractValue(array $data, $path)
     {
         if (strpos($path, '.') !== false) {
             $parts = explode('.', $path, 1);
