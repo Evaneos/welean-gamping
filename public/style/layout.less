@@ -1,0 +1,122 @@
+@HEADER_HEIGHT:130px;
+@HEADER_HEIGHT_MINI:90px;
+
+body{
+    .font(sans);
+    padding-bottom:50px;
+    padding-top:@HEADER_HEIGHT;
+
+    &.scrolled{
+        padding-top:@HEADER_HEIGHT_MINI;
+        header#header{
+            z-index:500;
+            height:@HEADER_HEIGHT_MINI;
+            .side{
+                padding-top:25px;
+            }
+            #site-title{
+                a{
+                    margin-top:-10px;
+                    img{
+                        width:150px;
+
+                    }
+                }
+                div{
+                    display:none;
+                }
+            }
+        }
+    }
+
+    &.fixed{
+        header#header{
+            z-index:500;
+            .side{
+                display:none;
+            }
+        }
+    }
+}
+
+/* HEADER ===== */
+header#header{
+    position:fixed;
+    top:0;
+    left:0;
+    height:@HEADER_HEIGHT;
+    width:100%;
+    z-index:200;
+    background:@BROWN_LIGHT;
+    border-bottom:1px solid darken(@BROWN_LIGHT, 10%);
+    .box-shadow(0 0px 10px rgba(0,0,0,.2));
+    .side{
+        text-align:center;
+        padding-top:50px;
+        .transition(padding .3s);
+        .button-discover, .button-suggest{
+            .butonize(big);
+            margin:0 auto;
+        }
+        .button-suggest{
+            .butonize(dark);
+        }
+    }
+    #site-title {
+        padding-top:0px!important;
+        margin-top:0!important;
+        a{
+            .transition(height .3s);
+            text-align:center;
+            display:block;
+            margin:-30px auto 10px;
+            img{
+                width:220px;
+                .transition(all .3s);
+            }
+        }
+        div{
+            padding-top:10px;
+            text-transform:uppercase;
+            color:@BROWN;
+        }
+    }
+
+}
+
+#content{
+    background:@WHITE;
+    border:1px solid @GREY;
+    .border-radius(5px);
+    .box-shadow(0 1px 4px rgba(0, 0, 0, .25));
+    padding-top:@SPACER;
+    padding-bottom:@SPACER;
+    z-index:230;
+    margin-top:2 * @SPACER;
+}
+
+#press{
+    padding:@SPACER;
+    img{
+        margin-left:2em;
+    }
+}
+
+footer#footer{
+    padding-top:40px;
+    padding-bottom:40px;
+    .l{
+
+    }
+    .r{
+        text-align:right;
+        a{
+            color:@BROWN;
+            display:inline-block;
+            padding:0 5px;
+            &:last-child{
+                padding-right:0;
+            }
+        }
+    }
+}

@@ -1,0 +1,260 @@
+/* PATHS =====================================================================*/
+@CONFIG_PATH : "./config";
+@IMAGE_PATH : "./images";
+@LIB_PATH : "./lib";
+@BOOTSTRAP_PATH : "../vendor/bootstrap/less";
+@FONTELLO_PATH : "./fonts/fontello";
+@PAGES_PATH : "./pages";
+
+/* CONFIG ====================================================================*/
+@import "@{CONFIG_PATH}/colors.less";
+@import "@{CONFIG_PATH}/types.less";
+@import "@{CONFIG_PATH}/variables.less";
+
+/* VENDORS ==================================================================*/
+/* BOOTSTRAP ===*/
+@import "@{BOOTSTRAP_PATH}/mixins.less";
+@import "@{BOOTSTRAP_PATH}/normalize.less";
+@import "@{BOOTSTRAP_PATH}/print.less";
+
+@import "@{BOOTSTRAP_PATH}/scaffolding.less";
+// @import "@{BOOTSTRAP_PATH}/type.less";
+// @import "@{BOOTSTRAP_PATH}/buttons.less";
+@import "@{BOOTSTRAP_PATH}/grid.less";
+@import "@{BOOTSTRAP_PATH}/forms.less";
+@import "@{BOOTSTRAP_PATH}/utilities.less";
+@import "@{BOOTSTRAP_PATH}/responsive-utilities.less";
+
+/* FONTELLO ===*/
+
+
+/* CUSTOM LIBS ===============================================================*/
+@import "@{LIB_PATH}/fonts.less";
+@import "@{LIB_PATH}/mixins.less";
+@import "@{LIB_PATH}/buttons.less";
+
+/* LAYOUT ====================================================================*/
+@import "./type.less";
+
+@SPACER:15px;
+
+@import "./layout.less";
+@import "@{PAGES_PATH}/homepage.less";
+
+
+.hostcard{
+    @SIZE:54px;
+    border:1px solid @GREY;
+    background:@GREY_LIGHT;
+    .border-radius(3px);
+    .h4{
+        padding-top:@SPACER/2;
+        margin-bottom:0!important;
+        a{
+            color:@BROWN;
+            &:hover{
+                color:@GREEN;
+            }
+        }
+    }
+    img{
+        border:1px solid @GREY;
+        width:@SIZE;
+        height:@SIZE;
+        .border-radius(@SIZE);
+        margin-top:10px;
+        float:left;
+        margin-right:@SPACER;
+        margin-left:@SPACER;
+        &:hover{}
+    }
+    p{
+        margin-top:0;
+    }
+}
+
+.testimonial-list {
+    border-left:1px solid @GREY_LIGHT;
+    .h1{
+        padding-left:@SPACER;
+    }
+    .testimonial{
+        padding-left:@SPACER;
+        @SIZE:80px;
+        @COLOR:@GREEN;
+        img{
+            background:@GREEN;
+            width:@SIZE;
+            height:@SIZE;
+            .border-radius(@SIZE);
+            margin-top:10px;
+            border:2px solid @COLOR;
+        }
+        .h3{
+            margin-bottom:.2em;
+            padding-bottom:.2em;
+            border-bottom:2px solid @COLOR;
+        }
+        q{
+            display:block;
+        }
+        &.img-left{
+            img{
+                margin-right:@SPACER;
+                float:left;
+            }
+            q{
+                margin-left:@SIZE + @SPACER;
+            }
+        }
+        &.img-right{
+            img{
+                margin-left:@SPACER;
+                float:right;
+            }
+            q{
+                margin-right:@SIZE + @SPACER;
+            }
+        }
+    }
+}
+
+.reason{
+    .h1{
+        text-aign:center;
+    }
+    .l{
+        background-position: right 10px;
+        background-repeat: no-repeat;
+        min-height:50px;
+    }
+    &.reason-1 .l{background-image:url("@{IMAGE_PATH}/reasons/ico_reason1.gif");}
+    &.reason-2 .l{background-image:url("@{IMAGE_PATH}/reasons/ico_reason2.gif");}
+    &.reason-3 .l{background-image:url("@{IMAGE_PATH}/reasons/ico_reason3.gif");}
+    &.reason-4 .l{background-image:url("@{IMAGE_PATH}/reasons/ico_reason4.gif");}
+    &.reason-5 .l{background-image:url("@{IMAGE_PATH}/reasons/ico_reason5.gif");}
+    &.reason-6 .l{background-image:url("@{IMAGE_PATH}/reasons/ico_reason6.gif");}
+    &.reason-7 .l{background-image:url("@{IMAGE_PATH}/reasons/ico_reason7.gif");}
+    &.reason-8 .l{background-image:url("@{IMAGE_PATH}/reasons/ico_reason8.gif");}
+    &.reason-9 .l{background-image:url("@{IMAGE_PATH}/reasons/ico_reason9.gif");}
+}
+
+
+
+.smart-form{
+    fieldset{
+        border-bottom:1px solid @GREY_LIGHT;
+        padding:2*@SPACER @SPACER;
+        h2{
+           margin-bottom:@SPACER;
+        }
+        select{
+            @H:40px;
+            clear:both;
+            margin:@SPACER 0;
+            float:left;
+            height:@H;
+            line-height:@H;
+            border:1px solid @BROWN_LIGHT;
+            #gradient.vertical(lighten(@BROWN_LIGHT, 5%), @BROWN_LIGHT, 0%, 100%);
+            border:1px solid darken(@BROWN_LIGHT, 5%);
+            .border-radius(3px);
+            .box-shadow(0px 1px 1px rgba(0, 0, 0, .1));
+            .font(special);
+            font-size:1.4em;
+            width:300px;
+            option{
+                height:@H;
+                line-height:@H;
+            }
+        }
+        ul.checkboxlist{
+            list-style-type:none;
+            padding-left:0;
+            li{
+                padding-left:0;
+                input[type="checkbox"] {
+                    margin-right:.3em;
+                }
+            }
+        }
+        &.who{
+            h2{
+                background:url(http://www.gamping.com/wp-content/themes/camping/images/ico_who.gif) left no-repeat;
+                padding-left:50px;
+            }
+            ul.hosting_type{
+                list-style-type:none;
+                padding:0;
+                margin:0;
+                li{
+                    @SIZE:90px;
+                    float:left;
+                    margin-right:@SPACER;
+                    a{
+                        display:block;
+                        width:@SIZE;
+                        height:@SIZE;
+                        .border-radius(3px);
+                        background:@BROWN_LIGHT;
+                        border:1px solid @GREY;
+                        text-align:center;
+                        background-repeat:no-repeat;
+                        background-position:center center;
+                        line-height: 1.7 * @SIZE;
+                        color:@BROWN;
+                        .transition(all .15s);
+                        &:hover{
+                            text-decoration:none;
+                            background-color:darken(@BROWN_LIGHT, 3%);
+                        }
+                        &.selected{
+                            background-color:@GREEN;
+                            color:@WHITE;
+                        }
+                    }
+                    &.tent a{
+                        background-image:url("@{IMAGE_PATH}/receive_icon1.png");
+                        &.selected{
+                            background-image:url("@{IMAGE_PATH}/receive_icon1_on.png");
+                        }
+                    }
+                    &.caravan a{
+                        background-image:url("@{IMAGE_PATH}/receive_icon2.png");
+                        &.selected{
+                            background-image:url("@{IMAGE_PATH}/receive_icon2_on.png");
+                        }
+                    }
+                    &.campingcar a{
+                        background-image:url("@{IMAGE_PATH}/receive_icon3.png");
+                        &.selected{
+                            background-image:url("@{IMAGE_PATH}/receive_icon3_on.png");
+                        }
+                    }
+
+                }
+            }
+            select{
+                width:300px;
+            }
+        }
+        &.situation{
+            h2{
+                background:url("@{IMAGE_PATH}/ico_situation.gif") left no-repeat;
+                padding-left:50px;
+            }
+        }
+        &.services{
+            h2{
+                background:url("@{IMAGE_PATH}/ico_amentities.gif") left no-repeat;
+                padding-left:50px;
+            }
+            ul.checkboxlist{
+
+            }
+        }
+
+
+
+    }
+}

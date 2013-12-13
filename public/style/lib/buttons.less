@@ -1,0 +1,50 @@
+.butonize(@_TYPE) {
+
+}
+
+.butonize(all) {
+    display:inline-block;
+    .font(special);
+    .box-shadow(0 1px 4px rgba(0, 0, 0, .25));
+    #gradient.vertical(lighten(@BROWN_LIGHT, 10%), #f4f1ea, 0%, 100%);
+    border: 1px solid @GREY;
+    color: @BROWN;
+    .border-radius(3px);
+    &:hover{
+        text-decoration:none;
+        .box-shadow(0 1px 8px rgba(0, 0, 0, .25));
+    }
+    &:active{
+        #gradient.vertical(#f4f1ea, lighten(@BROWN_LIGHT, 10%), 0%, 100%);
+        .box-shadow(inset 0 3px 3px rgba(0,0,0,.075));
+    }
+}
+
+.butonize(big) {
+    .butonize(all);
+    font-size:1.8em;
+    font-weight:bold;
+    padding:.15em .85em;
+}
+
+.butonize(dark) {
+    .box-shadow(0 1px 4px rgba(0, 0, 0, .25));
+    #gradient.vertical(lighten(@BROWN, 5%), @BROWN, 0%, 100%);
+    border: 1px solid @GREY;
+    color: @WHITE;
+    &:active{
+        #gradient.vertical(@BROWN, lighten(@BROWN, 20%), 0%, 100%);
+        .box-shadow(inset 0 3px 3px rgba(0,0,0,.1));
+    }
+}
+.butonize(green) {
+    .box-shadow(0 1px 4px rgba(0, 0, 0, .25));
+    #gradient.vertical(@GREEN, darken(@GREEN, 5%), 0%, 100%);
+    border: 1px solid darken(@GREEN, 10%);
+    color: @WHITE;
+    text-shadow:0px 0px 4px darken(@GREEN, 10%);
+    &:active{
+        #gradient.vertical(darken(@GREEN, 5%), lighten(@GREEN, 10%), 0%, 100%);
+        .box-shadow(inset 0 3px 3px rgba(0,0,0,.1));
+    }
+}

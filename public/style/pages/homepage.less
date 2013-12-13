@@ -1,0 +1,140 @@
+
+body.homepage{
+
+    #banner{
+        height:450px;
+        border-top:1px solid darken(@BROWN_LIGHT, 10%);
+        #gradient.vertical(darken(@BROWN_LIGHT, 5%), @BROWN_LIGHT, 0%, 100%);
+        label{
+            margin-top:80px;
+            text-align:center;
+            .font(special);
+            color:@WHITE;
+            text-shadow:0px 0px 15px #222;
+            font-size:4em;
+            line-height:1.2em;
+            display:block;
+        }
+        form{
+            @SELECT-WIDTH:450px;
+            @BUTTON-WIDTH:120px;
+            @HEIGHT:40px;
+            width:@SELECT-WIDTH + @BUTTON-WIDTH;
+            margin:40px auto 0;
+            position:relative;
+            height:@HEIGHT;
+            input[type="text"], input[type="submit"]{
+                position:absolute;
+                .border-radius(0);
+                width:@SELECT-WIDTH;
+            }
+            input[type="text"], input[type="submit"]{
+                height:@HEIGHT;
+                line-height:@HEIGHT;
+                width:@SELECT-WIDTH;
+            }
+            input[type="text"]{
+                left:0;
+                margin-right:@BUTTON-WIDTH;
+                color:@BROWN;
+                .font(sans);
+                font-size:1.3em;
+            }
+            input[type="submit"]{
+                right:0;
+                width:@BUTTON-WIDTH;
+                .font(special);
+                color:@WHITE;
+                background:@GREEN;
+                border:none;
+                .border-radius(0);
+                font-size:1.5em;
+                text-transform:uppercase;
+            }
+            select{
+                display:none;
+            }
+        }
+    }
+
+    #content{
+        margin-top:-80px;
+
+        .cta-large{
+            text-align:center;
+            background:@GREEN_LIGHT;
+            color:@GREEN;
+            padding-top:@SPACER;
+            padding-bottom:@SPACER;
+            margin-top:2*@SPACER;
+            margin-bottom:2*@SPACER;
+
+            strong{
+                .font(special);
+                font-size:2.5em;
+            }
+            a{
+                .butonize(all);
+                .butonize(big);
+                .butonize(green);
+                margin-left:.5em;
+            }
+            margin-bottom:1em;
+        }
+
+        .reasons{
+            header{
+                text-align:center;
+                margin-top:1em;
+                margin-bottom:1em;
+            }
+        }
+
+
+        #what{
+            .becore-host, .becore-guest{
+                .decorator{
+                    min-height:100px;
+                    background-position:top center;
+                    background-repeat:no-repeat;
+                }
+            }
+            .becore-host .decorator{
+                background-image:url("@{IMAGE_PATH}/ico_garden.gif");
+            }
+            .becore-guest .decorator{
+                background-image:url("@{IMAGE_PATH}/ico_car.gif");
+
+            }
+        }
+
+        #hosts{
+            margin-top:@SPACER;
+        }
+    }
+
+    .autocomplete-suggestions {
+        .font(sans);
+        font-size:1.3em;
+        color:@BROWN;
+        border: 1px solid #999;
+        background: #FFF;
+        cursor: default;
+        overflow: auto;
+        -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
+        -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
+        box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
+    }
+    .autocomplete-suggestion {
+        padding: 2px 5px;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    .autocomplete-selected {
+        color:@BROWN;
+        background:@BROWN_LIGHT;
+    }
+    .autocomplete-suggestions strong {
+        color:@BROWN;
+    }
+}
