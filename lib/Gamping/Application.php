@@ -165,10 +165,14 @@ class Application
         {
             $controller = $container->get($controllerName);
             
-            $controller->setResponseSelector($app->getResponseSelector($routeName));
             $controller->setRequest($app->getRequest());
             
-            return $controller->execute();
+            $data = $controller->execute();
+            
+            $responseSelector = $app->getResponseSelector($routeName);
+            $response = $responseSelector->getResponse($app->getRequest());
+            
+            return $response->render($data);
         };
         
         $methods = $this->extractValue($route, 'methods');

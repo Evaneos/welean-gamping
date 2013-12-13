@@ -16,12 +16,6 @@ abstract class Controller
      * @var Request
      */
     private $request;
-    
-    /**
-     * 
-     * @var ResponseSelector
-     */
-    private $responseSelector;
 
     protected abstract function executeAction();
 
@@ -32,11 +26,6 @@ abstract class Controller
     public function setRequest(Request $request)
     {
         $this->request = $request;
-    }
-
-    public function setResponseSelector(ResponseSelector $selector)
-    {
-        $this->responseSelector = $selector;
     }
     
     /**
@@ -92,9 +81,6 @@ abstract class Controller
      */
     public function execute()
     {
-    	$data = $this->executeAction();
-    	$response = $this->responseSelector->getResponse($this->request);
-        
-    	return $response->render($data);
+    	return $this->executeAction();
     }
 }
