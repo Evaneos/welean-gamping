@@ -5,5 +5,5 @@ parameters :
             host : localhost
             port : 3306
             username : root
-            password : weleanit
-            dbname : weleanit
+            password : chocolat
+            dbname : gamping
