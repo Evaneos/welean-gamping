@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS parcel_has_commodity (
+	id INT (11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	parcel_id INT(11) UNSIGNED,
+	commodity_id INT(11) UNSIGNED
+);
+
+CREATE TABLE IF NOT EXISTS parcel_has_activity (
+	id INT(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	parcel_id INT(11) UNSIGNED,
+	activity_id INT(11) UNSIGNED
+);
+
+
