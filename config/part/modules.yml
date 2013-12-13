@@ -1,3 +1,10 @@
 include:
     - modules/user.yml
     - modules/parcel.yml
+    - modules/country.yml
+    - modules/parcel_has_picture.yml
+    - modules/picture.yml
+    - modules/place.yml
+    - modules/place_has_situation_geo.yml
+    - modules/region.yml
+    - modules/situation_geo.yml

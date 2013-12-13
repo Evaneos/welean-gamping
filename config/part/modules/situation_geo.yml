@@ -1,0 +1,30 @@
+classes :
+    SituationGeoManager :
+        class : \Gamping\Model\SituationGeo\Manager
+        call :
+            setStorage : [ @SituationGeoStorage ]
+            setValidator : [ @SituationGeoValidator ]
+        interceptor : [ @ExceptionInterceptor ]
+    SituationGeoValidator :
+        class : \Gamping\Model\SituationGeo\Validator
+    SituationGeoStorage :
+        class : \Gamping\Model\SituationGeo\Storage
+        call :
+            setStoreVolatile : [ @SituationGeoStoreMemcached ]
+            setStorePersistent : [ @SituationGeoStoreDatabase ]
+            setStoreLevel1 : [ @StoreArray ]
+    SituationGeoStoreMemcached :
+        class : \Berthe\DAL\StoreMemcached
+    SituationGeoStoreDatabase :
+        class : \Berthe\DAL\StoreDatabase
+        call :
+            setReader : [ @SituationGeoReader ]
+            setWriter : [ @SituationGeoWriter ]
+    SituationGeoReader :
+        class : \Gamping\Model\SituationGeo\Reader
+        call :
+            setDb : [ @DbReader ]
+    SituationGeoWriter :
+        class : \Gamping\Model\SituationGeo\Writer
+        call :
+            setDb : [ @DbWriter ]

@@ -1,0 +1,30 @@
+classes :
+    CountryManager :
+        class : \Gamping\Model\Country\Manager
+        call :
+            setStorage : [ @CountryStorage ]
+            setValidator : [ @CountryValidator ]
+        interceptor : [ @ExceptionInterceptor ]
+    CountryValidator :
+        class : \Gamping\Model\Country\Validator
+    CountryStorage :
+        class : \Gamping\Model\Country\Storage
+        call :
+            setStoreVolatile : [ @CountryStoreMemcached ]
+            setStorePersistent : [ @CountryStoreDatabase ]
+            setStoreLevel1 : [ @StoreArray ]
+    CountryStoreMemcached :
+        class : \Berthe\DAL\StoreMemcached
+    CountryStoreDatabase :
+        class : \Berthe\DAL\StoreDatabase
+        call :
+            setReader : [ @CountryReader ]
+            setWriter : [ @CountryWriter ]
+    CountryReader :
+        class : \Gamping\Model\Country\Reader
+        call :
+            setDb : [ @DbReader ]
+    CountryWriter :
+        class : \Gamping\Model\Country\Writer
+        call :
+            setDb : [ @DbWriter ]

@@ -1,0 +1,30 @@
+classes :
+    ParcelHasPictureManager :
+        class : \Gamping\Model\ParcelHasPicture\Manager
+        call :
+            setStorage : [ @ParcelHasPictureStorage ]
+            setValidator : [ @ParcelHasPictureValidator ]
+        interceptor : [ @ExceptionInterceptor ]
+    ParcelHasPictureValidator :
+        class : \Gamping\Model\ParcelHasPicture\Validator
+    ParcelHasPictureStorage :
+        class : \Gamping\Model\ParcelHasPicture\Storage
+        call :
+            setStoreVolatile : [ @ParcelHasPictureStoreMemcached ]
+            setStorePersistent : [ @ParcelHasPictureStoreDatabase ]
+            setStoreLevel1 : [ @StoreArray ]
+    ParcelHasPictureStoreMemcached :
+        class : \Berthe\DAL\StoreMemcached
+    ParcelHasPictureStoreDatabase :
+        class : \Berthe\DAL\StoreDatabase
+        call :
+            setReader : [ @ParcelHasPictureReader ]
+            setWriter : [ @ParcelHasPictureWriter ]
+    ParcelHasPictureReader :
+        class : \Gamping\Model\ParcelHasPicture\Reader
+        call :
+            setDb : [ @DbReader ]
+    ParcelHasPictureWriter :
+        class : \Gamping\Model\ParcelHasPicture\Writer
+        call :
+            setDb : [ @DbWriter ]
