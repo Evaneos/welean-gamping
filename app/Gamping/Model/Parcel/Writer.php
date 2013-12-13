@@ -75,7 +75,7 @@ EOQ;
 EOQ;
         
         $ret = (bool)$this->db->query($query, $this->getParams($object, false));
-        $id = (int)$this->db->lastInsertId("parcels","id");
+        $id = (int)$this->db->lastInsertId("parcel","id");
         if ($id > 0) {
             $object->setId($id);
             return true;

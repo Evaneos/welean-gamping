@@ -1,4 +1,4 @@
-CREATE TABLE parcel (
+CREATE TABLE IF NOT EXISTS parcel (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	address_id INT, 
 	capacity INT,
@@ -8,7 +8,7 @@ CREATE TABLE parcel (
 	description TEXT,
         hosts_camping_cars TINYINT(1), 
 	hosts_caranvans TINYINT(1),
-        hosts_tents = TINYINT(1), 
+        hosts_tents TINYINT(1), 
 	latitude VARCHAR(32), 
 	longitude VARCHAR(32),
         online TINYINT(1), 
@@ -21,4 +21,3 @@ CREATE TABLE parcel (
 	updated_at DATE, 
 	user_id INT
 );
-
