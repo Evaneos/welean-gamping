@@ -1,0 +1,30 @@
+classes :
+    PictureManager :
+        class : \Gamping\Model\Picture\Manager
+        call :
+            setStorage : [ @PictureStorage ]
+            setValidator : [ @PictureValidator ]
+        interceptor : [ @ExceptionInterceptor ]
+    PictureValidator :
+        class : \Gamping\Model\Picture\Validator
+    PictureStorage :
+        class : \Gamping\Model\Picture\Storage
+        call :
+            setStoreVolatile : [ @PictureStoreMemcached ]
+            setStorePersistent : [ @PictureStoreDatabase ]
+            setStoreLevel1 : [ @StoreArray ]
+    PictureStoreMemcached :
+        class : \Berthe\DAL\StoreMemcached
+    PictureStoreDatabase :
+        class : \Berthe\DAL\StoreDatabase
+        call :
+            setReader : [ @PictureReader ]
+            setWriter : [ @PictureWriter ]
+    PictureReader :
+        class : \Gamping\Model\Picture\Reader
+        call :
+            setDb : [ @DbReader ]
+    PictureWriter :
+        class : \Gamping\Model\Picture\Writer
+        call :
+            setDb : [ @DbWriter ]

@@ -1,0 +1,30 @@
+classes :
+    RegionManager :
+        class : \Gamping\Model\Region\Manager
+        call :
+            setStorage : [ @RegionStorage ]
+            setValidator : [ @RegionValidator ]
+        interceptor : [ @ExceptionInterceptor ]
+    RegionValidator :
+        class : \Gamping\Model\Region\Validator
+    RegionStorage :
+        class : \Gamping\Model\Region\Storage
+        call :
+            setStoreVolatile : [ @RegionStoreMemcached ]
+            setStorePersistent : [ @RegionStoreDatabase ]
+            setStoreLevel1 : [ @StoreArray ]
+    RegionStoreMemcached :
+        class : \Berthe\DAL\StoreMemcached
+    RegionStoreDatabase :
+        class : \Berthe\DAL\StoreDatabase
+        call :
+            setReader : [ @RegionReader ]
+            setWriter : [ @RegionWriter ]
+    RegionReader :
+        class : \Gamping\Model\Region\Reader
+        call :
+            setDb : [ @DbReader ]
+    RegionWriter :
+        class : \Gamping\Model\Region\Writer
+        call :
+            setDb : [ @DbWriter ]

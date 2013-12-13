@@ -1,0 +1,30 @@
+classes :
+    PlaceManager :
+        class : \Gamping\Model\Place\Manager
+        call :
+            setStorage : [ @PlaceStorage ]
+            setValidator : [ @PlaceValidator ]
+        interceptor : [ @ExceptionInterceptor ]
+    PlaceValidator :
+        class : \Gamping\Model\Place\Validator
+    PlaceStorage :
+        class : \Gamping\Model\Place\Storage
+        call :
+            setStoreVolatile : [ @PlaceStoreMemcached ]
+            setStorePersistent : [ @PlaceStoreDatabase ]
+            setStoreLevel1 : [ @StoreArray ]
+    PlaceStoreMemcached :
+        class : \Berthe\DAL\StoreMemcached
+    PlaceStoreDatabase :
+        class : \Berthe\DAL\StoreDatabase
+        call :
+            setReader : [ @PlaceReader ]
+            setWriter : [ @PlaceWriter ]
+    PlaceReader :
+        class : \Gamping\Model\Place\Reader
+        call :
+            setDb : [ @DbReader ]
+    PlaceWriter :
+        class : \Gamping\Model\Place\Writer
+        call :
+            setDb : [ @DbWriter ]
