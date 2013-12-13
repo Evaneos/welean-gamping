@@ -3,3 +3,4 @@ classes:
         class: Gamping\Controllers\Home
         props :
             userManager : @UserManager
+            parcelManager: @ParcelManager

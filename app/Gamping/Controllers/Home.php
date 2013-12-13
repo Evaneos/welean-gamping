@@ -4,6 +4,12 @@ namespace Gamping\Controllers;
 class Home extends \Gamping\Controller
 {
     public $userManager = null;
+    
+    /**
+     * 
+     * @var \Gamping\Model\Parcel\Manager
+     */
+    public $parcelManager = null;
 
     protected function executeAction(array $data)
     {
@@ -12,6 +18,8 @@ class Home extends \Gamping\Controller
         // var_dump($this->userManager);
         var_dump($this->userManager->getById(2));
 
+        var_dump($this->parcelManager->getById(1));
+        
         return array('data' => 'Hello World');
     }
     
