@@ -19,7 +19,7 @@ classes :
         builder : \Gamping\Translation\InstanceCreator::factory
         singleton : true
         call :
-            setEnableNotice : false
+            setEnableNotice : [ true ]
             registerStorage : [ dbString, @TranslationStringDatabaseEngine ]
     TranslationStringDatabaseEngine :
         class : \Gamping\Translation\StringDatabaseEngine
