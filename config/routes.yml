@@ -1,7 +1,7 @@
 routes:
     home:
         pattern: "/"
-        object-key: "homeController"
+        controller: homeController
         methods: [ get, post, put, delete ]
         output:
             html:

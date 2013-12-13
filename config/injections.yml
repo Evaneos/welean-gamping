@@ -1,0 +1,3 @@
+classes:
+    homeController:
+        class: Gamping\Controllers\Home

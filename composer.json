@@ -6,7 +6,7 @@
         "oliviermadre/berthe" : "dev-ns"
     },
     "autoload": {
-        "psr-0": { "Gamping\\": "lib" }
+        "psr-0": { "Gamping\\": "lib", "Gamping\\Controller": "app" }
     }
 
 }
