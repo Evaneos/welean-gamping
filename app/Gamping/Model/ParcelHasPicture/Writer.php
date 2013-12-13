@@ -38,24 +38,17 @@ SQL;
     }
 
     public function delete(\Berthe\AbstractVO $object) {
-        $sql = <<<SQL
-DELETE FROM
-    parcel_has_picture
-WheRE
-    id = ?
-SQL;
-        $ret = (bool)$this->db->query($sql, array($object->getId()))
-        return $ret;
+        return $this->deleteById($object->getId());
     }
 
     public function deleteById($id) {
         $sql = <<<SQL
 DELETE FROM
     parcel_has_picture
-WheRE
+WHERE
     id = ?
 SQL;
-        $ret = (bool)$this->db->query($sql, array($object->getId()))
+        $ret = (bool)$this->db->query($sql, array($id));
         return $ret;
     }
 }

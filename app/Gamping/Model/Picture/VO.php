@@ -4,14 +4,14 @@ namespace Gamping\Model\Picture;
 class VO extends \Berthe\AbstractVO {
     const VERSION = 1;
 
-    protected $name = "";
+    protected $url = "";
 
-    public function setName($value) {
-        $this->name = $value;
+    public function setUrl($value) {
+        $this->url = $value;
         return $this;
     }
 
-    public function getName() {
-        return $this->name;
+    public function getUrl() {
+        return $this->url;
     }
 }

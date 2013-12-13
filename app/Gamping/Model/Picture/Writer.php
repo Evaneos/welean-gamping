@@ -3,11 +3,28 @@ namespace Gamping\Model\Picture;
 
 class Writer extends \Berthe\DAL\AbstractWriter {
     public function update(\Berthe\AbstractVO $object) {
-        return (bool)$this->db->query("UPDATE picture SET name=? where id=?", array($object->getName(), $object->getId()));
+        $sql = <<<SQL
+UPDATE
+    picture
+SET
+    url = ?
+WHERE
+    id = ?
+SQL;
+        return (bool)$this->db->query($sql, array($object->getUrl(), $object->getId()));
     }
 
     public function insert(\Berthe\AbstractVO $object) {
-        $ret = (bool)$this->db->query("INSERT INTO picture (name) VALUES (?)", array($object->getName()));
+        $sql = <<<SQL
+INSERT INTO
+    picture
+    (url)
+VALUES
+    (?)
+SQL;
+
+
+        $ret = (bool)$this->db->query($sql, array($object->getUrl()));
         $id = (int)$this->db->lastInsertId("picture","id");
         if ($id > 0) {
             $object->setId($id);
@@ -16,13 +33,21 @@ class Writer extends \Berthe\DAL\AbstractWriter {
         else {
             return false;
         }
+        }
     }
 
     public function delete(\Berthe\AbstractVO $object) {
-        throw new \RuntimeException("delete not implemented yet");
+        return $this->deleteById($object->getId());
     }
 
     public function deleteById($id) {
-        throw new \RuntimeException("delete not implemented yet");
+        $sql = <<<SQL
+DELETE FROM
+    picture
+WHERE
+    id = ?
+SQL;
+        $ret = (bool)$this->db->query($sql, array($id));
+        return $ret;
     }
 }
