@@ -18,6 +18,7 @@ class Html implements Response
         
         $viewData = $view->compile();
         
+        $this->layout->assignx($data);
         $this->layout->assign('view', $viewData);
         
         return $this->layout->compile();

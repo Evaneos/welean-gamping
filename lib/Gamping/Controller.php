@@ -29,8 +29,8 @@ abstract class Controller
     public function setData($key, $value)
     {
         $this->datas[$key] = $value;
-        
-        return $this->datas;
+
+        return $this;
     }
     
     /**

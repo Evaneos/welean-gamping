@@ -1,6 +1,7 @@
 classes:
     homeController:
         class: Gamping\Controllers\Home
+        interceptor : [ @GoogleAnalytics ]
         props :
             userManager : @UserManager
             parcelManager: @ParcelManager

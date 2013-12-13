@@ -1,6 +1,6 @@
 default-layout: landing
 layouts:
-    landing: app/views/landing.phtml
+    landing: app/views/index.phtml
 
 routes:
     home:
