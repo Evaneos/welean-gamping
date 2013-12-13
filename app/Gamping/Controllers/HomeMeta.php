@@ -1,8 +1,22 @@
 <?php
-
 namespace Gamping\Controllers;
 
-class HomeMeta implements 
+use Berthe\Interceptor\AbstractInterceptor;
+
+class HomeMeta extends AbstractInterceptor
 {
+    
+    public function intercept($method, $args)
+    {
+        if ($method !== 'execute') {
+            return;
+        }
+            
+        $data = $this->invoke($method, $args);
+        
+        if (!array_key_exists('title', $data)) {
+            $data['title'] = 'My title';
+        }
+    }
     
 }

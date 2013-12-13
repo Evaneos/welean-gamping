@@ -10,7 +10,7 @@ routes:
             html:
                 view: app/views/home/home.phtml
                 before-run:
-                after-run:
+                after-run: [ afterRun ]
             json:
                 before-run:
                 after-run:

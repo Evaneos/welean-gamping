@@ -17,7 +17,7 @@ abstract class Controller
      */
     private $request;
 
-    protected abstract function executeAction();
+    protected abstract function executeAction(array $data);
 
     /**
      * Sets the request object.
@@ -79,8 +79,8 @@ abstract class Controller
      * Executes the controller action.
      * @return string Response output.
      */
-    public function execute()
+    public function execute(array $data)
     {
-    	return $this->executeAction();
+    	return $this->executeAction($data);
     }
 }
