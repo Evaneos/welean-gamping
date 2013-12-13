@@ -36,6 +36,12 @@ class Application
     
     /**
      * 
+     * @var array
+     */
+    private $routeData;
+    
+    /**
+     * 
      * @var Request
      */
     private $request = null;
@@ -67,14 +73,36 @@ class Application
         $this->routeFile = $filename;
     }
 
+    /**
+     * Returns the current request object
+     * @return \Symfony\Component\HttpFoundation\Request
+     */
     public function getRequest()
     {
         return $this->request;
     }
     
+    /**
+     * Sets the current request object. This method has no effect if called after run().
+     * @param Request $request
+     */
     public function setRequest(Request $request)
     {
         $this->request = $request;
+    }
+    
+    public function getResponseSelector($routeName)
+    {      
+        $routeData = $this->getRouteData($routeName);
+        $outputData = $this->extractValue($routeData, 'output');
+        $selector = new ResponseSelector();
+        
+        foreach ($outputData as $name => $output) {
+            $view = $this->extractValue($output, 'view', '');
+            $selector->addOutput($name, ROOT_DIR . DIRECTORY_SEPARATOR . $view); 
+        }
+        
+        return $selector;
     }
     
     /**
@@ -100,6 +128,15 @@ class Application
         return call_user_func_array(array($this->app, $name), $args);
     }
 
+    private function getRouteData($routeName)
+    {
+        if (! array_key_exists($routeName, $this->routeData)) {
+            throw new \RuntimeException(sprintf('Route does not exist [%s]', $routeName));
+        }
+        
+        return $this->routeData[$routeName];
+    }
+    
     private function registerRoutes()
     {
         if (trim($this->routeFile) == '') {
@@ -110,26 +147,32 @@ class Application
         
         $routes = $data['routes'];
         
-        foreach ($routes as $route) {
-            $this->registerRoute($route);
+        foreach ($routes as $name => $route) {
+            $this->registerRoute($name, $route);
         }
+        
+        $this->routeData = $routes;
     }
 
-    private function registerRoute(array $route)
+    private function registerRoute($routeName, array $route)
     {
         $app = $this;
         $container = $this->container;
         $pattern = $app->extractValue($route, 'pattern');
         $controllerName = $app->extractValue($route, 'controller');
         
-        $to = function () use($app, $container, $controllerName)
+        $to = function () use($app, $container, $routeName, $controllerName)
         {
             $controller = $container->get($controllerName);
             
-            $controller->setResponseSelector(new ResponseSelector());
             $controller->setRequest($app->getRequest());
             
-            return $controller->execute();
+            $data = $controller->execute();
+            
+            $responseSelector = $app->getResponseSelector($routeName);
+            $response = $responseSelector->getResponse($app->getRequest());
+            
+            return $response->render($data);
         };
         
         $methods = $this->extractValue($route, 'methods');
@@ -145,16 +188,21 @@ class Application
         }
     }
 
-    private function extractValue(array $data, $path)
+    private function extractValue(array $data, $path, $default = null)
     {
         if (strpos($path, '.') !== false) {
             $parts = explode('.', $path, 1);
             
-            $this->validateArrayKey($data, $parts[0]);
+            if (! array_key_exists($parts[0], $data)) {
+                return $default;
+            }
+            
             return $this->extractValue($data[$parts[0]], $parts[1]);
         }
         
-        $this->validateArrayKey($data, $path);
+        if (! array_key_exists($path, $data)) {
+            return $default;
+        }
         
         return $data[$path];
     }
