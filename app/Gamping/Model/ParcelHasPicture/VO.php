@@ -4,14 +4,25 @@ namespace Gamping\Model\ParcelHasPicture;
 class VO extends \Berthe\AbstractVO {
     const VERSION = 1;
 
-    protected $name = "";
+    protected $picture_id = 0;
+    protected $parcel_id = 0;
 
-    public function setName($value) {
-        $this->name = $value;
+    public function setPictureId($value) {
+        $this->picture_id = $value;
         return $this;
     }
 
-    public function getName() {
-        return $this->name;
+    public function getPictureId() {
+        return $this->picture_id;
     }
+
+    public function setParcelId($value) {
+        $this->parcel_id = $value;
+        return $this;
+    }
+
+    public function getParcelId() {
+        return $this->parcel_id;
+    }
+
 }
