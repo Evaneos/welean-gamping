@@ -120,10 +120,10 @@ class Application
         $app = $this;
         $container = $this->container;
         $pattern = $app->extractValue($route, 'pattern');
+        $controllerName = $app->extractValue($route, 'controller');
         
-        $to = function () use($app, $container, $route)
+        $to = function () use($app, $container, $controllerName)
         {
-            $controllerName = $app->extractValue($route, 'controller');
             $controller = $container->get($controllerName);
             
             $controller->setResponseSelector(new ResponseSelector());
@@ -145,13 +145,7 @@ class Application
         }
     }
 
-    /**
-     * FIXME : Move out of this class by wrapping route data in a class. See registerRoute method.
-     * @param array $data
-     * @param unknown $path
-     * @return unknown
-     */
-    public function extractValue(array $data, $path)
+    private function extractValue(array $data, $path)
     {
         if (strpos($path, '.') !== false) {
             $parts = explode('.', $path, 1);
