@@ -9,6 +9,8 @@ classes :
         interceptor : [ @ExceptionInterceptor ]
     ActivityValidator :
         class : \Gamping\Model\Activity\Validator
+        call :
+            setErrors : [ @Errors ]
     ActivityStorage :
         class : \Gamping\Model\Activity\Storage
         call :

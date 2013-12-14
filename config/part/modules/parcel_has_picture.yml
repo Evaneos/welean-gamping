@@ -7,6 +7,8 @@ classes :
         interceptor : [ @ExceptionInterceptor ]
     ParcelHasPictureValidator :
         class : \Gamping\Model\ParcelHasPicture\Validator
+        call :
+            setErrors : [ @Errors ]
     ParcelHasPictureStorage :
         class : \Gamping\Model\ParcelHasPicture\Storage
         call :

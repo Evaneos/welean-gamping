@@ -187,10 +187,13 @@ class Form
 
         $this->parcel->setCountryId($this->country->getId());
 
+        $this->parcel->setUserId($this->user->getId());
+
         if (! $parcelManager->save($this->parcel)) {
             throw new \RuntimeException('Unable to save parcel.');
         }
 
+        return $this->parcel;
     }
 
     public function saveActivities($activityManager, $parcelHasActivityManager)
@@ -239,6 +242,8 @@ class Form
         if (!$userManager->save($this->user)) {
             throw new \RuntimeException('Could not save the user');
         }
+
+        return $this->user;
     }
 
 }

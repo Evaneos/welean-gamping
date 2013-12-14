@@ -4,7 +4,8 @@ function get($dataContainer, $key) {
 };
 
 $data = $this->formData;
-var_dump($this->formData);
+
+var_dump($this);
 
 ?>
 <div class="container">
@@ -17,6 +18,14 @@ var_dump($this->formData);
             <div>
                 <fieldset class="who col-md-6">
                     <h2 class="h2"><?= t('Qui voulez vous recevoir ?'); ?></h2>
+
+                    <?php
+                    if ($this->errorHosting === false) {
+                        $hostingClass = " hide";
+                    }
+                    ?>
+                    <div class="error <?= $hostingClass; ?>"><?= t('Il faut au moins 1 type d\'emplacement') ?></div>
+
                     <div data-form-choices="multiple">
                         <ul class="hosting_type">
                             <li class="tent"><a href="#" data-name="hosting_tent" <?= get($data, 'hosting_tent') == 1 ? 'class="selected"' : '' ?>><?= t('Tente'); ?></a></li>
@@ -31,7 +40,7 @@ var_dump($this->formData);
                     <select name="count">
                         <option value="1"><?= '1' . ' ' . t('personne'); ?></option>
                         <?php
-                        for ($i=1; $i <= 20; $i++) {
+                        for ($i=2; $i <= 20; $i++) {
                             ?>
                             <option value="<?= $i; ?>" <?= get($data, 'count') == $i ? 'selected="selected"' : '' ?>><?= $i . ' ' . t('personnes'); ?></option>
                             <?php
@@ -182,7 +191,14 @@ var_dump($this->formData);
                 <div class="row">
                     <div class="col-md-12">
                         <h2 class="h2"><?= t('Prix'); ?></h2>
-                        <div class="error"><?= t('Ca ne va pas du tout'); ?></div>
+
+                        <?php
+                        if ($this->errorPrice === false) {
+                            $priceClass = " hide";
+                        }
+                        ?>
+                        <div class="error <?= $priceClass; ?>"><?= t('Les prix sont obligatoires') ?></div>
+
                     </div>
 
                     <div class="col-md-12">
@@ -211,6 +227,20 @@ var_dump($this->formData);
                     <div class="col-md-12">
                         <h2 class="h2"><?= t('Parlez-nous de votre terrain.'); ?></h2>
 
+                        <?php
+                        if ($this->errorTitle === false) {
+                            $errorTitle = " hide";
+                        }
+                        ?>
+                        <div class="error <?= $errorTitle; ?>"><?= t('Le titre est obligatoire') ?></div>
+
+                        <?php
+                        if ($this->errorDesc === false) {
+                            $errorDesc = " hide";
+                        }
+                        ?>
+                        <div class="error <?= $errorDesc; ?>"><?= t('La description est obligatoire') ?></div>
+
                         <input type="text" name="title" class="long" placeholder="<?= t('Titre de votre annonce') ?>" value="<?= get($data, 'title') ?>" />
                         <textarea name="description" placeholder="<?= t('Décrivez votre terrain pour vos futurs campeurs...'); ?>"><?= get($data, 'description') ?></textarea>
                         <textarea name="rules" placeholder="<?= t('Listez ici les règles que les campeurs devront respecter...'); ?>"><?= get($data, 'rules') ?></textarea>
@@ -223,6 +253,13 @@ var_dump($this->formData);
                     <div class="col-md-12">
                         <h2 class="h2"><?= t('Adresse'); ?></h2>
                         <p><?= t('Cette adresse ne sera pas visible publiquement mais permettra de positionner approximativement votre emplacement sur des cartes ou plus tard pour permettre la recherche par géolocalisation.'); ?></p>
+
+                        <?php
+                        if ($this->errorAddress === false) {
+                            $errorAddress = " hide";
+                        }
+                        ?>
+                        <div class="error <?= $errorAddress; ?>"><?= t('Adresse incomplète. Seul le champ adresse2 est optionnel') ?></div>
                     </div>
                     <div class="col-md-6">
                         <select name="country" id="country">
@@ -255,6 +292,13 @@ var_dump($this->formData);
                     <div class="col-md-12">
                         <h2 class="h2"><?= t('Pour vous joindre'); ?></h2>
                         <p><?= t('Indiquez les informations relatives à votre compte'); ?></p>
+
+                        <?php
+                        if ($this->errorUser === false) {
+                            $errorUser = " hide";
+                        }
+                        ?>
+                        <div class="error <?= $errorUser; ?>"><?= t('Informations incomplètes') ?></div>
                     </div>
                     <div class="col-md-5">
                         <input type="text" class="long" name="firstname" id="firstname" placeholder="<?= t('Votre prénom') ?>" value="<?= get($data, 'firstname') ?>" />

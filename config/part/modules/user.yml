@@ -7,6 +7,8 @@ classes :
         interceptor : [ @ExceptionInterceptor ]
     UserValidator :
         class : \Gamping\Model\User\Validator
+        call :
+            setErrors : [ @Errors ]
     UserStorage :
         class : \Gamping\Model\User\Storage
         call :

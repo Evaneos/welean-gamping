@@ -36,6 +36,14 @@ routes:
             html:
                 view: app/views/form/form.phtml
 
+    registerSave:
+        pattern: "/success/{id}/{hash}"
+        controller: formSuccessController
+        methods: [ get ]
+        output:
+            html:
+                view: app/views/form/form.success.phtml
+
     search:
         pattern: "/search"
         controller: searchController

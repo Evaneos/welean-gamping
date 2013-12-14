@@ -6,6 +6,7 @@ use Gamping;
 use Gamping\Model\Parcel\Builder\Form;
 use Gamping\Model\Currency\Manager;
 use Berthe\DAL\DbWriter;
+use Berthe\ErrorHandler\Errors as ErrorsException;
 
 /**
  *
@@ -148,18 +149,62 @@ class ParcelFormService
 
     public function saveParcelFromBuilder($builder)
     {
+        $exceptionParcel = null;
+        $exceptionActivities = null;
+        $exceptionCommodities = null;
+        $exceptionUser = null;
+
         try {
             $this->db->beginTransaction();
 
-            $builder->saveParcel($this->parcelManager, $this->addressManager);
-            $builder->saveActivities($this->activityManager, $this->parcelHasActivityManager);
-            $builder->saveCommodities($this->commodityManager, $this->parcelHasCommodityManager);
-            $builder->saveUser($this->userManager);
-            // throw new \Exception('everything went fine, but rollback anyway');
+            try {
+                $user = $builder->saveUser($this->userManager);
+            }
+            catch(ErrorsException $e) {
+                $exceptionUser = $e;
+            }
+
+            try {
+                $parcel = $builder->saveParcel($this->parcelManager, $this->addressManager);
+            }
+            catch(ErrorsException $e) {
+                $exceptionParcel = $e;
+            }
+
+            try {
+                $builder->saveActivities($this->activityManager, $this->parcelHasActivityManager);
+            }
+            catch(ErrorsException $e) {
+                $exceptionActivities = $e;
+            }
+
+            try {
+                $builder->saveCommodities($this->commodityManager, $this->parcelHasCommodityManager);
+            }
+            catch(ErrorsException $e) {
+                $exceptionCommodities = $e;
+            }
+
+            if ($exceptionParcel || $exceptionActivities || $exceptionCommodities || $exceptionUser) {
+                $error = array_merge(  $exceptionParcel ? $exceptionParcel->getErrors() : array(),
+                                        $exceptionActivities ? $exceptionActivities->getErrors() : array(),
+                                        $exceptionCommodities ? $exceptionCommodities->getErrors() : array(),
+                                        $exceptionUser ? $exceptionUser->getErrors() : array());
+
+                $errors = new ErrorsException();
+                foreach($error as $err) {
+                    $errors->addError($err);
+                }
+                $errors->throwMe();
+            }
+
             $this->db->commit();
+
+            return $parcel;
         }
         catch (\Exception $ex) {
             $this->db->rollback();
+            throw $ex;
         }
     }
 }

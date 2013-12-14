@@ -15,6 +15,13 @@ classes:
         call:
             setFormService: [ @ParcelFormService ]
 
+    formSuccessController:
+        class: \Gamping\Controllers\FormSuccess
+        interceptor : [ @GoogleAnalytics ]
+        props :
+            userManager : @UserManager
+            parcelManager: @ParcelManager
+
     searchController:
         class: \Gamping\Controllers\Search
         call:
