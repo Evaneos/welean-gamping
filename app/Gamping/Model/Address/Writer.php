@@ -35,7 +35,7 @@ SQL;
     {
         $sql = <<<SQL
             INSERT INTO address (address, locality, zip_code, city)
-            VALUES (:address, :locality, :zip_code, :city)
+            VALUES (:address, :locality, :zipCode, :city)
 SQL;
         
         $ret = (bool) $this->db->query($sql, $this->getParams($object, false));

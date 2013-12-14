@@ -1,6 +1,22 @@
 classes:
     ParcelFormService:
         class: \Gamping\Service\ParcelFormService
+        arguments: [ @DbWriter ]
         call:
-            setParcelManager: [ @ParcelManager ]
+            setActivityManager: [ @ActivityManager ]
+            setAddressManager: [ @AddressManager ]
+            setCommodityManager: [ @CommodityManager ]
             setCurrencyManager: [ @CurrencyManager ]
+            setParcelHasActivityManager: [ @ParcelHasActivityManager ]
+            setParcelHasCommodityManager: [ @ParcelHasCommodityManager ]
+            setParcelManager: [ @ParcelManager ]
+            
+    GeographicalService:
+        class: \Gamping\Service\GeographicalService
+        call:
+            setCountryManager: [ @CountryManager ]
+            setParcelManager : [ @ParcelManager ]
+            setRegionManager: [ @RegionManager ]
+            setUserManager: [ @UserManager ]
+            setPictureManager: [ @PictureManager ]
+            setParcelHasPictureManager: [ @ParcelHasPictureManager ]

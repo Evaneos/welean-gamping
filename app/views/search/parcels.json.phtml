@@ -1,0 +1,20 @@
+<?php
+
+$output = array();
+
+/* @var $parcelView \View\Parcel\ParcelTile */
+foreach ($this->parcelViews as $parcelView) {
+    $parcel = $parcelView->getParcel();
+    $user = $parcelView->getUser();
+    
+    $data['parcel'] = array('id' => $parcel->getId(), 'name' => $parcel->getTitle());
+    $data['user'] = array(
+        'id' => $user->getId(), 
+        'name' => $user->getFirstname(), 
+        'picture' => $parcelView->getUserPicture()->getUrl()
+    );
+    
+    $output[] = $data;
+}
+
+echo json_encode($output);

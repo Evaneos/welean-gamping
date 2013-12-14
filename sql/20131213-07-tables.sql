@@ -61,9 +61,10 @@ ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `region` (
     `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `country_id` INT(10) UNSIGNED,
     `name` VARCHAR(255) NOT NULL,
     PRIMARY KEY (`id`),
-    CONSTRAINT `FK__country` FOREIGN KEY (`id`) REFERENCES `country` (`id`)
+    CONSTRAINT `FK__country` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`)
 )
 COLLATE='latin1_swedish_ci'
 ENGINE=InnoDB;

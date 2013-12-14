@@ -114,7 +114,7 @@ class Form
         return $this;
     }
     
-    public function saveParcel(Manager $parcelManager, \Gamping\Model\Address\Manager $addressManager)
+    public function saveParcel($parcelManager, $addressManager)
     {
         if (! $addressManager->save($this->address)) {
             throw new \RuntimeException('Unable to save address.');
@@ -127,7 +127,7 @@ class Form
         }
     }
     
-    public function saveActivities(\Gamping\Model\Activity\Manager $activityManager, \Gamping\Model\ParcelHasActivity\Manager $parcelHasActivityManager)
+    public function saveActivities($activityManager, $parcelHasActivityManager)
     {
         $activities = $activityManager->getByIds($this->activities);
         
@@ -149,7 +149,7 @@ class Form
         }
     }
     
-    public function saveCommodities(\Gamping\Model\Commodity\Manager $commodityManager, \Gamping\Model\ParcelHasCommodity\Manager $parcelHasCommodityManager)
+    public function saveCommodities($commodityManager, $parcelHasCommodityManager)
     {
         $commodities = $commodityManager->getByIds($this->commodities);
         

@@ -11,6 +11,7 @@
             "Gamping\\": "lib",
             "Gamping\\Controller": "app",
             "Gamping\\Model" : "app",
+            "Gamping\\View" : "app",
             "Gamping\\Service" : "app"
         },
         "files": [

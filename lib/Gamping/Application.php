@@ -224,9 +224,9 @@ class Application
         $controllerName = $app->extractValue($route, 'controller');
         
         $to = function () use($app, $container, $routeName, $controllerName)
-        {
+        {            
             $request = $app->getRequest();
-            
+                        
             $controller = $container->get($controllerName);
             $controller->setRequest($request);
             
@@ -244,17 +244,17 @@ class Application
             
             return $response->render($controller->getDatas());
         };
-        
+                
         $methods = $this->extractValue($route, 'methods');
         foreach ($methods as $method) {
-            $this->registerMethod($method, $pattern, $to);
+            $this->registerMethod($method, $routeName, $pattern, $to);
         }
     }
 
-    private function registerMethod($method, $pattern, $to)
+    private function registerMethod($method, $name, $pattern, $to)
     {
         if (in_array($method, array('get', 'post', 'put', 'delete'))) {
-            $this->app->{$method}($pattern, $to);
+            $this->app->{$method}($pattern, $to)->bind($name);
         }
     }
 

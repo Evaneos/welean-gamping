@@ -1,0 +1,30 @@
+classes :
+    AddressManager :
+        class : \Gamping\Model\Address\Manager
+        call :
+            setStorage : [ @AddressStorage ]
+            setValidator : [ @AddressValidator ]
+        interceptor : [ @ExceptionInterceptor ]
+    AddressValidator :
+        class : \Gamping\Model\Address\Validator
+    AddressStorage :
+        class : \Gamping\Model\Address\Storage
+        call :
+            setStoreVolatile : [ @AddressStoreMemcached ]
+            setStorePersistent : [ @AddressStoreDatabase ]
+            setStoreLevel1 : [ @StoreArray ]
+    AddressStoreMemcached :
+        class : \Berthe\DAL\StoreMemcached
+    AddressStoreDatabase :
+        class : \Berthe\DAL\StoreDatabase
+        call :
+            setReader : [ @AddressReader ]
+            setWriter : [ @AddressWriter ]
+    AddressReader :
+        class : \Gamping\Model\Address\Reader
+        call :
+            setDb : [ @DbReader ]
+    AddressWriter :
+        class : \Gamping\Model\Address\Writer
+        call :
+            setDb : [ @DbWriter ]

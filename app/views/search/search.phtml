@@ -1,0 +1,29 @@
+<div id="host_template" class="hosting">
+    <div class="in">
+        <h3 class="h3"></h3>
+        <a href="">Plus d'information</a>
+    </div>
+</div>
+<div class="fullheight">
+    <div class="semi left">
+        <div id="map"></div>
+    </div>
+    <div class="semi right">
+        <form class="smart-form">
+            <select name="country">
+                <option value="">Pays</option>
+                <?php foreach ($this->countries as $country): ?>
+                <option value="<?= $country->getId() ?>"><?= $country->getName() ?></option>
+                <?php endforeach;?>
+            </select>
+            <select name="region">
+                <option value="">Région</option>
+                <option value="idf">Ile de France</option>
+            </select>
+            <div style="clear:both"></div>
+        </form>
+        <div id="host-list"></div>
+    </div>
+    <div style="clear:both"></div>
+</div>
+<div style="clear:both"></div>

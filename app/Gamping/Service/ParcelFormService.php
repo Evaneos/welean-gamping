@@ -5,6 +5,7 @@ namespace Gamping\Service;
 use Gamping;
 use Gamping\Model\Parcel\Builder\Form;
 use Gamping\Model\Currency\Manager;
+use Berthe\DAL\DbWriter;
 
 /**
  *
@@ -13,7 +14,12 @@ use Gamping\Model\Currency\Manager;
  */
 class ParcelFormService
 {
-
+    /**
+     * 
+     * @var DbWriter
+     */
+    private $db;
+    
     /**
      *
      * @var Manager
@@ -26,19 +32,57 @@ class ParcelFormService
      */
     private $parcelManager;
 
+    private $activityManager;
     
-    public function setParcelManager($manager)
+    private $addressManager;
+    
+    private $parcelHasActivityManager;
+    
+    private $commodityManager;
+    
+    private $parcelHasCommodityManager;
+    
+    public function __construct(DbWriter $db)
     {
-        $this->parcelManager = $manager;
+        $this->db = $db;
     }
 
-    
+    public function setActivityManager($manager)
+    {
+        $this->activityManager = $manager;
+    }
+
+    public function setAddressManager($manager)
+    {
+        $this->addressManager = $manager;
+    }
+
+    public function setCommodityManager($manager)
+    {
+        $this->commodityManager = $manager;
+    }
+
     public function setCurrencyManager($currencyManager)
     {
         $this->currencyManager = $currencyManager;
     }
     
+    public function setParcelManager($manager)
+    {
+        $this->parcelManager = $manager;
+    }
+    
+    public function setParcelHasActivityManager($manager)
+    {
+        $this->parcelHasActivityManager = $manager;
+    }
+    
+    public function setParcelHasCommodityManager($manager)
+    {
+        $this->parcelHasCommodityManager = $manager;
+    }
 
+    
     /**
      *
      * @return \Gamping\Model\Parcel\Builder\Form
@@ -48,13 +92,22 @@ class ParcelFormService
         $builder = new Form();
         
         $builder->setParcel($this->parcelManager->getVoForCreation());
+        $builder->setAddress($this->addressManager->getVoForCreation());
         $builder->setCurrencyManager($this->currencyManager);
         
         return $builder;
     }
 
-    public function saveParcelFromBuilder(Form $builder)
+    public function saveParcelFromBuilder($builder)
     {
-        throw new \BadMethodCallException('Not implemented.');
+        try {
+            //$this->db->beginTransaction();
+            $builder->saveParcel($this->parcelManager, $this->addressManager);
+            $builder->saveActivities($this->activityManager, $this->parcelHasActivityManager);
+            //$this->db->commit();
+        }
+        catch (Exception $ex) {
+            //$this->db->rollback();
+        }
     }
 }

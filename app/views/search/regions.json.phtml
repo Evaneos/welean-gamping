@@ -1,0 +1,9 @@
+<?php
+
+$output = array();
+
+foreach ($this->regions as $region) {
+    $output[] = array('id' => $region->getId(), 'name' => $region->getName());
+}
+
+echo json_encode($output);

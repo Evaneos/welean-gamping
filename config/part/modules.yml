@@ -9,3 +9,8 @@ include:
     - modules/region.yml
     - modules/situation_geo.yml
     - modules/currency.yml
+    - modules/activity.yml
+    - modules/commodity.yml
+    - modules/parcel_has_activity.yml
+    - modules/parcel_has_commodity.yml
+    - modules/address.yml

@@ -1,0 +1,30 @@
+classes :
+    ActivityManager :
+        class : \Gamping\Model\Activity\Manager
+        call :
+            setStorage : [ @ActivityStorage ]
+            setValidator : [ @ActivityValidator ]
+        interceptor : [ @ExceptionInterceptor ]
+    ActivityValidator :
+        class : \Gamping\Model\Activity\Validator
+    ActivityStorage :
+        class : \Gamping\Model\Activity\Storage
+        call :
+            setStoreVolatile : [ @ActivityStoreMemcached ]
+            setStorePersistent : [ @ActivityStoreDatabase ]
+            setStoreLevel1 : [ @StoreArray ]
+    ActivityStoreMemcached :
+        class : \Berthe\DAL\StoreMemcached
+    ActivityStoreDatabase :
+        class : \Berthe\DAL\StoreDatabase
+        call :
+            setReader : [ @ActivityReader ]
+            setWriter : [ @ActivityWriter ]
+    ActivityReader :
+        class : \Gamping\Model\Activity\Reader
+        call :
+            setDb : [ @DbReader ]
+    ActivityWriter :
+        class : \Gamping\Model\Activity\Writer
+        call :
+            setDb : [ @DbWriter ]

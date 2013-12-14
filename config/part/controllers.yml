@@ -11,3 +11,18 @@ classes:
         interceptor : [ @GoogleAnalytics ]
         call:  
             setFormService: [ @ParcelFormService ]
+            
+    searchController:
+        class: \Gamping\Controllers\Search
+        call:
+            setGeographicalService: [ @GeographicalService ]
+            
+    searchRegionsController:
+        class: \Gamping\Controllers\Search\RegionsByCountry
+        call:
+            setGeographicalService: [ @GeographicalService ]
+            
+    parcelsByRegionController:
+        class: \Gamping\Controllers\Search\ParcelsByRegion
+        call:
+            setGeographicalService: [ @GeographicalService ]

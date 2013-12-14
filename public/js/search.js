@@ -142,4 +142,32 @@ jQuery(document).ready(function() {
 
     map.fitBounds(markerBounds);
     // var poly = new google.maps.Polyline({path:pointsArray, map:map});
+    
+    $("[name='country']").change(function(e) {
+		$.ajax({
+			'dataType': 'json',
+			'url': '/ajax/regions-by-country/id/' + e.target.value, 
+			'success' :function(data) {
+				var select = $("[name='region']");
+				select.find('option:not(:first-child)').remove();
+				$.each(data, function(key, value) {
+					$('<option />', { value: value.id, html: value.name }).appendTo(select);
+				});
+			}
+		});
+	});
+    
+    $("[name='region']").change(function(e) {
+    	$.ajax({
+    		'dataType': 'json',
+    		'url': '/ajax/parcels-by-region/id/' + e.target.value,
+    		'success' :function(data) {
+				/*var select = $("[name='region']");
+				select.find('option:not(:first-child)').remove();
+				$.each(data, function(key, value) {
+					$('<option />', { value: value.id, html: value.name }).appendTo(select);
+				});*/
+			}
+    	});
+    });
 })

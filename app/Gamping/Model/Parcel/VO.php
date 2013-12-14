@@ -50,7 +50,7 @@ class VO extends \Berthe\AbstractVO
     protected $created_at = null;
 
     protected $updated_at = null;
-
+    
     public function getUserId()
     {
         return $this->user_id;

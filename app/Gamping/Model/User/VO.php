@@ -16,6 +16,7 @@ class VO extends \Berthe\AbstractVO {
     protected $created_at = null;
     protected $updated_at = null;
     protected $is_banned = 0;
+    protected $picture_id = 0;
 
     public function setFirstname($value) {
         $this->firstname = $value;
@@ -124,5 +125,14 @@ class VO extends \Berthe\AbstractVO {
 
     public function getIsBanned() {
         return $this->is_banned;
+    }
+    
+    public function setPictureId($id) {
+        $this->picture_id = $id;
+        return $this;
+    }
+    
+    public function getPictureId() {
+        return $this->picture_id;
     }
 }

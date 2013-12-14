@@ -18,7 +18,8 @@ SET
     password = ?,
     created_at = ?,
     updated_at = ?,
-    is_banned = ?
+    is_banned = ?,
+    picture_id = ?
 WHERE
     id = ?
 SQL;
@@ -35,6 +36,7 @@ SQL;
                     $object->getCreatedAt(),
                     $object->getUpdatedAt(),
                     $object->getIsBanned(),
+                    $object->getPictureId(),
                     $object->getId()));
     }
 
@@ -57,7 +59,7 @@ INSERT INTO
     is_banned
     )
 VALUES
-    (?, ?, ?, ?, ?, ?
+    (?, ?, ?, ?, ?, ?, ?
      ?, ?, ?, ?, ?, ?)
 SQL;
 
@@ -74,7 +76,8 @@ SQL;
             $object->getPassword(),
             $object->getCreatedAt(),
             $object->getUpdatedAt(),
-            $object->getIsBanned()
+            $object->getIsBanned(),
+            $object->getPictureId()
             ));
         $id = (int)$this->db->lastInsertId("user","id");
         if ($id > 0) {

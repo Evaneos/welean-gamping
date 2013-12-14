@@ -35,3 +35,32 @@ routes:
         output:
             html:
                 view: app/views/form/form.phtml
+                
+    search:
+        pattern: "/search"
+        controller: searchController
+        methods: [ get ]
+        scripts:
+            head:
+                - "http://maps.google.com/maps/api/js?sensor=false"
+            bottom:
+                - "/js/search.js"
+        output:
+            html:
+                view: app/views/search/search.phtml
+                
+    searchRegions:
+        pattern: "/ajax/regions-by-country/id/{id}"
+        controller: searchRegionsController
+        methods: [ get ]
+        output:
+            json:
+                view: app/views/search/regions.json.phtml
+                
+    searchParcels:
+        pattern: "/ajax/parcels-by-region/id/{id}"
+        controller: parcelsByRegionController
+        methods: [ get ]
+        output:
+            json:
+                view: app/views/search/parcels.json.phtml

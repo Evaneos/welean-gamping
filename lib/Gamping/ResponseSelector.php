@@ -2,6 +2,7 @@
 namespace Gamping;
 
 use Gamping\Response\Html;
+use Gamping\Response\Json;
 use Symfony\Component\HttpFoundation\Request;
 use Gamping\Layout\Selector;
 
@@ -61,14 +62,18 @@ class ResponseSelector
         if ($response != null) {
             $layout = $this->layoutSelector->getLayout($this->layouts[$outputName]);
             
-            foreach ($this->scripts[$outputName] as $section => $scripts) {
-                foreach ($scripts as $script) {
-                    $layout->addJavascriptFile($script, $section);
-                }
-            } 
+            if (is_array($this->scripts[$outputName])) {
+                foreach ($this->scripts[$outputName] as $section => $scripts) {
+                    foreach ($scripts as $script) {
+                        $layout->addJavascriptFile($script, $section);
+                    }
+                } 
+            }
             
             $response->setLayout($layout);
-            $response->setViewFile($this->rootDirectory . DIRECTORY_SEPARATOR . $viewName);
+            if (trim($viewName) != '') {
+                $response->setViewFile($this->rootDirectory . DIRECTORY_SEPARATOR . $viewName);
+            }
         }
         
         return $response;
@@ -79,20 +84,30 @@ class ResponseSelector
         $acceptables = $request->getAcceptableContentTypes();
         
         foreach ($acceptables as $acceptable) {
-            if ($acceptable == 'text/html' && array_key_exists('html', $this->outputs)) {
+            if ($this->isAcceptable($acceptable, 'text/html') && array_key_exists('html', $this->outputs)) {
                 return 'html';
             }
         
-            if ($acceptable == 'application/json'  && array_key_exists('json', $this->outputs)) {
+            if ($this->isAcceptable($acceptable, 'application/json') && array_key_exists('json', $this->outputs)) {
                 return 'json';
             }
         
-            if (($acceptable == 'text/xml' || $acceptable == 'application/xml')  && array_key_exists('xml', $this->outputs)) {
+            if (($this->isAcceptable($acceptable, 'text/xml') || $this->isAcceptable($acceptable, 'application/xml'))  
+                && array_key_exists('xml', $this->outputs)) {
                 return 'xml';
             }
         }
         
         throw new \RuntimeException('Unable to find a compatible output.');
+    }
+    
+    private function isAcceptable($requested, $match)
+    {
+        if ($requested = '*/*') {
+            return true;
+        }
+        
+        return ($requested == $tested);
     }
     
     public function addOutput($name, $layout, $view, $scripts)

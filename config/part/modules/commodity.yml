@@ -1,0 +1,30 @@
+classes :
+    CommodityManager :
+        class : \Gamping\Model\Commodity\Manager
+        call :
+            setStorage : [ @CommodityStorage ]
+            setValidator : [ @CommodityValidator ]
+        interceptor : [ @ExceptionInterceptor ]
+    CommodityValidator :
+        class : \Gamping\Model\Commodity\Validator
+    CommodityStorage :
+        class : \Gamping\Model\Commodity\Storage
+        call :
+            setStoreVolatile : [ @CommodityStoreMemcached ]
+            setStorePersistent : [ @CommodityStoreDatabase ]
+            setStoreLevel1 : [ @StoreArray ]
+    CommodityStoreMemcached :
+        class : \Berthe\DAL\StoreMemcached
+    CommodityStoreDatabase :
+        class : \Berthe\DAL\StoreDatabase
+        call :
+            setReader : [ @CommodityReader ]
+            setWriter : [ @CommodityWriter ]
+    CommodityReader :
+        class : \Gamping\Model\Commodity\Reader
+        call :
+            setDb : [ @DbReader ]
+    CommodityWriter :
+        class : \Gamping\Model\Commodity\Writer
+        call :
+            setDb : [ @DbWriter ]

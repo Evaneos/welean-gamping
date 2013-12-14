@@ -22,23 +22,25 @@ class Form extends Controller
     {
         $isSubmit = $this->getParam('submit', false);
         
-        if ($isSubmit) {
+        if ($isSubmit !== false) {
             $builder = $this->formService->getParcelBuilder();
             
             $this->setRates($builder);
             $this->setCommodities($builder);
             $this->setActivities($builder);
+            
+            $this->formService->saveParcelFromBuilder($builder);
         }
         
-        $this->setData('bodyClass', 'search');
+        $this->setData('bodyClass', 'add');
     }
     
     private function setRates($builder)
     {
         $currencyCode = $this->getParam('currency', '');
         
-        $adultPrice = (float) $this->getParam('adult_price', 0);
-        $extraAdultPrice = (float) $this->getParam('extra_adult_price', 0);
+        $adultPrice = (float) $this->getParam('price_base', 0);
+        $extraAdultPrice = (float) $this->getParam('price_extra', 0);
         
         $builder->setRates($currencyCode, $adultPrice, $extraAdultPrice);
     }

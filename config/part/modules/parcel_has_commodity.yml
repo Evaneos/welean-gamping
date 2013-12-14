@@ -1,0 +1,30 @@
+classes :
+    ParcelHasCommodityManager :
+        class : \Gamping\Model\ParcelHasCommodity\Manager
+        call :
+            setStorage : [ @ParcelHasCommodityStorage ]
+            setValidator : [ @ParcelHasCommodityValidator ]
+        interceptor : [ @ExceptionInterceptor ]
+    ParcelHasCommodityValidator :
+        class : \Gamping\Model\ParcelHasCommodity\Validator
+    ParcelHasCommodityStorage :
+        class : \Gamping\Model\ParcelHasCommodity\Storage
+        call :
+            setStoreVolatile : [ @ParcelHasCommodityStoreMemcached ]
+            setStorePersistent : [ @ParcelHasCommodityStoreDatabase ]
+            setStoreLevel1 : [ @StoreArray ]
+    ParcelHasCommodityStoreMemcached :
+        class : \Berthe\DAL\StoreMemcached
+    ParcelHasCommodityStoreDatabase :
+        class : \Berthe\DAL\StoreDatabase
+        call :
+            setReader : [ @ParcelHasCommodityReader ]
+            setWriter : [ @ParcelHasCommodityWriter ]
+    ParcelHasCommodityReader :
+        class : \Gamping\Model\ParcelHasCommodity\Reader
+        call :
+            setDb : [ @DbReader ]
+    ParcelHasCommodityWriter :
+        class : \Gamping\Model\ParcelHasCommodity\Writer
+        call :
+            setDb : [ @DbWriter ]
