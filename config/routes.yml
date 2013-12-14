@@ -83,9 +83,9 @@ routes:
                 view: app/views/search/regions.json.phtml
 
     searchParcels:
-        pattern: "/ajax/parcels-by-region/id/{id}"
-        controller: parcelsByRegionController
-        methods: [ get ]
+        pattern: "/ajax/parcels-search"
+        controller: parcelsSearchController
+        methods: [ post ]
         output:
             json:
                 view: app/views/search/parcels.json.phtml

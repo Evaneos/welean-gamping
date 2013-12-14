@@ -12,7 +12,7 @@ class Manager extends \Berthe\AbstractManager
     
     /**
      * 
-     * @param int $id
+     * @param int $id The RegionId
      * @return \Gamping\Model\Parcel\VO[]
      */
     public function getByRegionId($id)
@@ -23,5 +23,19 @@ class Manager extends \Berthe\AbstractManager
         
         return $this->getByPaginator($paginator)->getResultSet();
     }
-    
+
+    /**
+     *
+     * @param int $id The CountryId
+     * @return \Gamping\Model\Parcel\VO[]
+     */
+    public function getByCountryId($id)
+    {
+        $paginator = new Fetcher();
+
+        $paginator->addFilter('country_id', Fetcher::TYPE_EQ, $id);
+
+        return $this->getByPaginator($paginator)->getResultSet();
+    }
+
 }

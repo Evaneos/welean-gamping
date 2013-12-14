@@ -30,7 +30,7 @@ classes:
         call:
             setGeographicalService: [ @GeographicalService ]
 
-    parcelsByRegionController:
-        class: \Gamping\Controllers\Search\ParcelsByRegion
+    parcelsSearchController:
+        class: \Gamping\Controllers\Search\ParcelsSearch
         call:
             setGeographicalService: [ @GeographicalService ]
