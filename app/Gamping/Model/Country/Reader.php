@@ -8,17 +8,38 @@ class Reader extends \Gamping\DAL\AbstractReader {
         return <<<SQL
 SELECT
     country.*,
-    translation.name as translation_name
+    tName.name as translation_name,
+    tComputername.name as translation_computername
 FROM
     country
 LEFT JOIN
-    translation
-    ON translation.id = country.name
-    AND translation.language_id = {$this->getDefaultLanguageId()}
+    translation as tName
+    ON tName.id = country.name
+    AND tName.language_id = {$this->getDefaultLanguageId()}
+LEFT JOIN
+    translation as tComputername
+    ON tComputername.id = country.computername
+    AND tComputername.language_id = {$this->getDefaultLanguageId()}
 SQL;
     }
 
     public function getTableName() {
         return 'country';
     }
+
+    public function getIdByComputerame($computername){
+        $sql = <<<SQL
+SELECT
+    country.id
+FROM
+    country
+LEFT JOIN
+    translation as tComputername
+    ON tComputername.id = country.computername
+    AND tComputername.language_id = ?
+    AND tComputername.name = ?
+SQL;
+        return $this->db->fetchOne($sql, array($this->getDefaultLanguageId(), $computername));
+    }
+
 }
