@@ -29,8 +29,9 @@ class HomeService
         $this->parcelManager = $manager;
     }
 
-    public function getAllCountriesWithActiveParcel() {
-        return $this->countryManager->getAll();
+    public function getAllCountriesWithActiveParcel()
+    {
+        return $this->countryManager->getWithActiveParcel();
     }
 
 }

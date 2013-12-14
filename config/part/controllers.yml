@@ -9,6 +9,9 @@ classes:
         call:
             setHomeService: [ @HomeService ]
 
+    parcelController:
+        class: \Gamping\Controllers\Parcel
+
     formController:
         class: \Gamping\Controllers\Form
         interceptor : [ @GoogleAnalytics ]
@@ -24,11 +27,6 @@ classes:
 
     searchController:
         class: \Gamping\Controllers\Search
-        call:
-            setGeographicalService: [ @GeographicalService ]
-
-    searchByCountryController:
-        class: \Gamping\Controllers\Search\SearchByCountry
         props :
             countryManager : @CountryManager
         call:
@@ -39,7 +37,7 @@ classes:
         call:
             setGeographicalService: [ @GeographicalService ]
 
-    parcelsByRegionController:
-        class: \Gamping\Controllers\Search\ParcelsByRegion
+    parcelsSearchController:
+        class: \Gamping\Controllers\Search\ParcelsSearch
         call:
             setGeographicalService: [ @GeographicalService ]

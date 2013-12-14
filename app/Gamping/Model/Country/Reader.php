@@ -27,7 +27,8 @@ SQL;
         return 'country';
     }
 
-    public function getIdByComputerame($computername){
+    public function getIdByComputerame($computername)
+    {
         $sql = <<<SQL
 SELECT
     country.id
@@ -41,5 +42,17 @@ LEFT JOIN
 SQL;
         return $this->db->fetchOne($sql, array($this->getDefaultLanguageId(), $computername));
     }
+
+    public function getIdsWithActiveParcel()
+    {
+        $sql = <<<SQL
+SELECT
+  DISTINCT country_id as id
+FROM
+  parcel
+SQL;
+        return $this->db->fetchCol($sql);
+    }
+
 
 }

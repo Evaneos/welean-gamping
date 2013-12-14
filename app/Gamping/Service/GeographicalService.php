@@ -77,6 +77,11 @@ class GeographicalService
         return $this->countryManager->getAll();
     }
 
+    public function getAllCountriesWithActiveParcel()
+    {
+        return $this->countryManager->getWithActiveParcel();
+    }
+
     public function getCountryById($id)
     {
         if ((int) $id <= 0) {
@@ -102,11 +107,11 @@ class GeographicalService
         return $this->regionManager->getByCountryId($countryId);
     }
 
-    public function getParcelTileViewsByRegion(\Gamping\Model\Region\VO $region)
+    private function getParcelTileViews($parcels)
     {
-        $regionId = $region->getId();
-
-        $parcels = $this->parcelManager->getByRegionId($regionId);
+        if(count($parcels) == 0){
+            return array();
+        }
 
         $users = $this->getUsersFromParcels($parcels);
         $userPictures = $this->getPicturesFromUsers($users);
@@ -136,6 +141,23 @@ class GeographicalService
         }
 
         return $views;
+
+    }
+
+    public function getParcelTileViewsByRegion(\Gamping\Model\Region\VO $region)
+    {
+        $regionId = $region->getId();
+        $parcels = $this->parcelManager->getByRegionId($regionId);
+
+        return $this->getParcelTileViews($parcels);
+    }
+
+    public function getParcelTileViewsByCountry(\Gamping\Model\Country\VO $country)
+    {
+        $countryId = $country->getId();
+        $parcels = $this->parcelManager->getByCountryId($countryId);
+
+        return $this->getParcelTileViews($parcels);
     }
 
     private function getUsersFromParcels(array $parcels)

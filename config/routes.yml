@@ -1,4 +1,5 @@
 default-layout: index
+
 layouts:
     index:
         template: app/views/index.phtml
@@ -44,6 +45,18 @@ routes:
             html:
                 view: app/views/form/form.success.phtml
 
+    parcel:
+        pattern: "/parcel"
+        controller: parcelController
+        methods: [ get ]
+        scripts:
+            bottom:
+                - "/vendor/jquery-backstretch/jquery.backstretch.min.js"
+                - "/js/parcel.js"
+        output:
+            html:
+                view: app/views/parcel/parcel.phtml
+
     search:
         pattern: "/search"
         controller: searchController
@@ -59,7 +72,7 @@ routes:
 
     searchByCountry:
         pattern: "/search/{computername}"
-        controller: searchByCountryController
+        controller: searchController
         methods: [ get ]
         scripts:
             head:
@@ -79,9 +92,9 @@ routes:
                 view: app/views/search/regions.json.phtml
 
     searchParcels:
-        pattern: "/ajax/parcels-by-region/id/{id}"
-        controller: parcelsByRegionController
-        methods: [ get ]
+        pattern: "/ajax/parcels-search"
+        controller: parcelsSearchController
+        methods: [ post ]
         output:
             json:
                 view: app/views/search/parcels.json.phtml
