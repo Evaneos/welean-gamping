@@ -14,6 +14,7 @@ parameters :
     currentLanguage :
         iso2 : fr
         id : 1
+    dateDefaultTimezone : Europe/Paris
     defaultLanguages :
         gamping_com_dev :
             iso2 : en

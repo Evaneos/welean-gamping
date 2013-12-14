@@ -23,6 +23,7 @@ define('LANG_ISO2', $langISO2);
 
 $container->setParameter('currentLanguage.iso2', $langISO2);
 $container->setParameter('currentLanguage.id', $langID);
+date_default_timezone_set($container->getParameter('dateDefaultTimezone'));
 
 $yaml = new Symfony\Component\Yaml\Yaml();
 
