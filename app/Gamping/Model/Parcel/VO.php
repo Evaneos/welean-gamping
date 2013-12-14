@@ -10,11 +10,11 @@ class VO extends \Gamping\AbstractVO
 
     protected $country_id = 0;
 
-    protected $place_id = 0;
-
     protected $region_id = 0;
 
     protected $address_id = 0;
+
+    protected $currency_id = 0;
 
     protected $title = '';
 
@@ -23,8 +23,6 @@ class VO extends \Gamping\AbstractVO
     protected $price_per_adult = '';
 
     protected $price_per_extra = '';
-
-    protected $currency_iso3 = '';
 
     protected $hosts_tents = false;
 
@@ -70,17 +68,6 @@ class VO extends \Gamping\AbstractVO
     public function setCountryId($id)
     {
         $this->country_id = (int) $id;
-        return $this;
-    }
-
-    public function getPlaceId()
-    {
-        return $this->place_id;
-    }
-
-    public function setPlaceId($id)
-    {
-        $this->place_id = (int) $id;
         return $this;
     }
 
@@ -150,14 +137,14 @@ class VO extends \Gamping\AbstractVO
         return $this;
     }
 
-    public function getCurrencyCode()
+    public function getCurrencyId()
     {
-        return $this->currency_iso3;
+        return $this->currency_id;
     }
 
-    public function setCurrencyCode($code)
+    public function setCurrencyId($id)
     {
-        $this->currency_iso3 = $code;
+        $this->currency_id = $id;
         return $this;
     }
 

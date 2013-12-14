@@ -7,13 +7,13 @@ class Reader extends \Gamping\DAL\AbstractReader {
     public function getSelectQuery() {
         return <<<SQL
 SELECT
-    country.*,
+    {$this->getTableName()}.*,
     translation.name as translation_name
 FROM
-    country
+    {$this->getTableName()}
 LEFT JOIN
     translation
-    ON translation.id = country.name
+    ON translation.id = {$this->getTableName()}.name
     AND translation.language_id = {$this->getDefaultLanguageId()}
 SQL;
     }

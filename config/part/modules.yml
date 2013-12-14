@@ -1,16 +1,16 @@
 include:
     - modules/user.yml
-    - modules/parcel.yml
     - modules/country.yml
-    - modules/parcel_has_picture.yml
     - modules/picture.yml
     - modules/place.yml
-    - modules/place_has_situation_geo.yml
     - modules/region.yml
     - modules/situation_geo.yml
     - modules/currency.yml
     - modules/activity.yml
     - modules/commodity.yml
+    - modules/address.yml
+    - modules/parcel.yml
     - modules/parcel_has_activity.yml
     - modules/parcel_has_commodity.yml
-    - modules/address.yml
+    - modules/parcel_has_situation_geo.yml
+    - modules/parcel_has_picture.yml

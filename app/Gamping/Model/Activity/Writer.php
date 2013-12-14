@@ -6,10 +6,8 @@ class Writer extends \Gamping\DAL\AbstractWriter {
     private function getParams(VO $object, $withId = false)
     {
         $params = array(
-            ':address_id' => $object->getAddressId(),
             ':description' => $object->getDescription(),
-            ':name' => $object->getName(),
-            ':place_id' => $object->getPlaceId()
+            ':name' => $object->getName()
         );
 
         if ($withId) {
@@ -22,8 +20,8 @@ class Writer extends \Gamping\DAL\AbstractWriter {
     public function update(\Gamping\AbstractVO $object) {
         $query = <<<EOQ
             UPDATE activity SET
-                address_id = :address_id, description = :description,
-                name = :name, place_id = :place_id
+                description = :description,
+                name = :name
             WHERE id = :id
 EOQ;
 
@@ -32,8 +30,8 @@ EOQ;
 
     public function insert(\Gamping\AbstractVO $object) {
         $query = <<<EOQ
-            INSERT INTO activity (address_id, description, name, place_id)
-            VALUES (:address_id, :description, :name, :place_id)
+            INSERT INTO activity (description, name)
+            VALUES (:description, :name)
 EOQ;
 
         $ret = (bool) $this->db->query($query, $this->getParams($object, false));
