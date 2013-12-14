@@ -10,13 +10,13 @@
     </div>
     <div class="semi right">
         <form class="smart-form">
-            <select name="country">
+            <select id="country_select" name="country" onchange="loadData()">
                 <option value="">Pays</option>
                 <?php foreach ($this->countries as $country): ?>
                 <option value="<?= $country->getId() ?>"><?= $country->getName() ?></option>
                 <?php endforeach;?>
             </select>
-            <select name="region">
+            <select id="region_select" name="region">
                 <option value="">Région</option>
                 <option value="idf">Ile de France</option>
             </select>

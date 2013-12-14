@@ -136,27 +136,33 @@ function loadData() {
     // @TODO
 
     var markerBounds = new google.maps.LatLngBounds();
+    var country_id = jQuery("#country_select").val();
 
-    // Add the marker (here as sample until load is done w/ ajax)
-    for(k=0; k<10; k++) {
+    jQuery.getJSON( "/ajax/parcels-search?cid=" + country_id, function( parcelViews ) {
 
-        var myLatlng = new google.maps.LatLng(45.758796 + Math.random(),4.834607 - Math.random());
-        var markerData = {
-            position : myLatlng,
-            title : 'rr',
-            sidebarItem: "Nouille Orc",
-            image: 'http://www.gamping.com/wp-content/uploads/2013/11/P10109951-716x287.jpg',
-            content: "Grand espace vert naturel",
-            host_name : 'Patricia T.',
-            host_picture:'http://www.gamping.com/wp-content/authors/patou0526@yahoo.fr-1161-1384610599.jpg'
-        }
+        jQuery.each( parcelViews, function( key, parcelView ) {
 
-        makeMarker(markerData);
-        markerBounds.extend(myLatlng);
-    }
+            var myLatlng = new google.maps.LatLng(parcelView.parcel.lat, parcelView.parcel.lng);
 
-    highlightVisibleMarkers();
-    googleMap.fitBounds(markerBounds);
+            var markerData = {
+                position : myLatlng,
+                title : parcelView.parcel.name,
+                sidebarItem: "Nouille Orc",
+                image: 'http://www.gamping.com/wp-content/uploads/2013/11/P10109951-716x287.jpg',
+                content: "",
+                host_name : parcelView.user.name,
+                host_picture:'http://www.gamping.com/wp-content/authors/patou0526@yahoo.fr-1161-1384610599.jpg'
+            }
+
+            makeMarker(markerData);
+            markerBounds.extend(myLatlng);
+
+        });
+        highlightVisibleMarkers();
+        googleMap.fitBounds(markerBounds);
+
+    });
+
 }
 
 function hightlightSizebox(i) {
