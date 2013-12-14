@@ -22,7 +22,7 @@ class Layout extends View
         return $this;
     }
     
-    public function addStyleSheet($group, $url, $media = 'all')
+    public function addStyleSheet($group, $url, $media = 'all', $type = 'css')
     {
         if (! array_key_exists($group, $this->stylesheets)) {
             $this->stylesheets[$group] = array();
@@ -32,7 +32,7 @@ class Layout extends View
             $this->stylesheets[$group][$media] = array();
         }
         
-        $this->stylesheets[$group][$media][] = $url;
+        $this->stylesheets[$group][$media][] = array('url' => $url, 'type' => $type);
         
         return $this;
     }
@@ -43,7 +43,7 @@ class Layout extends View
             $this->javascripts[$position] = array();
         }
         
-        $this->javascripts[$position] = $url;
+        $this->javascripts[$position][] = $url;
         
         return $this;
     }
@@ -53,10 +53,10 @@ class Layout extends View
         $buffer = '';
         
         foreach ($this->metas as $meta) {
-            $buffer .= sprintf('<meta name="%s" content="%s" />', $meta['key'], $meta['value']);
+            $buffer .= sprintf('<meta name="%s" content="%s" />', $meta['key'], $meta['value']) . PHP_EOL;
         }
         
-        return nl2br($buffer);
+        return $buffer;
     }
     
     protected function renderJavascripts($position = 'head')
@@ -68,10 +68,10 @@ class Layout extends View
         }
         
         foreach ($this->javascripts[$position] as $jsInclude) {
-            $buffer .= sprintf('<script src="%s"></script>%s', $jsInclude, PHP_EOL);       
+            $buffer .= sprintf('<script src="%s" type="text/javascript"></script>%s', $jsInclude, PHP_EOL);       
         }
         
-        return nl2br($buffer);
+        return $buffer;
     }
     
     protected function renderStylesheets()
@@ -79,13 +79,14 @@ class Layout extends View
         $buffer = '';
         
         foreach ($this->stylesheets as $group) {
-            foreach ($group as $media) {
-                foreach ($media as $stylesheet) {
-                    $buffer .= sprintf('<link rel="stylesheet" media="%s" href="%s" />', $media, $url);
+            foreach ($group as $media => $mediaGroup) {
+                foreach ($mediaGroup as $stylesheet) {
+                    $buffer .= sprintf('<link rel="stylesheet" media="%s" href="%s" type="text/%s" />', 
+                        $media, $stylesheet['url'], $stylesheet['type']) . PHP_EOL;
                 }
             }
         }
         
-        return nl2br($buffer);
+        return $buffer;
     }
 }

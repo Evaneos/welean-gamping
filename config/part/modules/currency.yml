@@ -1,0 +1,30 @@
+classes :
+    CurrencyManager :
+        class : \Gamping\Model\Currency\Manager
+        call :
+            setStorage : [ @CurrencyStorage ]
+            setValidator : [ @CurrencyValidator ]
+        interceptor : [ @ExceptionInterceptor ]
+    CurrencyValidator :
+        class : \Gamping\Model\Currency\Validator
+    CurrencyStorage :
+        class : \Gamping\Model\Currency\Storage
+        call :
+            setStoreVolatile : [ @CurrencyStoreMemcached ]
+            setStorePersistent : [ @CurrencyStoreDatabase ]
+            setStoreLevel1 : [ @StoreArray ]
+    CurrencyStoreMemcached :
+        class : \Berthe\DAL\StoreMemcached
+    CurrencyStoreDatabase :
+        class : \Berthe\DAL\StoreDatabase
+        call :
+            setReader : [ @CurrencyReader ]
+            setWriter : [ @CurrencyWriter ]
+    CurrencyReader :
+        class : \Gamping\Model\Currency\Reader
+        call :
+            setDb : [ @DbReader ]
+    CurrencyWriter :
+        class : \Gamping\Model\Currency\Writer
+        call :
+            setDb : [ @DbWriter ]

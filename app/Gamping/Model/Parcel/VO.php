@@ -22,7 +22,7 @@ class VO extends \Berthe\AbstractVO
 
     protected $price_per_adult = '';
 
-    protected $price_per_child = '';
+    protected $price_per_extra = '';
 
     protected $currency_iso3 = '';
 
@@ -139,14 +139,14 @@ class VO extends \Berthe\AbstractVO
         return $this;
     }
 
-    public function getPricePerChild()
+    public function getPricePerExtraAdult()
     {
-        return $this->price_per_child;
+        return $this->price_per_extra;
     }
 
-    public function setPricePerChild($price)
+    public function setPricePerExtraAdult($price)
     {
-        $this->price_per_child = (float) $price;
+        $this->price_per_extra = (float) $price;
         return $this;
     }
 

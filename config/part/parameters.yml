@@ -5,5 +5,10 @@ parameters :
             host : localhost
             port : 3306
             username : root
-            password : chocolat
-            dbname : gamping
+            password : weleanit
+            dbname : weleanit
+    facebook:
+        key : facebook-app-key
+    googleAnalytics:
+        key : ga-key-thibaud
+

@@ -8,3 +8,4 @@ include:
     - modules/place_has_situation_geo.yml
     - modules/region.yml
     - modules/situation_geo.yml
+    - modules/currency.yml

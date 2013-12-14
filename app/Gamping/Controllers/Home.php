@@ -15,7 +15,7 @@ class Home extends \Gamping\Controller
     {
         $this->getAllParams();
 
-        echo \t('chaud', 'en');
+        //echo \t('chaud', 'en');
 
 /*
         $fetcher = new \Berthe\Fetcher(-1, -1);
@@ -29,6 +29,7 @@ class Home extends \Gamping\Controller
 */
                 
         $this->setData('data', 'Hello World');
+        $this->setData('bodyClass', 'homepage');
 
     }
 

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr-FR" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="UTF-8" />
+
+<meta name="viewport" content="width=device-width" />
+<meta name="copyright" content="December 2013">
+
+<!--
+===================================================
+            Coded w/ passion during
+    __      __   _                 _ _
+    \ \    / /__| |___ __ _ _ _   (_) |_
+     \ \/\/ / -_) / -_) _` | ' \ _| |  _|
+      \_/\_/\___|_\___\__,_|_||_(_)_|\__|
+
+Olivier MADRE/ Thibaud FABRE / Julien Tilap LA VINH
+
+===================================================
+-->
+
+<!--[if IE]>
+<meta http-equiv="imagetoolbar" content="no">
+<![endif]-->
+
+<!--[if lt IE 9]>
+<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<title>Gamping</title>
+
+<script type="text/javascript">
+<!--
+less = {env: "development"};
+-->
+</script>
+<?= $this->renderStylesheets() ?>
+<?= $this->renderJavascripts('head') ?>
+</head>
+
+<body class="<?= $this->bodyClass ?>">
+<?= $this->renderJavascripts('top') ?>
+<header id="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 side hidden-xs hidden-sm">
+                <a href="/connect" class="button-discover" title="tilap">Connectez vous !</a>
+            </div>
+            <div class="col-md-4" id="site-title">
+                <h1><a href="/" title="Gamping.com"><img src="/images/gamping-logo.png" title="" alt=""/></h1>
+                <div>Le camping chez l'habitant</div>
+            </div>
+            <div class="col-md-4 side hidden-xs hidden-sm">
+                <a href="/register" class="button-suggest" title="tilap">Proposez votre terrain</a>
+                <i class="icon-user"></i>
+
+            </div>
+        </div>
+    </div>
+</header>
+
+<?= $this->view ?>
+
+<aside id="press" class="container">
+    <div class="row">
+        <div class="col-md-12">
+            Ils en parlent <img src="/images/press_logos2.gif" title="Gamping dans la presse" alt="Gamping dans la presse">
+        </div>
+    </div>
+</aside>
+
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 l">
+                <div class="fb-like fb_edge_widget_with_comment fb_iframe_widget" data-href="https://www.facebook.com/camping.chez.habitant.gamping" data-send="true" data-width="450" data-show-faces="true" fb-xfbml-state="rendered"><span style="height: 25px; width: 450px;"><iframe id="f1cd73718c" name="f3e0b806e8" scrolling="no" title="Like this content on Facebook." class="fb_ltr" src="http://www.facebook.com/plugins/like.php?api_key=154084594742516&amp;channel_url=http%3A%2F%2Fstatic.ak.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D28%23cb%3Df636a4bb4%26domain%3Dwww.gamping.com%26origin%3Dhttp%253A%252F%252Fwww.gamping.com%252Ff3b2510f44%26relation%3Dparent.parent&amp;colorscheme=light&amp;extended_social_context=false&amp;href=https%3A%2F%2Fwww.facebook.com%2Fcamping.chez.habitant.gamping&amp;layout=standard&amp;locale=en_US&amp;node_type=link&amp;sdk=joey&amp;send=true&amp;show_faces=true&amp;width=450" style="border: none; overflow: hidden; height: 25px; width: 450px;"></iframe></span></div>
+            </div>
+            <div class="col-md-6 r">
+                <a href="#legal_mentions" class="link_legal fancybox">Mentions légales.</a>
+                <a href="http://blog.gamping.com" class="link_legal">Blog</a>
+                <a href="http://www.gamping.com/press/?lang=fr" class="link_legal">Presse</a>
+
+                <a href="?lang=us"><img src="/images/flag_us.gif" alt="us"></a>
+                <a href="?lang=es"><img src="/images/Spanish.gif" alt="es"></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<?= $this->renderJavascripts('bottom') ?>
+</body>
+</html>

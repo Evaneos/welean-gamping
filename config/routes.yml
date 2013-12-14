@@ -1,37 +1,37 @@
-default-layout: landing
+default-layout: index
 layouts:
-    landing: app/views/landing.phtml
+    index: 
+        template: app/views/index.phtml
+        stylesheets:
+            - [ "/style/style.less", less, screen ]
+        scripts:
+            head:
+                - "/vendor/lessjs/less.js"
+            bottom:
+                - "//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"
+                - "/js/layout.js"
 
 routes:
     home:
         pattern: "/"
         controller: homeController
-        methods: [ get, post, put, delete ]
-        output:
-            html:
-                layout: landing
-                view: app/views/home/home.phtml
-                before-run:
-                after-run: [ afterRun ]
-            json:
-                before-run:
-                after-run:
-            xml:
-                before-run:
-                after-run:
-                
-    page:
-        pattern: "/home"
-        controller: homeController
-        methods: [ get, post, put, delete ]
+        methods: [ get ]
+        scripts:
+            bottom:
+                - "/vendor/jquery-backstretch/jquery.backstretch.min.js"
+                - "/vendor/jQuery-Autocomplete/src/jquery.autocomplete.min.js"
+                - "/js/homepage.js"
         output:
             html:
                 view: app/views/home/home.phtml
-                before-run: 
-                after-run:
-            json:
-                before-run:
-                after-run:
-            xml:
-                before-run:
-                after-run:
+
+    form:
+        pattern: "/register"
+        controller: formController
+        methods: [ get, post ]
+        scripts:
+            bottom:
+                - "/js/add.js"
+        output:
+            html:
+                view: app/views/form/form.phtml

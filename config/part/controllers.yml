@@ -1,6 +1,13 @@
 classes:
     homeController:
-        class: Gamping\Controllers\Home
+        class: \Gamping\Controllers\Home
+        interceptor : [ @GoogleAnalytics ]
         props :
             userManager : @UserManager
             parcelManager: @ParcelManager
+            
+    formController:
+        class: \Gamping\Controllers\Form
+        interceptor : [ @GoogleAnalytics ]
+        call:  
+            setFormService: [ @ParcelFormService ]

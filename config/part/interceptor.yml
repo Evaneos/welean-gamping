@@ -1,3 +1,7 @@
 classes :
     ExceptionInterceptor :
         class : \Berthe\Interceptor\ExceptionInterceptor
+    GoogleAnalytics :
+        class : \Gamping\Interceptor\Controller\GoogleAnalytics
+        call:
+            setKey: [ %googleAnalytics.key ]
