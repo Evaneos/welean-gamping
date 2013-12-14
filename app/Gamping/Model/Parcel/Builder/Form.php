@@ -115,11 +115,14 @@ class Form
         return $this;
     }
 
-    public function setRawData($country, $description, $rules, $capacity) {
+    public function setRawData($country, $description, $rules, $capacity, $title) {
         $this->parcel->setCountryId($country);
         $this->parcel->setDescription($description);
         $this->parcel->setRules($rules);
+        $this->parcel->setTitle($title);
         $this->parcel->setCapacity($capacity);
+        $this->parcel->setCreatedAt(new \DateTime());
+        $this->parcel->setUpdatedAt(new \DateTime());
     }
 
     public function addActivity($id)

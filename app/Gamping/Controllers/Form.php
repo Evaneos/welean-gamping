@@ -57,8 +57,9 @@ class Form extends Controller
         $description = (string) $this->getParam('description', '');
         $rules = (string) $this->getParam('rules', '');
         $capacity = (string) $this->getParam('count', 0);
+        $title = (string) $this->getParam('title', '');
 
-        $builder->setRawData($country, $description, $rules, $capacity);
+        $builder->setRawData($country, $description, $rules, $capacity, $title);
     }
 
     private function setRates($builder)

@@ -241,7 +241,7 @@ class VO extends \Gamping\AbstractVO
         return $this->created_at;
     }
 
-    public function setCreatedAt(DateTime $time)
+    public function setCreatedAt(\DateTime $time)
     {
         $this->created_at = $time;
         return $this;
@@ -252,7 +252,7 @@ class VO extends \Gamping\AbstractVO
         return $this->updated_at;
     }
 
-    public function setUpdatedAt(DateTime $time)
+    public function setUpdatedAt(\DateTime $time)
     {
         $this->updated_at = $time;
         return $this;
