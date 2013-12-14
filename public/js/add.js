@@ -23,4 +23,18 @@ jQuery(document).ready(function() {
             })
         })
     })
+
+    $("[name='country']").change(function(e) {
+        $.ajax({
+            'dataType': 'json',
+            'url': '/ajax/regions-by-country/id/' + e.target.value,
+            'success' :function(data) {
+                var select = $("[name='state']");
+                select.find('option:not(:first-child)').remove();
+                $.each(data, function(key, value) {
+                    $('<option />', { value: value.id, html: value.name }).appendTo(select);
+                });
+            }
+        });
+    });
 })

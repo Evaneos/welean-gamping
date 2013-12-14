@@ -32,6 +32,9 @@ class Form extends Controller
             $this->formService->saveParcelFromBuilder($builder);
         }
 
+        $this->setData('countries', $this->formService->getAllCountries());
+        $this->setData('activities', $this->formService->getAllActivites());
+        $this->setData('commodities', $this->formService->getAllCommodities());
         $this->setData('bodyClass', 'add');
     }
 

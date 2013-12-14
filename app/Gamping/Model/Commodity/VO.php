@@ -12,9 +12,8 @@ class VO extends \Gamping\AbstractVO
 
     protected $is_available = false;
 
-    public function getName()
-    {
-        return $this->name;
+    public function getName($label = true, $lang = null) {
+        return $label ? $this->getTranslation('name', $lang) : $this->name;
     }
 
     public function setName($value)

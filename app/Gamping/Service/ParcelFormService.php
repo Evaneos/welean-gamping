@@ -10,16 +10,16 @@ use Berthe\DAL\DbWriter;
 /**
  *
  * @author thibaud
- *        
+ *
  */
 class ParcelFormService
 {
     /**
-     * 
+     *
      * @var DbWriter
      */
     private $db;
-    
+
     /**
      *
      * @var Manager
@@ -27,24 +27,34 @@ class ParcelFormService
     private $currencyManager;
 
     /**
-     * 
+     *
      * @var \Gamping\Model\Parcel\Manager
      */
     private $parcelManager;
 
     private $activityManager;
-    
+
+    /**
+     * @var \Gamping\Model\Country\Manager
+     */
+    private $countryManager;
+
     private $addressManager;
-    
+
     private $parcelHasActivityManager;
-    
+
     private $commodityManager;
-    
+
     private $parcelHasCommodityManager;
-    
+
     public function __construct(DbWriter $db)
     {
         $this->db = $db;
+    }
+
+    public function setCountryManager($manager)
+    {
+        $this->countryManager = $manager;
     }
 
     public function setActivityManager($manager)
@@ -66,23 +76,34 @@ class ParcelFormService
     {
         $this->currencyManager = $currencyManager;
     }
-    
+
     public function setParcelManager($manager)
     {
         $this->parcelManager = $manager;
     }
-    
+
     public function setParcelHasActivityManager($manager)
     {
         $this->parcelHasActivityManager = $manager;
     }
-    
+
     public function setParcelHasCommodityManager($manager)
     {
         $this->parcelHasCommodityManager = $manager;
     }
 
-    
+    public function getAllCountries() {
+        return $this->countryManager->getAll();
+    }
+
+    public function getAllActivites() {
+        return $this->activityManager->getAll();
+    }
+
+    public function getAllCommodities() {
+        return $this->commodityManager->getAll();
+    }
+
     /**
      *
      * @return \Gamping\Model\Parcel\Builder\Form
@@ -90,11 +111,11 @@ class ParcelFormService
     public function getParcelBuilder()
     {
         $builder = new Form();
-        
+
         $builder->setParcel($this->parcelManager->getVoForCreation());
         $builder->setAddress($this->addressManager->getVoForCreation());
         $builder->setCurrencyManager($this->currencyManager);
-        
+
         return $builder;
     }
 
@@ -102,10 +123,10 @@ class ParcelFormService
     {
         try {
             $this->db->beginTransaction();
-            
+
             $builder->saveParcel($this->parcelManager, $this->addressManager);
             $builder->saveActivities($this->activityManager, $this->parcelHasActivityManager);
-            
+
             $this->db->commit();
         }
         catch (Exception $ex) {
