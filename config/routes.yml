@@ -36,6 +36,18 @@ routes:
             html:
                 view: app/views/form/form.phtml
 
+    parcel:
+        pattern: "/parcel"
+        controller: parcelController
+        methods: [ get ]
+        scripts:
+            bottom:
+                - "/vendor/jquery-backstretch/jquery.backstretch.min.js"
+                - "/js/parcel.js"
+        output:
+            html:
+                view: app/views/parcel/parcel.phtml
+
     search:
         pattern: "/search"
         controller: searchController
