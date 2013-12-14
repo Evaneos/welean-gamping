@@ -16,7 +16,7 @@ foreach ($this->parcelViews as $parcelView) {
     $data['user'] = array(
         'id' => $user->getId(), 
         'name' => $user->getFirstname(), 
-        'picture' => $parcelView->getUserPicture()->getUrl()
+        'picture' => ($parcelView->getUserPicture()) ? $parcelView->getUserPicture()->getUrl() : ""
     );
     
     $output[] = $data;
