@@ -1,4 +1,6 @@
+// Height of the header on normal mode
 @HEADER_HEIGHT:130px;
+// Height of the header once user has scrooled down
 @HEADER_HEIGHT_MINI:90px;
 
 body{
@@ -6,6 +8,8 @@ body{
     padding-bottom:50px;
     padding-top:@HEADER_HEIGHT;
 
+    // When the user has scrolled down the page
+    // Class triggered from javascript
     &.scrolled{
         padding-top:@HEADER_HEIGHT_MINI;
         header#header{
@@ -16,10 +20,9 @@ body{
             }
             #site-title{
                 a{
-                    margin-top:-10px;
+                    margin-top:-20px;
                     img{
                         width:150px;
-
                     }
                 }
                 div{
@@ -39,7 +42,7 @@ body{
     }
 }
 
-/* HEADER ===== */
+/* HEADER =================================================================== */
 header#header{
     position:fixed;
     top:0;
@@ -84,6 +87,7 @@ header#header{
 
 }
 
+/* MAIN CONTENT ============================================================= */
 #content{
     background:@WHITE;
     border:1px solid @GREY;
@@ -95,6 +99,7 @@ header#header{
     margin-top:2 * @SPACER;
 }
 
+/* SIDEBAR ================================================================== */
 .sidebar{
     padding-top:2 * @SPACER;
     .widget{
@@ -105,6 +110,7 @@ header#header{
     }
 }
 
+/* PRESS AT THE BOTTOM OF THE PAGES ========================================= */
 #press{
     padding:@SPACER;
     img{
@@ -112,6 +118,7 @@ header#header{
     }
 }
 
+/* BASIC FOOTER ============================================================= */
 footer#footer{
     padding-top:40px;
     padding-bottom:40px;

@@ -56,9 +56,7 @@ body.search{
             #gradient.vertical(darken(@WHITE, 5%), @WHITE, 0%, 100%);
             .border-radius(3px);
             margin:10px;
-            -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.1);
-            -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.1);
-            box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.1);
+            .box-shadow(1px 4px 3px rgba(50, 50, 50, 0.1));
             position:relative;
             height:@BOX-H;
             text-align:center;
@@ -88,9 +86,7 @@ body.search{
                 .transition(all .2s);
             }
             &.focus{
-                -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.3);
-                -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.3);
-                box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.3);
+                .box-shadow(1px 4px 3px rgba(50, 50, 50, 0.35));
                 img.author{
                     top:70px;
                 }
