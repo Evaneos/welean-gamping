@@ -7,6 +7,8 @@ classes :
         interceptor : [ @ExceptionInterceptor ]
     PictureValidator :
         class : \Gamping\Model\Picture\Validator
+        call :
+            setErrors : [ @Errors ]
     PictureStorage :
         class : \Gamping\Model\Picture\Storage
         call :

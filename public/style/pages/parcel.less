@@ -1,5 +1,92 @@
 body.parcel{
     #picture{
         height:280px;
+        margin: -@SPACER -@SPACER 0 -@SPACER ;
+        .border-top-radius(5px);
+        overflow:hidden;
     }
+
+    p.place-info{
+        margin-top:@SPACER;
+        padding-left:20px;
+        background:url("@{IMAGE_PATH}/ico_direct.gif") left no-repeat;
+        color:@GREY_DARK;
+        .font(special);
+        font-size:1.4em;
+    }
+
+    p.allowing{
+        .font(special);
+        font-size:1.4em;
+        line-height:18px;
+        vertical-align:bottom;
+        i{
+            line-height:18px;
+            vertical-align:bottom;
+            display:inline-block;
+            height:18px;
+            width:30px;
+            background-repeat:no-repeat;
+            background-position:top center;
+            &.not-allowed{
+                background-position:center bottom;
+            }
+            &.allow-tent{
+                background-image: url("@{IMAGE_PATH}/allow_ico1.gif");
+            }
+            &.allow-caravan{
+                width:38px;
+                margin-left:5px;
+                background-image: url("@{IMAGE_PATH}/allow_ico2.gif");
+            }
+            &.allow-campingcar{
+                width:38px;
+                margin-left:5px;
+                background-image: url("@{IMAGE_PATH}/allow_ico3.gif");
+            }
+        }
+    }
+    div.r{
+        border-left:1px solid @GREY;
+        padding-bottom:@SPACER;
+        p.notice{
+            margin-top:2em;
+        }
+        a.contact-host{
+            .butonize(all);
+            .butonize(green);
+            font-size:1.7em;
+            text-align:center;
+            display:block;
+            margin:1em 0;
+        }
+    }
+
+    hr{
+        display:block;
+        height:1px;
+        margin:@SPACER * 2 0 @SPACER;
+        border-top:1px solid @GREY;
+    }
+
+    .h2.services{
+        padding-left:45px;
+        background: url("@{IMAGE_PATH}/ico_amentities.gif") left no-repeat;
+    }
+
+    ul.available{
+        padding-left:0;
+        margin-bottom:@SPACER;
+        li{
+            padding-left:20px;
+            list-style-type:none;
+            color:@GREY_DARK;
+            background: url("@{IMAGE_PATH}/ico_dot2.gif") left no-repeat;
+            &.yes{
+                background: url("@{IMAGE_PATH}/ico_dot1.gif") left no-repeat;
+                color:@BROWN;
+            }
+        }
+    }
+
 }

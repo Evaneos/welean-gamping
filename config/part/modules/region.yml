@@ -7,6 +7,8 @@ classes :
         interceptor : [ @ExceptionInterceptor ]
     RegionValidator :
         class : \Gamping\Model\Region\Validator
+        call :
+            setErrors : [ @Errors ]
     RegionStorage :
         class : \Gamping\Model\Region\Storage
         call :

@@ -7,6 +7,8 @@ classes :
         interceptor : [ @ExceptionInterceptor ]
     CurrencyValidator :
         class : \Gamping\Model\Currency\Validator
+        call :
+            setErrors : [ @Errors ]
     CurrencyStorage :
         class : \Gamping\Model\Currency\Storage
         call :

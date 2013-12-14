@@ -12,6 +12,7 @@ classes:
             setParcelManager: [ @ParcelManager ]
             setCountryManager: [ @CountryManager ]
             setSituationGeoManager: [ @SituationGeoManager ]
+            setUserManager: [ @UserManager ]
 
     GeographicalService:
         class: \Gamping\Service\GeographicalService
