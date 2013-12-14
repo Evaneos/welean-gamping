@@ -1,13 +1,13 @@
 .smart-form{
     fieldset{
-        &.more-info {
+        &.more-infos {
             h2{
-                background-image:url(http://www.gamping.com/wp-content/themes/camping/images/ico_property.gif);
+                background-image:url("@{IMAGE_PATH}/ico_property.gif");
             }
         }
         &.who{
             h2{
-                background-image:url(http://www.gamping.com/wp-content/themes/camping/images/ico_who.gif);
+                background-image:url("@{IMAGE_PATH}/ico_who.gif");
             }
 
             ul.hosting_type{
@@ -96,7 +96,7 @@
                 background-image:url("@{IMAGE_PATH}/ico_address.gif");
             }
         }
-        &.who, &.situation, &.services, &.activities, &.prices, &.address {
+        &.who, &.situation, &.services, &.activities, &.prices, &.address, &.more-infos {
             h2{
                 background-repeat:no-repeat;
                 background-position:left;
@@ -104,6 +104,12 @@
             }
 
         }
-
     }
 }
+/*
+firstname
+lastname
+email
+tel
+password
+*/

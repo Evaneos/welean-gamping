@@ -249,7 +249,30 @@ var_dump($this->formData);
                     </div>
                 </div>
             </fieldset>
-           <div class="button-row">
+
+            <fieldset class="more-user col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="h2"><?= t('Pour vous joindre'); ?></h2>
+                        <p><?= t('Indiquez les informations relatives à votre compte'); ?></p>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" class="long" name="firstname" id="firstname" placeholder="<?= t('Votre prénom') ?>" />
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" class="long" name="lastname" id="lastname" placeholder="<?= t('Votre nom') ?>" />
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-12">
+                        <input type="text" class="long" name="email" id="email" placeholder="<?= t('Votre email') ?>" />
+                    </div>
+                    <div class="col-md-12">
+                        <input type="password" class="long" name="password" id="password" placeholder="<?= t('Votre mot de passe') ?>" />
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="button-row">
                 <button type="submit" name="submit" value="true" class="submit"><?= t('Envoyer !'); ?></button>
             </div>
         </form>
