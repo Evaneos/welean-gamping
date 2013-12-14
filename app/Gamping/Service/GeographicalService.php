@@ -77,6 +77,11 @@ class GeographicalService
         return $this->countryManager->getAll();
     }
 
+    public function getAllCountriesWithActiveParcel()
+    {
+        return $this->countryManager->getWithActiveParcel();
+    }
+
     public function getCountryById($id)
     {
         if ((int) $id <= 0) {

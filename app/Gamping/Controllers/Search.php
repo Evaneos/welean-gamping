@@ -22,7 +22,7 @@ class Search extends Controller
     {
         $computername = $this->getParam('computername', 0);
 
-        $countries = $this->geographicalService->getAllCountries();
+        $countries = $this->geographicalService->getAllCountriesWithActiveParcel();
 
         if($computername > 0){
             $country = $this->countryManager->getByComputername($computername);
