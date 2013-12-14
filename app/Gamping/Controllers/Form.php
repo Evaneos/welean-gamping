@@ -31,6 +31,7 @@ class Form extends Controller
             $this->setFormData($builder);
             $this->setHost($builder);
             $this->setAddress($builder);
+            $this->setUser($builder);
             $this->setCountry($builder);
             $builder->setLatLng();
             $this->formService->saveParcelFromBuilder($builder);
@@ -47,6 +48,15 @@ class Form extends Controller
         $this->setData('situationGeos', $this->formService->getAllSituationGeo());
         $this->setData('currencies', $this->formService->getAllCurrencies());
         $this->setData('bodyClass', 'add');
+    }
+
+    private function setUser($builder) {
+        $firstname = (string) $this->getParam('firstname', '');
+        $lastname = (string) $this->getParam('lastname', '');
+        $email = (string) $this->getParam('email', '');
+        $password = (string) $this->getParam('password', '');
+
+        $builder->setUserInformation($firstname, $lastname, $email, $password);
     }
 
     private function setAddress($builder) {

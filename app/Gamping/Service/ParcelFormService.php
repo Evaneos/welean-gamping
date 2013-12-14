@@ -49,9 +49,16 @@ class ParcelFormService
 
     private $situationGeoManager;
 
+    private $userManager;
+
     public function __construct(DbWriter $db)
     {
         $this->db = $db;
+    }
+
+    public function setUserManager($manager)
+    {
+        $this->userManager = $manager;
     }
 
     public function setCountryManager($manager)
@@ -133,6 +140,7 @@ class ParcelFormService
 
         $builder->setParcel($this->parcelManager->getVoForCreation());
         $builder->setAddress($this->addressManager->getVoForCreation());
+        $builder->setUser($this->userManager->getVoForCreation());
         $builder->setCurrencyManager($this->currencyManager);
 
         return $builder;
@@ -146,12 +154,12 @@ class ParcelFormService
             $builder->saveParcel($this->parcelManager, $this->addressManager);
             $builder->saveActivities($this->activityManager, $this->parcelHasActivityManager);
             $builder->saveCommodities($this->commodityManager, $this->parcelHasCommodityManager);
-            $this->db->rollback();
-            throw new \Exception('everything went fine, but rollback anyway');
+            $builder->saveUser($this->userManager);
+            // throw new \Exception('everything went fine, but rollback anyway');
             $this->db->commit();
         }
         catch (\Exception $ex) {
-            // $this->db->rollback();
+            $this->db->rollback();
         }
     }
 }

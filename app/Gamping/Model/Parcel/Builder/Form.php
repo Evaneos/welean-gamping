@@ -15,6 +15,8 @@ class Form
 
     private $country;
 
+    private $user;
+
     private $activities = array();
 
     private $commodities = array();
@@ -33,6 +35,13 @@ class Form
     public function setParcel(\Gamping\Model\Parcel\VO $vo)
     {
         $this->parcel = $vo;
+
+        return $this;
+    }
+
+    public function setUser(\Gamping\Model\User\VO $vo)
+    {
+        $this->user = $vo;
 
         return $this;
     }
@@ -85,6 +94,14 @@ class Form
         $this->address->setLocality($locality);
         $this->address->setZipCode($zipCode);
         $this->address->setCity($city);
+    }
+
+    public function setUserInformation($firstname, $lastname, $email, $password)
+    {
+        $this->user->setFirstname($firstname);
+        $this->user->setLastname($lastname);
+        $this->user->setEmail($email);
+        $this->user->setPassword(md5($password));
     }
 
     public function setLatLng() {
@@ -215,6 +232,12 @@ class Form
                 throw new \RuntimeException('Could not save relationship between parcel [%d] and commodity [%d].',
                     $parcelHasCommodityVO->getParcelId(), $parcelHasCommodityVO->getCommodityId());
             }
+        }
+    }
+
+    public function saveUser($userManager) {
+        if (!$userManager->save($this->user)) {
+            throw new \RuntimeException('Could not save the user');
         }
     }
 

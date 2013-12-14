@@ -186,10 +186,10 @@ var_dump($this->formData);
                     </div>
 
                     <div class="col-md-12">
-                        <label for="price_base" class="inline"><input type="number" name="price_base" id="price_base" /> <?= t('Prix 1 emplacement + 1 adulte'); ?></label>
+                        <label for="price_base" class="inline"><input type="number" name="price_base" id="price_base" value="<?= get($data, 'price_base') ?>" /> <?= t('Prix 1 emplacement + 1 adulte'); ?></label>
                     </div>
                     <div class="col-md-12">
-                        <label for="price_extra" class="inline"><input type="number" name="price_extra" id="price_extra" /> <?= t('Prix par personne suppémentaire'); ?></label>
+                        <label for="price_extra" class="inline"><input type="number" name="price_extra" id="price_extra" value="<?= get($data, 'price_extra') ?>" /> <?= t('Prix par personne suppémentaire'); ?></label>
                     </div>
                     <div class="col-md-12">
                         <label for="currency" class="block"><?= t('Devise :'); ?></label>
@@ -197,7 +197,7 @@ var_dump($this->formData);
                             <?php
                             foreach($this->currencies as $currency) {
                                 ?>
-                                <option value="<?= $currency->getId(); ?>"><?= $currency->getHtml() . ' ' . $currency->getName() ?></option>
+                                <option value="<?= $currency->getId(); ?>" <?= get($data, 'currency') == $currency->getId() ? 'selected="selected"' : '' ?>><?= $currency->getHtml() . ' ' . $currency->getName() ?></option>
                                 <?php
                             }
                             ?>
@@ -211,9 +211,9 @@ var_dump($this->formData);
                     <div class="col-md-12">
                         <h2 class="h2"><?= t('Parlez-nous de votre terrain.'); ?></h2>
 
-                        <input type="text" name="title" class="long" placeholder="<?= t('Titre de votre annonce') ?>" />
-                        <textarea name="description" placeholder="<?= t('Décrivez votre terrain pour vos futurs campeurs...'); ?>"></textarea>
-                        <textarea name="rules" placeholder="<?= t('Listez ici les règles que les campeurs devront respecter...'); ?>"></textarea>
+                        <input type="text" name="title" class="long" placeholder="<?= t('Titre de votre annonce') ?>" value="<?= get($data, 'title') ?>" />
+                        <textarea name="description" placeholder="<?= t('Décrivez votre terrain pour vos futurs campeurs...'); ?>"><?= get($data, 'description') ?></textarea>
+                        <textarea name="rules" placeholder="<?= t('Listez ici les règles que les campeurs devront respecter...'); ?>"><?= get($data, 'rules') ?></textarea>
                     </div>
                 </div>
             </fieldset>
@@ -230,7 +230,7 @@ var_dump($this->formData);
                             <?php
                             foreach($this->countries as $country) {
                                 ?>
-                                <option value="<?= $country->getId(); ?>"><?= $country->getName(); ?></option>
+                                <option value="<?= $country->getId(); ?>" <?= get($data, 'country') == $country->getId() ? 'selected="selected"' : '' ?>><?= $country->getName(); ?></option>
                                 <?php
                             }
                             ?>
@@ -242,10 +242,10 @@ var_dump($this->formData);
                         </select>
                     </div>
                     <div class="col-md-12">
-                        <input type="text" name="address1" id="address1" placeholder="<?= t('Adresse'); ?>" class="long" />
-                        <input type="text" name="address2" id="address2" placeholder="<?= t('Adresse (suite - optionnel)'); ?>" class="long" />
-                        <input type="text" name="zip" id="zip" placeholder="<?= t('Code postal'); ?>" class="small" />
-                        <input type="text" name="city" id="city" placeholder="<?= t('Ville'); ?>" class="small" />
+                        <input type="text" name="address1" id="address1" placeholder="<?= t('Adresse'); ?>" class="long" value="<?= get($data, 'address1') ?>" />
+                        <input type="text" name="address2" id="address2" placeholder="<?= t('Adresse (suite - optionnel)'); ?>" class="long" value="<?= get($data, 'address2') ?>" />
+                        <input type="text" name="zip" id="zip" placeholder="<?= t('Code postal'); ?>" class="small" value="<?= get($data, 'zip') ?>" />
+                        <input type="text" name="city" id="city" placeholder="<?= t('Ville'); ?>" class="small" value="<?= get($data, 'city') ?>" />
                     </div>
                 </div>
             </fieldset>
@@ -257,17 +257,17 @@ var_dump($this->formData);
                         <p><?= t('Indiquez les informations relatives à votre compte'); ?></p>
                     </div>
                     <div class="col-md-5">
-                        <input type="text" class="long" name="firstname" id="firstname" placeholder="<?= t('Votre prénom') ?>" />
+                        <input type="text" class="long" name="firstname" id="firstname" placeholder="<?= t('Votre prénom') ?>" value="<?= get($data, 'firstname') ?>" />
                     </div>
                     <div class="col-md-5">
-                        <input type="text" class="long" name="lastname" id="lastname" placeholder="<?= t('Votre nom') ?>" />
+                        <input type="text" class="long" name="lastname" id="lastname" placeholder="<?= t('Votre nom') ?>" value="<?= get($data, 'lastname') ?>" />
                     </div>
                     <div class="col-md-2"></div>
                     <div class="col-md-12">
-                        <input type="text" class="long" name="email" id="email" placeholder="<?= t('Votre email') ?>" />
+                        <input type="text" class="long" name="email" id="email" placeholder="<?= t('Votre email') ?>" value="<?= get($data, 'email') ?>" />
                     </div>
                     <div class="col-md-12">
-                        <input type="password" class="long" name="password" id="password" placeholder="<?= t('Votre mot de passe') ?>" />
+                        <input type="password" class="long" name="password" id="password" placeholder="<?= t('Votre mot de passe') ?>" value="<?= get($data, 'password') ?>" />
                     </div>
                 </div>
             </fieldset>
