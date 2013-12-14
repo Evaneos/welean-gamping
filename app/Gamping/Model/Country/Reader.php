@@ -10,7 +10,6 @@ SELECT
     {$this->getTableName()}.*,
     tName.name as translation_name,
     tComputername.name as translation_computername
-    translation.name as translation_name
 FROM
     {$this->getTableName()}
 LEFT JOIN
