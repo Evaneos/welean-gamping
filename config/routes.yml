@@ -51,7 +51,7 @@ routes:
 
     searchByCountry:
         pattern: "/search/{computername}"
-        controller: searchByCountryController
+        controller: searchController
         methods: [ get ]
         scripts:
             head:
