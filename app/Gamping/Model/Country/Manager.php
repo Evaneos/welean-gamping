@@ -7,7 +7,13 @@ class Manager extends \Berthe\AbstractManager {
     }
 
 
-    public function getByComputername($computername){
+    public function getByComputername($computername)
+    {
         return $this->getStorage()->getByComputername($computername);
+    }
+
+    public function getWithActiveParcel()
+    {
+        return $this->getStorage()->getWithActiveParcel();
     }
 }
