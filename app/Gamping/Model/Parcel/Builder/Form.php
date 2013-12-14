@@ -4,6 +4,7 @@ namespace Gamping\Model\Parcel\Builder;
 
 use Gamping\Model\Parcel\Manager;
 use Berthe\Paginator;
+use Berthe\ErrorHandler\Errors as ErrorsException;
 
 class Form
 {
@@ -179,19 +180,43 @@ class Form
 
     public function saveParcel($parcelManager, $addressManager)
     {
-        if (! $addressManager->save($this->address)) {
-            throw new \RuntimeException('Unable to save address.');
+        $addressErrors = array();
+        $parcelErrors = array();
+        try {
+            $addressManager->save($this->address);
+        }
+        catch (ErrorsException $e) {
+            $addressErrors = $e->getErrors();
         }
 
-        $this->parcel->setAddressId($this->address->getId());
-
-        $this->parcel->setCountryId($this->country->getId());
-
-        $this->parcel->setUserId($this->user->getId());
-
-        if (! $parcelManager->save($this->parcel)) {
-            throw new \RuntimeException('Unable to save parcel.');
+        if ($this->address) {
+            $this->parcel->setAddressId($this->address->getId());
         }
+
+        if ($this->country) {
+            $this->parcel->setCountryId($this->country->getId());
+        }
+
+        if ($this->user) {
+            $this->parcel->setUserId($this->user->getId());
+        }
+
+        try {
+            $parcelManager->save($this->parcel);
+        }
+        catch (ErrorsException $e) {
+            $parcelErrors = $e->getErrors();
+        }
+
+        $errors = array_merge($addressErrors, $parcelErrors);
+        if (count($errors) > 0) {
+            $e = new ErrorsException();
+            foreach($errors as $error) {
+                $e->addError($error);
+            }
+            $e->throwMe();
+        }
+
 
         return $this->parcel;
     }
