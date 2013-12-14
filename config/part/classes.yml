@@ -2,6 +2,8 @@ classes :
     ServiceLocator :
         class : \Gamping\Container
         singleton : true
+    Errors :
+        class : \Berthe\ErrorHandler\Errors
     DbReader :
         class : \Berthe\DAL\DbReader
         singleton : true

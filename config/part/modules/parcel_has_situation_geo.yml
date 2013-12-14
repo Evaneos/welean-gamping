@@ -7,6 +7,8 @@ classes :
         interceptor : [ @ExceptionInterceptor ]
     ParcelHasSituationGeoValidator :
         class : \Gamping\Model\ParcelHasSituationGeo\Validator
+        call :
+            setErrors : [ @Errors ]
     ParcelHasSituationGeoStorage :
         class : \Gamping\Model\ParcelHasSituationGeo\Storage
         call :

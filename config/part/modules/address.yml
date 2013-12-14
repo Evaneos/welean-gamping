@@ -7,6 +7,8 @@ classes :
         interceptor : [ @ExceptionInterceptor ]
     AddressValidator :
         class : \Gamping\Model\Address\Validator
+        call :
+            setErrors : [ @Errors ]
     AddressStorage :
         class : \Gamping\Model\Address\Storage
         call :

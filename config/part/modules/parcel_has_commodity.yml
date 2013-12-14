@@ -7,6 +7,8 @@ classes :
         interceptor : [ @ExceptionInterceptor ]
     ParcelHasCommodityValidator :
         class : \Gamping\Model\ParcelHasCommodity\Validator
+        call :
+            setErrors : [ @Errors ]
     ParcelHasCommodityStorage :
         class : \Gamping\Model\ParcelHasCommodity\Storage
         call :

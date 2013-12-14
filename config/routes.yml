@@ -1,4 +1,5 @@
 default-layout: index
+
 layouts:
     index:
         template: app/views/index.phtml
@@ -35,6 +36,14 @@ routes:
         output:
             html:
                 view: app/views/form/form.phtml
+
+    registerSave:
+        pattern: "/success/{id}/{hash}"
+        controller: formSuccessController
+        methods: [ get ]
+        output:
+            html:
+                view: app/views/form/form.success.phtml
 
     parcel:
         pattern: "/parcel"
