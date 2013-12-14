@@ -101,13 +101,15 @@ class ParcelFormService
     public function saveParcelFromBuilder($builder)
     {
         try {
-            //$this->db->beginTransaction();
+            $this->db->beginTransaction();
+            
             $builder->saveParcel($this->parcelManager, $this->addressManager);
             $builder->saveActivities($this->activityManager, $this->parcelHasActivityManager);
-            //$this->db->commit();
+            
+            $this->db->commit();
         }
         catch (Exception $ex) {
-            //$this->db->rollback();
+            $this->db->rollback();
         }
     }
 }

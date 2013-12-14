@@ -25,7 +25,7 @@ routes:
             html:
                 view: app/views/home/home.phtml
 
-    form:
+    register:
         pattern: "/register"
         controller: formController
         methods: [ get, post ]
