@@ -1,7 +1,7 @@
 <?php
 namespace Gamping\Model\Region;
 
-class VO extends \Berthe\AbstractVO
+class VO extends \Gamping\AbstractVO
 {
 
     const VERSION = 1;
@@ -14,24 +14,24 @@ class VO extends \Berthe\AbstractVO
     {
         return $this->country_id;
     }
-    
+
     public function setCountryId($id)
     {
         $this->country_id = (int) $id;
-        
+
         return $this;
     }
-    
+
     public function getName()
     {
         return $this->name;
     }
-    
+
     public function setName($value)
     {
         $this->name = $value;
-    
+
         return $this;
     }
-    
+
 }

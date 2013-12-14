@@ -1,7 +1,7 @@
 <?php
 namespace Gamping\Model\ParcelHasPicture;
 
-class VO extends \Berthe\AbstractVO {
+class VO extends \Gamping\AbstractVO {
     const VERSION = 1;
 
     protected $picture_id = 0;

@@ -16,7 +16,7 @@ classes :
     PlaceStoreMemcached :
         class : \Berthe\DAL\StoreMemcached
     PlaceStoreDatabase :
-        class : \Berthe\DAL\StoreDatabase
+        class : \Gamping\DAL\StoreDatabase
         call :
             setReader : [ @PlaceReader ]
             setWriter : [ @PlaceWriter ]

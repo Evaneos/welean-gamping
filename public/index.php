@@ -12,9 +12,17 @@ $silex = new Silex\Application();
 $silex['debug'] = true;
 
 $containerConfig = new \DICIT\Config\YML($injections);
-$container = new \DICIT\Container($containerConfig);
+$container = new \Gamping\Container($containerConfig);
 
-$container->get('TranslationEngine');
+$translationEngine = $container->get('TranslationEngine');
+$host = str_replace('.', '_', strtolower($_SERVER['HTTP_HOST']));
+$langISO2 = $container->getParameter('defaultLanguages.' . $host . '.iso2');
+$langID = $container->getParameter('defaultLanguages.' . $host . '.id');
+$translationEngine->setDefaultLanguage($langISO2);
+define('LANG_ISO2', $langISO2);
+
+$container->setParameter('currentLanguage.iso2', $langISO2);
+$container->setParameter('currentLanguage.id', $langID);
 
 $yaml = new Symfony\Component\Yaml\Yaml();
 

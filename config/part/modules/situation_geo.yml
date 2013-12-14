@@ -16,7 +16,7 @@ classes :
     SituationGeoStoreMemcached :
         class : \Berthe\DAL\StoreMemcached
     SituationGeoStoreDatabase :
-        class : \Berthe\DAL\StoreDatabase
+        class : \Gamping\DAL\StoreDatabase
         call :
             setReader : [ @SituationGeoReader ]
             setWriter : [ @SituationGeoWriter ]

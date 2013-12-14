@@ -1,7 +1,7 @@
 <?php
 namespace Gamping\Model\User;
 
-class Reader extends \Berthe\DAL\AbstractReader {
+class Reader extends \Gamping\DAL\AbstractReader {
     const VO_CLASS = '\Gamping\Model\User\VO';
 
     public function getSelectQuery() {

@@ -1,7 +1,7 @@
 <?php
 namespace Gamping\Model\Parcel;
 
-class VO extends \Berthe\AbstractVO
+class VO extends \Gamping\AbstractVO
 {
 
     const VERSION = 1;
@@ -40,7 +40,7 @@ class VO extends \Berthe\AbstractVO
 
     /**
      * Policy applied by the host (no walking around naked...)
-     * 
+     *
      * @var string
      */
     protected $rules = '';
@@ -50,7 +50,7 @@ class VO extends \Berthe\AbstractVO
     protected $created_at = null;
 
     protected $updated_at = null;
-    
+
     public function getUserId()
     {
         return $this->user_id;
@@ -88,7 +88,7 @@ class VO extends \Berthe\AbstractVO
     {
     	return $this->region_id;
     }
-    
+
     public function setRegionId($id)
     {
         $this->region_id = (int) $id;
@@ -259,7 +259,7 @@ class VO extends \Berthe\AbstractVO
         $this->created_at = $time;
         return $this;
     }
-    
+
     public function getUpdatedAt()
     {
         return $this->updated_at;

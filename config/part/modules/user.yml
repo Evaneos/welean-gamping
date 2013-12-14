@@ -16,7 +16,7 @@ classes :
     UserStoreMemcached :
         class : \Berthe\DAL\StoreMemcached
     UserStoreDatabase :
-        class : \Berthe\DAL\StoreDatabase
+        class : \Gamping\DAL\StoreDatabase
         call :
             setReader : [ @UserReader ]
             setWriter : [ @UserWriter ]

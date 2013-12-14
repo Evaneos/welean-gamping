@@ -1,7 +1,7 @@
 <?php
 namespace Gamping\Model\Commodity;
 
-class VO extends \Berthe\AbstractVO
+class VO extends \Gamping\AbstractVO
 {
 
     const VERSION = 1;
@@ -27,18 +27,18 @@ class VO extends \Berthe\AbstractVO
     {
     	return $this->description;
     }
-    
+
     public function setDescription($description)
     {
         $this->description = $description;
         return $this;
     }
-    
+
     public function isAvailable()
     {
         return $this->is_available;
     }
-    
+
     public function setAvailibility($available)
     {
         $this->is_available = $available;

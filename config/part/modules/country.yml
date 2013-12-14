@@ -16,7 +16,7 @@ classes :
     CountryStoreMemcached :
         class : \Berthe\DAL\StoreMemcached
     CountryStoreDatabase :
-        class : \Berthe\DAL\StoreDatabase
+        class : \Gamping\DAL\StoreDatabase
         call :
             setReader : [ @CountryReader ]
             setWriter : [ @CountryWriter ]
@@ -24,7 +24,9 @@ classes :
         class : \Gamping\Model\Country\Reader
         call :
             setDb : [ @DbReader ]
+            setDefaultLanguageId : [ %currentLanguage.id ]
     CountryWriter :
         class : \Gamping\Model\Country\Writer
         call :
             setDb : [ @DbWriter ]
+            setDefaultLanguageId : [ %currentLanguage.id ]

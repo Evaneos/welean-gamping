@@ -1,8 +1,8 @@
 <?php
 namespace Gamping\Model\User;
 
-class Writer extends \Berthe\DAL\AbstractWriter {
-    public function update(\Berthe\AbstractVO $object) {
+class Writer extends \Gamping\DAL\AbstractWriter {
+    public function update(\Gamping\AbstractVO $object) {
         $sql = <<<SQL
 UPDATE
     user
@@ -40,7 +40,7 @@ SQL;
                     $object->getId()));
     }
 
-    public function insert(\Berthe\AbstractVO $object) {
+    public function insert(\Gamping\AbstractVO $object) {
         $sql = <<<SQL
 INSERT INTO
     user
@@ -89,7 +89,7 @@ SQL;
         }
     }
 
-    public function delete(\Berthe\AbstractVO $object) {
+    public function delete(\Gamping\AbstractVO $object) {
         return $this->deleteById($object->getId());
     }
 

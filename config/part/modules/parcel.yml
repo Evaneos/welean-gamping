@@ -16,7 +16,7 @@ classes :
     ParcelStoreMemcached :
         class : \Berthe\DAL\StoreMemcached
     ParcelStoreDatabase :
-        class : \Berthe\DAL\StoreDatabase
+        class : \Gamping\DAL\StoreDatabase
         call :
             setReader : [ @ParcelReader ]
             setWriter : [ @ParcelWriter ]

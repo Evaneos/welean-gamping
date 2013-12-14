@@ -1,10 +1,10 @@
 <?php
 namespace Gamping\Model\Region;
 
-class Writer extends \Berthe\DAL\AbstractWriter
+class Writer extends \Gamping\DAL\AbstractWriter
 {
 
-    public function update(\Berthe\AbstractVO $object)
+    public function update(\Gamping\AbstractVO $object)
     {
         $sql = <<<SQL
 UPDATE
@@ -20,7 +20,7 @@ SQL;
         ));
     }
 
-    public function insert(\Berthe\AbstractVO $object)
+    public function insert(\Gamping\AbstractVO $object)
     {
         $sql = <<<SQL
 INSERT INTO
@@ -29,7 +29,7 @@ INSERT INTO
 VALUES
     (?)
 SQL;
-        
+
         $ret = (bool) $this->db->query($sql, array(
             $object->getName()
         ));
@@ -42,7 +42,7 @@ SQL;
         }
     }
 
-    public function delete(\Berthe\AbstractVO $object)
+    public function delete(\Gamping\AbstractVO $object)
     {
         return $this->deleteById($object->getId());
     }

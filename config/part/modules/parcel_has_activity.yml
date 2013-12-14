@@ -16,7 +16,7 @@ classes :
     ParcelHasActivityStoreMemcached :
         class : \Berthe\DAL\StoreMemcached
     ParcelHasActivityStoreDatabase :
-        class : \Berthe\DAL\StoreDatabase
+        class : \Gamping\DAL\StoreDatabase
         call :
             setReader : [ @ParcelHasActivityReader ]
             setWriter : [ @ParcelHasActivityWriter ]

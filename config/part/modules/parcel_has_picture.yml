@@ -16,7 +16,7 @@ classes :
     ParcelHasPictureStoreMemcached :
         class : \Berthe\DAL\StoreMemcached
     ParcelHasPictureStoreDatabase :
-        class : \Berthe\DAL\StoreDatabase
+        class : \Gamping\DAL\StoreDatabase
         call :
             setReader : [ @ParcelHasPictureReader ]
             setWriter : [ @ParcelHasPictureWriter ]

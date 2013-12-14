@@ -16,7 +16,7 @@ classes :
     CommodityStoreMemcached :
         class : \Berthe\DAL\StoreMemcached
     CommodityStoreDatabase :
-        class : \Berthe\DAL\StoreDatabase
+        class : \Gamping\DAL\StoreDatabase
         call :
             setReader : [ @CommodityReader ]
             setWriter : [ @CommodityWriter ]

@@ -16,7 +16,7 @@ classes :
     AddressStoreMemcached :
         class : \Berthe\DAL\StoreMemcached
     AddressStoreDatabase :
-        class : \Berthe\DAL\StoreDatabase
+        class : \Gamping\DAL\StoreDatabase
         call :
             setReader : [ @AddressReader ]
             setWriter : [ @AddressWriter ]

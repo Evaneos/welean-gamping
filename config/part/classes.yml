@@ -1,4 +1,7 @@
 classes :
+    ServiceLocator :
+        class : \Gamping\Container
+        singleton : true
     DbReader :
         class : \Berthe\DAL\DbReader
         singleton : true
@@ -19,7 +22,7 @@ classes :
         builder : \Gamping\Translation\InstanceCreator::factory
         singleton : true
         call :
-            setEnableNotice : [ true ]
+            setEnableNotice : [ false ]
             registerStorage : [ dbString, @TranslationStringDatabaseEngine ]
     TranslationStringDatabaseEngine :
         class : \Gamping\Translation\StringDatabaseEngine

@@ -35,34 +35,34 @@ class Application
      * @var string
      */
     private $routeFile = '';
-    
+
     /**
-     * 
+     *
      * @var array
      */
     private $data = null;
-    
+
     /**
-     * 
+     *
      * @var array
      */
     private $routeData;
-        
+
     /**
-     * 
+     *
      * @var Layout\Selector
      */
     private $layoutSelector;
-    
+
     /**
-     * 
+     *
      * @var Request
      */
     private $request = null;
 
     /**
      * Initialize a new instance.
-     * 
+     *
      * @param \Silex\Application $application
      * @param \DICIT\Container $container
      * @param \Symfony\Component\Yaml\Yaml $yaml Yaml parser used for routes.
@@ -77,14 +77,14 @@ class Application
     /**
      * Sets the file name that contains the route definitions.
      * @param string $filename
-     * @throws \RuntimeException when $filename does not exist. 
+     * @throws \RuntimeException when $filename does not exist.
      */
     public function setRouteFile($filename)
     {
         if (! file_exists($filename)) {
             throw new \RuntimeException(sprintf('Route file not found ["%s"]', $filename));
         }
-        
+
         $this->routeFile = $filename;
     }
 
@@ -96,7 +96,7 @@ class Application
     {
         return $this->request;
     }
-    
+
     /**
      * Sets the current request object. This method has no effect if called after run().
      * @param Request $request
@@ -105,62 +105,62 @@ class Application
     {
         $this->request = $request;
     }
-    
+
     public function getResponseSelector($routeName)
-    {      
+    {
         $routeData = $this->getRouteData($routeName);
         $outputData = $this->extractValue($routeData, 'output', array());
         $selector = new ResponseSelector();
-        
+
         foreach ($outputData as $name => $output) {
             $view = $this->extractValue($output, 'view', '');
             $layout = $this->extractValue($output, 'layout', '');
-            
-            $selector->addOutput($name, $layout, $view, $this->extractValue($routeData, 'scripts')); 
+
+            $selector->addOutput($name, $layout, $view, $this->extractValue($routeData, 'scripts'));
         }
-        
+
         $selector->setRootDirectory(ROOT_DIR);
         $selector->setLayoutSelector($this->getLayoutSelector($routeName));
-        
+
         return $selector;
     }
-    
+
     public function getLayoutSelector()
     {
         $this->loadData();
-        
+
         $builder = new Builder();
         $builder->setRootDirectory(ROOT_DIR);
-        
+
         $layoutSelector = new Selector();
         $layoutSelector->setBuilder($builder);
-        
+
         foreach ($this->data['layouts'] as $layout => $data) {
             $layoutSelector->addLayout($layout, $data);
         }
-        
+
         $layoutSelector->setDefaultLayout($this->data['default-layout']);
-                
+
         return $layoutSelector;
     }
-    
+
     public function getControllerHooks($routeName, $outputName)
     {
         $hooks = new ControllerHookCollection();
         $routeData = $this->getRouteData($routeName);
         $outputData = $this->extractValue($routeData, 'output', array());
-        
+
         foreach ($outputData as $output => $data) {
             $before = $this->extractValue($data, 'before-run', array()) ?: array();
             $after = $this->extractValue($data, 'after-run', array()) ?: array();
-            
+
             $hooks->setBeforeHooks($output, $before);
             $hooks->setAfterHooks($output, $after);
         }
-            
+
         return $hooks;
     }
-    
+
     /**
      * Registers all routes and runs the application.
      */
@@ -168,15 +168,15 @@ class Application
     {
         $this->registerRoutes();
         $this->setRequest(Request::createFromGlobals());
-        
+
         $this->app->run($this->getRequest());
     }
 
     /**
      * Delegates all calls to underlying Silex application object
-     * 
-     * @param string $name            
-     * @param array $args            
+     *
+     * @param string $name
+     * @param array $args
      * @return mixed
      */
     public function __call($name, $args)
@@ -189,30 +189,30 @@ class Application
         if (! array_key_exists($routeName, $this->routeData)) {
             throw new \RuntimeException(sprintf('Route does not exist [%s]', $routeName));
         }
-        
+
         return $this->routeData[$routeName];
     }
-    
+
     private function loadData()
     {
         if ($this->data === null) {
             if (trim($this->routeFile) == '') {
                 throw new \RuntimeException('Route file is not set.');
             }
-            
+
             $this->data = $this->yaml->parse($this->routeFile);
         }
     }
-    
+
     private function registerRoutes()
     {
         $this->loadData();
         $routes = $this->data['routes'];
-        
+
         foreach ($routes as $name => $route) {
             $this->registerRoute($name, $route);
         }
-        
+
         $this->routeData = $routes;
     }
 
@@ -222,29 +222,29 @@ class Application
         $container = $this->container;
         $pattern = $app->extractValue($route, 'pattern');
         $controllerName = $app->extractValue($route, 'controller');
-        
+
         $to = function () use($app, $container, $routeName, $controllerName)
-        {            
+        {
             $request = $app->getRequest();
-                        
+
             $controller = $container->get($controllerName);
             $controller->setRequest($request);
-            
+
             $responseSelector = $app->getResponseSelector($routeName);
             $outputName = $responseSelector->getOutputName($request);
-            
+
             /* @var $hooks  \Gamping\ControllerHookCollection */
             $hooks = $app->getControllerHooks($routeName, $outputName);
-            
+
             $hooks->runBefore($controller, $outputName);
             $controller->execute();
             $hooks->runAfter($controller, $outputName);
-           
+
             $response = $responseSelector->getResponse($app->getRequest());
-            
+
             return $response->render($controller->getDatas());
         };
-                
+
         $methods = $this->extractValue($route, 'methods');
         foreach ($methods as $method) {
             $this->registerMethod($method, $routeName, $pattern, $to);
@@ -254,7 +254,7 @@ class Application
     private function registerMethod($method, $name, $pattern, $to)
     {
         if (in_array($method, array('get', 'post', 'put', 'delete'))) {
-            $this->app->{$method}($pattern, $to)->bind($name);
+            $this->app->{$method}($pattern, $to);
         }
     }
 
@@ -262,18 +262,18 @@ class Application
     {
         if (strpos($path, '.') !== false) {
             $parts = explode('.', $path, 1);
-            
+
             if (! array_key_exists($parts[0], $data)) {
                 return $default;
             }
-            
+
             return $this->extractValue($data[$parts[0]], $parts[1]);
         }
-        
+
         if (! array_key_exists($path, $data)) {
             return $default;
         }
-        
+
         return $data[$path];
     }
 

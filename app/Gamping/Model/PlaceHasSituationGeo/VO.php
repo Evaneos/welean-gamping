@@ -1,7 +1,7 @@
 <?php
 namespace Gamping\Model\PlaceHasSituationGeo;
 
-class VO extends \Berthe\AbstractVO {
+class VO extends \Gamping\AbstractVO {
     const VERSION = 1;
 
     protected $place_id = 0;

@@ -16,7 +16,7 @@ classes :
     PictureStoreMemcached :
         class : \Berthe\DAL\StoreMemcached
     PictureStoreDatabase :
-        class : \Berthe\DAL\StoreDatabase
+        class : \Gamping\DAL\StoreDatabase
         call :
             setReader : [ @PictureReader ]
             setWriter : [ @PictureWriter ]

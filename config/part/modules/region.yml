@@ -16,7 +16,7 @@ classes :
     RegionStoreMemcached :
         class : \Berthe\DAL\StoreMemcached
     RegionStoreDatabase :
-        class : \Berthe\DAL\StoreDatabase
+        class : \Gamping\DAL\StoreDatabase
         call :
             setReader : [ @RegionReader ]
             setWriter : [ @RegionWriter ]

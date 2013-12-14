@@ -3,7 +3,7 @@ namespace Gamping\Model\ParcelHasCommodity;
 
 use Gamping\Model\ParcelHasCommodity\VO;
 
-class Writer extends \Berthe\DAL\AbstractWriter
+class Writer extends \Gamping\DAL\AbstractWriter
 {
 
     private function getParams(VO $object, $withId = false)
@@ -12,32 +12,32 @@ class Writer extends \Berthe\DAL\AbstractWriter
     	    ':commodity_id' => $object->getCommodityId(),
     	    ':parcel_id' => $object->getParcelId()
 	    );
-    	
+
     	if ($withId) {
     	    $params[':id'] = $object->getId();
     	}
-    	
+
     	return $params;
     }
 
-    public function update(\Berthe\AbstractVO $object)
+    public function update(\Gamping\AbstractVO $object)
     {
         $query = <<<EOQ
-            UPDATE parcel_has_commodity SET 
+            UPDATE parcel_has_commodity SET
                 commodity_id = :commodity_id, parcel_id = :parcel_id
-            WHERE id = :id;     
+            WHERE id = :id;
 EOQ;
-        
+
         return (bool) $this->db->query($this->getParams($object, true));
     }
 
-    public function insert(\Berthe\AbstractVO $object)
+    public function insert(\Gamping\AbstractVO $object)
     {
         $query = <<<EOQ
             INSERT INTO parcel_has_commodity (commodity_id, parcel_id)
-                VALUES (:commodity_id, :parcel_id)       
+                VALUES (:commodity_id, :parcel_id)
 EOQ;
-        
+
         $ret = (bool) $this->db->query($query, $this->getParams($object, false));
         $id = (int) $this->db->lastInsertId("parcel_has_commodity", "id");
         if ($id > 0) {
@@ -48,7 +48,7 @@ EOQ;
         }
     }
 
-    public function delete(\Berthe\AbstractVO $object)
+    public function delete(\Gamping\AbstractVO $object)
     {
         return $this->deleteById($object->getId());
     }
@@ -56,9 +56,9 @@ EOQ;
     public function deleteById($id)
     {
         $query = <<<EOQ
-            DELETE FROM parcel_has_commodity WHERE id = :id        
+            DELETE FROM parcel_has_commodity WHERE id = :id
 EOQ;
-        
+
         return (bool) $this->db->query($query, array(':id' => $id));
     }
 }

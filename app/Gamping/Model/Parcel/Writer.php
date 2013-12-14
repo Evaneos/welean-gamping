@@ -1,8 +1,8 @@
 <?php
 namespace Gamping\Model\Parcel;
 
-class Writer extends \Berthe\DAL\AbstractWriter {
-    
+class Writer extends \Gamping\DAL\AbstractWriter {
+
     private function getParams(VO $parcel, $withId = false)
     {
         $params = array(
@@ -27,17 +27,17 @@ class Writer extends \Berthe\DAL\AbstractWriter {
             ':updated_at' => $parcel->getUpdatedAt(),
             ':user_id' => $parcel->getUserId()
         );
-        
+
         if ($withId) {
             $params[':id'] = $parcel->getId();
         }
-        
+
         return $params;
     }
-    
-    public function update(\Berthe\AbstractVO $object) {
+
+    public function update(\Gamping\AbstractVO $object) {
         $query = <<<EOQ
-            UPDATE parcel SET 
+            UPDATE parcel SET
                 address_id = :address_id, capacity = :capacity,
                 country_id = :country_id, created_at = :created_at,
                 currency_iso3 = :currency_iso3, description = :description,
@@ -48,11 +48,11 @@ class Writer extends \Berthe\DAL\AbstractWriter {
                 rules = :rules, title = :title, updated_at = :updated_at, user_id = :user_id
         WHERE id = :id;
 EOQ;
-        
+
         return (bool) $this->db->query($query, $this->getParams($object, true));
     }
 
-    public function insert(\Berthe\AbstractVO $object) {
+    public function insert(\Gamping\AbstractVO $object) {
         $query = <<<EOQ
             INSERT INTO parcel (
                 address_id, capacity,
@@ -73,7 +73,7 @@ EOQ;
                 :price_per_extra, :region_id,
                 :rules, :title, :updated_at, :user_id);
 EOQ;
-        
+
         $ret = (bool)$this->db->query($query, $this->getParams($object, false));
         if (! $ret) {
             throw new Exception('Fail saved.');
@@ -88,7 +88,7 @@ EOQ;
         }
     }
 
-    public function delete(\Berthe\AbstractVO $object) {
+    public function delete(\Gamping\AbstractVO $object) {
         throw new \RuntimeException("delete not implemented yet");
     }
 

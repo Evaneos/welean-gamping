@@ -1,9 +1,12 @@
 <?php
 namespace Gamping\Model\Country;
 
-class VO extends \Berthe\AbstractVO {
+class VO extends \Gamping\AbstractVO {
     const VERSION = 1;
 
+    /**
+     * @Translatable (azeaezz)
+     */
     protected $name = "";
 
     public function setName($value) {
@@ -11,7 +14,7 @@ class VO extends \Berthe\AbstractVO {
         return $this;
     }
 
-    public function getName() {
-        return $this->name;
+    public function getName($label = true, $lang = null) {
+        return $label ? $this->getTranslation('name', $lang) : $this->name;
     }
 }

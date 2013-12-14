@@ -1,7 +1,7 @@
 <?php
 namespace Gamping\Model\Currency;
 
-class VO extends \Berthe\AbstractVO
+class VO extends \Gamping\AbstractVO
 {
 
     const VERSION = 1;
@@ -14,24 +14,24 @@ class VO extends \Berthe\AbstractVO
     {
         return $this->name;
     }
-    
+
     public function setName($value)
     {
         $this->name = $value;
-        
+
         return $this;
     }
 
     public function getCode()
     {
         return $this->code;
-    }    
-    
+    }
+
     public function setCode($code)
     {
         $this->code = $code;
-        
+
         return $this;
     }
-    
+
 }

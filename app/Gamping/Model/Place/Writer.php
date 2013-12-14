@@ -1,8 +1,8 @@
 <?php
 namespace Gamping\Model\Place;
 
-class Writer extends \Berthe\DAL\AbstractWriter {
-    public function update(\Berthe\AbstractVO $object) {
+class Writer extends \Gamping\DAL\AbstractWriter {
+    public function update(\Gamping\AbstractVO $object) {
         $sql = <<<SQL
 UPDATE
     place
@@ -14,7 +14,7 @@ SQL;
         return (bool)$this->db->query($sql, array($object->getName(), $object->getId()));
     }
 
-    public function insert(\Berthe\AbstractVO $object) {
+    public function insert(\Gamping\AbstractVO $object) {
         $sql = <<<SQL
 INSERT INTO
     place
@@ -36,7 +36,7 @@ SQL;
         }
     }
 
-    public function delete(\Berthe\AbstractVO $object) {
+    public function delete(\Gamping\AbstractVO $object) {
         return $this->deleteById($object->getId());
     }
 

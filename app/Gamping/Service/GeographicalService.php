@@ -82,7 +82,7 @@ class GeographicalService
         if ((int) $id <= 0) {
             throw new \InvalidArgumentException('Invalid country ID.');
         }
-        
+
         return $this->countryManager->getById($id);
     }
 
@@ -91,50 +91,50 @@ class GeographicalService
         if ((int) $id <= 0) {
             throw new \InvalidArgumentException('Invalid region ID.');
         }
-        
+
         return $this->regionManager->getById($id);
     }
 
     public function getRegionsByCountry(\Gamping\Model\Country\VO $country)
     {
         $countryId = $country->getId();
-        
+
         return $this->regionManager->getByCountryId($countryId);
     }
 
     public function getParcelTileViewsByRegion(\Gamping\Model\Region\VO $region)
     {
         $regionId = $region->getId();
-        
+
         $parcels = $this->parcelManager->getByRegionId($regionId);
-        
+
         $users = $this->getUsersFromParcels($parcels);
         $userPictures = $this->getPicturesFromUsers($users);
-        
+
         $parcelIds = array_keys($parcels);
         $parcelsHavePictures = $this->parcelHasPictureManager->getByParcelIds($parcelIds);
         $picturesIds = $this->extractPicturesId($parcelsHavePictures);
-        
+
         $pictures = $this->pictureManager->getByIds($picturesIds);
-        
+
         $views = array();
-        
+
         foreach ($parcels as $parcel) {
             $view = new ParcelTile();
             $user = $users[$parcel->getUserId()];
-            
+
             $view->setParcel($parcel)
                 ->setUser($user);
-            
+
             $view->setUserPicture($userPictures[$user->getPictureId()]);
-            
+
             if (array_key_exists($user->getPictureId(), $userPictures)) {
                 $view->setUserPicture($userPictures[$user->getPictureId()]);
             }
-            
+
             $views[] = $view;
         }
-        
+
         return $views;
     }
 
@@ -144,25 +144,25 @@ class GeographicalService
         foreach ($parcels as $parcel) {
             $userIds[] = $parcel->getUserId();
         }
-        
+
         return $this->userManager->getByIds($userIds);
     }
 
     private function getPicturesFromUsers(array $users)
     {
         $ids = $this->extractPicturesId($users);
-        
+
         return $this->pictureManager->getByIds($ids);
     }
-    
+
     private function extractPicturesId($items)
     {
         $ids = array();
-        
+
         foreach ($items as $item) {
-            $ids[] = $item->getPictureId();   
+            $ids[] = $item->getPictureId();
         }
-        
+
         return $ids;
     }
 }

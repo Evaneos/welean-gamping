@@ -4,6 +4,7 @@ namespace Gamping\Controllers;
 class Home extends \Gamping\Controller
 {
     public $userManager = null;
+    public $countryManager = null;
 
     /**
      *
@@ -15,6 +16,13 @@ class Home extends \Gamping\Controller
     {
         $this->getAllParams();
 
+
+        $countries = $this->countryManager->getAll();
+        // foreach($countries as $country) {
+        //     echo $country->getName(true) . '|' . $country->getName(false) . "<br />\n";
+        //     var_dump($country);
+        // }
+        // die();
         //echo \t('chaud', 'en');
 
 /*
@@ -27,7 +35,7 @@ class Home extends \Gamping\Controller
 
         return array('data' => 'Hello World');
 */
-                
+
         $this->setData('data', 'Hello World');
         $this->setData('bodyClass', 'homepage');
 

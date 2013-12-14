@@ -5,10 +5,37 @@ parameters :
             host : localhost
             port : 3306
             username : root
-            password : weleanit
-            dbname : weleanit
+            password : gamping
+            dbname : gamping
     facebook:
         key : facebook-app-key
     googleAnalytics:
         key : ga-key-thibaud
-
+    currentLanguage :
+        iso2 : fr
+        id : 1
+    defaultLanguages :
+        gamping_com_dev :
+            iso2 : en
+            id : 2
+        gamping_es_dev :
+            iso2 : es
+            id : 3
+        gamping_fr_dev :
+            iso2 : fr
+            id : 1
+        gamping_uk_dev :
+            iso2 : en
+            id : 2
+        www_gamping_com_dev :
+            iso2 : en
+            id : 2
+        www_gamping_es_dev :
+            iso2 : es
+            id : 3
+        www_gamping_fr_dev :
+            iso2 : fr
+            id : 1
+        www_gamping_uk_dev :
+            iso2 : en
+            id : 2

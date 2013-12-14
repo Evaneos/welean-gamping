@@ -1,3 +1,5 @@
+
+
 classes :
     ActivityManager :
         class : \Gamping\Model\Activity\Manager
@@ -16,7 +18,7 @@ classes :
     ActivityStoreMemcached :
         class : \Berthe\DAL\StoreMemcached
     ActivityStoreDatabase :
-        class : \Berthe\DAL\StoreDatabase
+        class : \Gamping\DAL\StoreDatabase
         call :
             setReader : [ @ActivityReader ]
             setWriter : [ @ActivityWriter ]

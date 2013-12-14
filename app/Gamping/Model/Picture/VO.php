@@ -1,7 +1,7 @@
 <?php
 namespace Gamping\Model\Picture;
 
-class VO extends \Berthe\AbstractVO {
+class VO extends \Gamping\AbstractVO {
     const VERSION = 1;
 
     protected $url = "";

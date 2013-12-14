@@ -1,7 +1,7 @@
 <?php
 namespace Gamping\Model\User;
 
-class VO extends \Berthe\AbstractVO {
+class VO extends \Gamping\AbstractVO {
     const VERSION = 1;
 
     protected $firstname = "";
@@ -126,12 +126,12 @@ class VO extends \Berthe\AbstractVO {
     public function getIsBanned() {
         return $this->is_banned;
     }
-    
+
     public function setPictureId($id) {
         $this->picture_id = $id;
         return $this;
     }
-    
+
     public function getPictureId() {
         return $this->picture_id;
     }

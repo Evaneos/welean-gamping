@@ -1,9 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr-FR" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width" />
+    <meta name="copyright" content="December 2013">
+
+    <!--
+    ===================================================
+                Coded w/ passion during
+        __      __   _                 _ _
+        \ \    / /__| |___ __ _ _ _   (_) |_
+         \ \/\/ / -_) / -_) _` | ' \ _| |  _|
+          \_/\_/\___|_\___\__,_|_||_(_)_|\__|
+
+    Olivier MADRE/ Thibaud Fabre / Julien Tilap LA VINH
+
+    ===================================================
+    -->
+
+    <!--[if IE]>
+    <meta http-equiv="imagetoolbar" content="no">
+    <![endif]-->
+
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Gamping</title>
+
+    <script type="text/javascript">
+    <!--
+    less = {env: "development"};
+    -->
+    </script>
+    <link rel="stylesheet" href="/style/style.less" type="text/less" media="screen"/>
+    <script src="/vendor/lessjs/less.js" type="text/javascript"></script>
+</head>
+<body class="homepage">
+
+<header id="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 side hidden-xs hidden-sm">
+                <a href="#tilap" class="button-discover" title="tilap">Connectez vous !</a>
+            </div>
+            <div class="col-md-4" id="site-title">
+                <h1><a href="#tilap" title="Gamping.com"><img src="/images/gamping-logo.png" title="" alt=""/></h1>
+                <div>Le camping chez l'habitant</div>
+            </div>
+            <div class="col-md-4 side hidden-xs hidden-sm">
+                <a href="#tilap" class="button-suggest" title="tilap">Proposez votre terrain</a>
+                <i class="icon-user"></i>
+
+            </div>
+        </div>
+    </div>
+</header>
+
 <div id="banner" data-backstretch-image="/images/gamping.jpg">
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <label for="place">
-                    <?= t('Trouvez un emplacement de camping.'); ?>
+                    Trouvez un emplacement de camping.
                 </label>
                 <form method="get" action="#" id="searchform">
                     <input type="text" id="place" name="place" placeholder="Où allez vous ?" class="form-control" />
@@ -144,9 +205,9 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                                <header><h2 class="h1"><?= t('Qu\'est ce que le Gamping ?'); ?></h2></header>
+                                <header><h2 class="h1">Qu'est ce que le Gamping ?</h2></header>
                                 <aside>
-                                    <p class="highlight"><?= t('Le gamping (garden camping), c\'est réserver un terrain chez un particulier partout dans le monde pour y camper. Ou gagner de l\'argent en louant votre propre terrain.'); ?></p>
+                                    <p class="highlight">Le gamping (garden camping), c'est réserver un terrain chez un particulier partout dans le monde pour y camper. Ou gagner de l'argent en louant votre propre terrain.</p>
                                 </aside>
                             </div>
                         </div>
@@ -156,12 +217,12 @@
                                     <div class="col-md-4 hidden-xs hidden-sm decorator">
                                     </div>
                                     <div class="col-md-8">
-                                        <h3 class="h3"><?= t('Partir gamper'); ?></h3>
-                                        <p><?= t('Pour partir gimper, faire de nouvelles rencontres et découvrir de nouveaux horizons, c\'est facile !'); ?></p>
+                                        <h3 class="h3">Partir gamper</h3>
+                                        <p>Pour partir gimper, faire de nouvelles rencontres et découvrir de nouveaux horizons, c'est facile !</p>
                                         <ol>
-                                            <li><?= t('Trouvez un terrain.'); ?></li>
-                                            <li><?= t('Réservez-le avec l\'hôte.'); ?></li>
-                                            <li><?= t('Bon voyage !'); ?></li>
+                                            <li>Trouvez un terrain.</li>
+                                            <li>Réservez-le avec l'hôte.</li>
+                                            <li>Bon voyage !</li>
                                         </ol>
                                     </div>
                                 </div>
@@ -171,12 +232,12 @@
                                     <div class="col-md-4 hidden-xs hidden-sm decorator">
                                     </div>
                                     <div class="col-md-8">
-                                        <h3 class="h3"><?= t('Devenir hôte'); ?></h3>
-                                        <p><?= t('Pour devenir hôte et accueillir des gampeurs contre rémunération, rien de plus facile !'); ?></p>
+                                        <h3 class="h3">Devenir hôte</h3>
+                                        <p>Pour devenir hôte et accueillir des gampeurs contre rémunération, rien de plus facile !</p>
                                         <ol>
-                                            <li><?= t('Référencez votre terrain.'); ?></li>
-                                            <li><?= t('Recevez des demandes de réservation.'); ?></li>
-                                            <li><?= t('Accueillez vos invités.'); ?></li>
+                                            <li>Référencez votre terrain.</li>
+                                            <li>Recevez des demandes de réservation.</li>
+                                            <li>Accueillez vos invités.</li>
                                         </ol>
                                     </div>
                                 </div>
@@ -185,27 +246,27 @@
 
                         <div id="hosts" class="row">
                             <div class="col-md-12">
-                                <h2 class="h2"><?= t('Ils vous accueillent chez eux'); ?></h2>
+                                <h2 class="h2">Ils vous accueillent chez eux</h2>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="hostcard">
                                             <a href="#" title=""><img src="http://www.gamping.com/wp-content/authors/m.a.ccinfos@orange.fr-865-1376763439.jpg" title="Myriam L., hote pour gamping" ></a>
                                             <h3 class="h4"><a href="#" title="">Myriam L.</a></h3>
-                                            <p><?= t('Votre hôte'); ?></p>
+                                            <p>Votre hôte</p>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="hostcard">
                                             <a href="#" title=""><img src="http://www.gamping.com/wp-content/authors/herve.blanco@orange.fr-1145-1383587191.jpg"  title="Myriam L., hote pour gamping"></a>
                                             <h3 class="h4"><a href="#" title="">Tilap L.</a></h3>
-                                            <p><?= t('Votre hôte'); ?></p>
+                                            <p>Votre hôte</p>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="hostcard">
                                             <a href="#" title=""><img src="http://www.gamping.com/wp-content/authors/myriam.loubriat@hotmail.fr-353-1375099136.jpg"  title="Myriam L., hote pour gamping"></a>
                                             <h3 class="h4"><a href="#">Olivier M.</a></h3>
-                                            <p><?= t('Votre hôte'); ?></p>
+                                            <p>Votre hôte</p>
                                         </div>
                                     </div>
                                 </div>
@@ -216,8 +277,8 @@
                 </div>
 
                 <section class="col-md-4 testimonial-list">
-                    <h2 class="h1"><?= t('Ils ont gampé'); ?></h2>
-                    <p><?= t('Témoignages de campeurs ayant trouvé des hôtes grace à Gamping.com :'); ?></p>
+                    <h2 class="h1">Ils ont gampé</h2>
+                    <p>Témoignages de campeurs ayant trouvé des hôtes grace à Gamping.com :</p>
                     <div class="testimonial img-left" itemscope itemtype="http://data-vocabulary.org/Review">
                         <di class="row">
                             <div class="head">
@@ -240,14 +301,14 @@
             </div>
             <div class="row">
                 <div class="col-md-12 cta-large">
-                    <strong><?= t('Rejoignez la première communauté de gamping au monde !'); ?></strong> <a href="#"><?= t('Proposez un terrain'); ?></a>
+                    <strong>Rejoignez la première communauté de gamping au monde !</strong> <a href="#">Proposez un terrain</a>
                 </div>
             </div>
             <section class="reasons">
 
                 <header class="row">
                     <div class="col-md-12">
-                        <h2 class="h1"><?= t('9 bonnes raisons de devenir hôte'); ?></h1>
+                        <h2 class="h1">9 bonnes raisons de devenir hôte</h1>
                     </div>
                 </header>
 
@@ -256,8 +317,8 @@
                         <div class="row">
                             <div class="col-md-2 l hidden-xs hidden-sm"></div>
                             <div class="col-md-10">
-                                <h3 class="h4"><?= t('Faire des rencontres'); ?></h3>
-                                <p><?= t('Elargissez votre cercle d\'amis en accueillant des personnes du monde entier.'); ?></p>
+                                <h3 class="h4">Faire des rencontres</h3>
+                                <p>Elargissez votre cercle d'amis en accueillant des personnes du monde entier.</p>
                             </div>
                         </div>
                     </div>
@@ -265,8 +326,8 @@
                         <div class="row">
                             <div class="col-md-2 l hidden-xs hidden-sm"></div>
                             <div class="col-md-10">
-                                <h3 class="h4"><?= t('Gagner de l\'argent'); ?></h3>
-                                <p><?= t('Accumulez un peu de sous pour vous offrir des petits extras !'); ?></p>
+                                <h3 class="h4">Gagner de l'argent</h3>
+                                <p>Accumulez un peu de sous pour vous offrir des petits extras !</p>
                             </div>
                         </div>
                     </div>
@@ -274,8 +335,8 @@
                         <div class="row">
                             <div class="col-md-2 l hidden-xs hidden-sm"></div>
                             <div class="col-md-10">
-                                <h3 class="h4"><?= t('Vivre plus confortablement'); ?></h3>
-                                <p><?= t('Vous profiterez aussi des investissements réalisés pour les campeurs.'); ?></p>
+                                <h3 class="h4">Vivre plus confortablement</h3>
+                                <p>Vous profiterez aussi des investissements réalisés pour les campeurs.</p>
                             </div>
                         </div>
                     </div>
@@ -341,9 +402,43 @@
             </section>
             <div class="row">
                 <div class="col-md-12 cta-large">
-                    <strong><?= t('Créez avec nous une nouvelle alternative d\'hébergement !'); ?></strong> <a href="#"><?= t('Proposez un terrain'); ?></a>
+                    <strong>Créez avec nous une nouvelle alternative d'hébergement !</strong> <a href="#">Proposez un terrain</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<aside id="press" class="container">
+    <div class="row">
+        <div class="col-md-12">
+            Ils en parlent <img src="/images/press_logos2.gif" title="Gamping dans la presse" alt="Gamping dans la presse">
+        </div>
+    </div>
+</aside>
+
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 l">
+                <div class="fb-like fb_edge_widget_with_comment fb_iframe_widget" data-href="https://www.facebook.com/camping.chez.habitant.gamping" data-send="true" data-width="450" data-show-faces="true" fb-xfbml-state="rendered"><span style="height: 25px; width: 450px;"><iframe id="f1cd73718c" name="f3e0b806e8" scrolling="no" title="Like this content on Facebook." class="fb_ltr" src="http://www.facebook.com/plugins/like.php?api_key=154084594742516&amp;channel_url=http%3A%2F%2Fstatic.ak.facebook.com%2Fconnect%2Fxd_arbiter.php%3Fversion%3D28%23cb%3Df636a4bb4%26domain%3Dwww.gamping.com%26origin%3Dhttp%253A%252F%252Fwww.gamping.com%252Ff3b2510f44%26relation%3Dparent.parent&amp;colorscheme=light&amp;extended_social_context=false&amp;href=https%3A%2F%2Fwww.facebook.com%2Fcamping.chez.habitant.gamping&amp;layout=standard&amp;locale=en_US&amp;node_type=link&amp;sdk=joey&amp;send=true&amp;show_faces=true&amp;width=450" style="border: none; overflow: hidden; height: 25px; width: 450px;"></iframe></span></div>
+            </div>
+            <div class="col-md-6 r">
+                <a href="#legal_mentions" class="link_legal fancybox">Mentions légales.</a>
+                <a href="http://blog.gamping.com" class="link_legal">Blog</a>
+                <a href="http://www.gamping.com/press/?lang=fr" class="link_legal">Presse</a>
+
+                <a href="?lang=us"><img src="/images/flag_us.gif" alt="us"></a>
+                <a href="?lang=es"><img src="/images/Spanish.gif" alt="es"></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/vendor/jquery-backstretch/jquery.backstretch.min.js"></script>
+<script type="text/javascript" src="/vendor/jQuery-Autocomplete/src/jquery.autocomplete.min.js"></script>
+<script type="text/javascript" src="/js/layout.js"></script>
+<script type="text/javascript" src="/js/homepage.js"></script>
+</body>
+</html>
