@@ -6,6 +6,8 @@ classes:
             userManager : @UserManager
             parcelManager: @ParcelManager
             countryManager : @CountryManager
+        call:
+            setHomeService: [ @HomeService ]
 
     formController:
         class: \Gamping\Controllers\Form
@@ -15,6 +17,13 @@ classes:
 
     searchController:
         class: \Gamping\Controllers\Search
+        call:
+            setGeographicalService: [ @GeographicalService ]
+
+    searchByCountryController:
+        class: \Gamping\Controllers\Search\SearchByCountry
+        props :
+            countryManager : @CountryManager
         call:
             setGeographicalService: [ @GeographicalService ]
 

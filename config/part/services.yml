@@ -21,3 +21,9 @@ classes:
             setUserManager: [ @UserManager ]
             setPictureManager: [ @PictureManager ]
             setParcelHasPictureManager: [ @ParcelHasPictureManager ]
+
+    HomeService:
+        class: \Gamping\Service\HomeService
+        call:
+            setCountryManager: [ @CountryManager ]
+            setParcelManager : [ @ParcelManager ]

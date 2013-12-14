@@ -10,11 +10,16 @@ jQuery(document).ready(function() {
     jQuery('#place').autocomplete({
         lookup: places,
         onSelect: function (suggestion) {
-            jQuery('#place').val(suggestion.value);
-            jQuery('#placeid').val(suggestion.data);
-            jQuery('#searchform').submit();
+            jQuery(location).attr('href', "/search/" + suggestion.data);
         }
     });
+
+    /*jQuery("#searchform").submit (function( event ) {
+        alert(jQuery("#place").val());
+        jQuery(location).attr('href', "/search");
+        event.stopPropagation();
+    });*/
+
 })
 
 // Init the place for autocomplete from select

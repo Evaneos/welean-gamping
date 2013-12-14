@@ -1,10 +1,24 @@
 <?php
 namespace Gamping\Controllers;
 
+use Gamping\Service\HomeService;
+
 class Home extends \Gamping\Controller
 {
+
     public $userManager = null;
     public $countryManager = null;
+
+    /**
+     *
+     * @var HomeService
+     */
+    private $homeService;
+
+    public function setHomeService($homeService)
+    {
+        $this->homeService = $homeService;
+    }
 
     /**
      *
@@ -12,12 +26,12 @@ class Home extends \Gamping\Controller
      */
     public $parcelManager = null;
 
+
     protected function executeAction()
     {
         $this->getAllParams();
 
-
-        $countries = $this->countryManager->getAll();
+        // $countries = $this->countryManager->getAll();
         // foreach($countries as $country) {
         //     echo $country->getName() . '|' . $country->getName(false) . "<br />\n";
         //     var_dump($country);
@@ -35,6 +49,7 @@ class Home extends \Gamping\Controller
 
         return array('data' => 'Hello World');
 */
+        $this->setData('countries', $this->homeService->getAllCountriesWithActiveParcel());
 
         $this->setData('data', 'Hello World');
         $this->setData('bodyClass', 'homepage');
