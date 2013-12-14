@@ -8,8 +8,7 @@ class Writer extends \Gamping\DAL\AbstractWriter
     {
         $params = array(
             ':activity_id' => $object->getActivityId(),
-            ':parcel_id' => $object->getParcelId(),
-            ':online' => (int) $object->isOnline()
+            ':parcel_id' => $object->getParcelId()
         );
 
         if ($withId) {
@@ -24,8 +23,7 @@ class Writer extends \Gamping\DAL\AbstractWriter
         $query = <<<EOQ
             UPDATE parcel_has_activity SET
                 activity_id = :activity_id,
-                parcel_id = :parcel_id,
-                online = :online
+                parcel_id = :parcel_id
             WHERE id = :id
 EOQ;
 
@@ -35,8 +33,8 @@ EOQ;
     public function insert(\Gamping\AbstractVO $object)
     {
         $query = <<<EOQ
-            INSERT INTO parcel_has_activity (activity_id, parcel_id, online)
-            VALUES (:activity_id, :parcel_id, :online)
+            INSERT INTO parcel_has_activity (activity_id, parcel_id)
+            VALUES (:activity_id, :parcel_id)
 EOQ;
 
         $ret = (bool) $this->db->query($query, $this->getParams($object, false));

@@ -4,6 +4,7 @@ namespace Gamping\Model\Parcel\Builder;
 
 use Gamping\Model\Parcel\Manager;
 use Berthe\Paginator;
+
 class Form
 {
     private $currencyManager;
@@ -86,6 +87,27 @@ class Form
         $this->address->setCity($city);
     }
 
+    public function setLatLng() {
+        $address = implode(' ', array(
+            $this->address->getAddress(),
+            $this->address->getZipCode(),
+            $this->address->getCity()
+        ));
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, "http://maps.googleapis.com/maps/api/geocode/json?sensor=false&address=" . urlencode($address));
+        curl_setopt($curl, CURLOPT_HEADER, 0);
+        curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
+        $ret = json_decode(curl_exec($curl));
+
+        if ($ret->status === 'OK' && count($ret->results) > 0) {
+            $this->parcel->setLatitude($ret->results[0]->geometry->location->lat);
+            $this->parcel->setLongitude($ret->results[0]->geometry->location->lng);
+        }
+
+    }
+
     public function setRates($currencyId, $adultPrice, $extraAdultPrice)
     {
         $currency = $this->currencyManager->getById($currencyId);
@@ -115,8 +137,7 @@ class Form
         return $this;
     }
 
-    public function setRawData($country, $description, $rules, $capacity, $title) {
-        $this->parcel->setCountryId($country);
+    public function setRawData($description, $rules, $capacity, $title) {
         $this->parcel->setDescription($description);
         $this->parcel->setRules($rules);
         $this->parcel->setTitle($title);
@@ -134,7 +155,7 @@ class Form
 
     public function addCommodity($id)
     {
-        $this->services[] = $id;
+        $this->commodities[] = $id;
 
         return $this;
     }
@@ -168,7 +189,6 @@ class Form
 
             $parcelHasActivityVO->setActivityId($activity->getId());
             $parcelHasActivityVO->setParcelId($this->parcel->getId());
-            $parcelHasActivityVO->setOnline(true);
 
             if (! $parcelHasActivityManager->save($parcelHasActivityVO)) {
                 throw new \RuntimeException(sprintf('Could not save relationship between parcel [%d] and activity [%d].',

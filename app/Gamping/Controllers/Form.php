@@ -23,7 +23,6 @@ class Form extends Controller
         $isSubmit = $this->getParam('submit', false);
 
         if ($isSubmit !== false) {
-            var_dump($this->getAllParams());
             $builder = $this->formService->getParcelBuilder();
 
             $this->setRates($builder);
@@ -31,8 +30,9 @@ class Form extends Controller
             $this->setActivities($builder);
             $this->setFormData($builder);
             $this->setHost($builder);
-            var_dump($builder);
-            die();
+            $this->setAddress($builder);
+            $this->setCountry($builder);
+            $builder->setLatLng();
             $this->formService->saveParcelFromBuilder($builder);
         }
 
@@ -44,6 +44,22 @@ class Form extends Controller
         $this->setData('bodyClass', 'add');
     }
 
+    private function setAddress($builder) {
+        $address1 = (string) $this->getParam('address1', '');
+        $address2 = (string) $this->getParam('address2', '');
+        $zip = (string) $this->getParam('zip', '');
+        $city = (string) $this->getParam('city', '');
+
+        $builder->setAddressInformation($address1, $address2, $zip, $city);
+    }
+
+    private function setCountry($builder) {
+        $countryId = (int) $this->getParam('country', '');
+        $country = $this->formService->getCountryById($countryId);
+
+        $builder->setCountry($country);
+    }
+
     private function setHost($builder) {
         $tent = (int) $this->getParam('hosting_tent', 0);
         $description = (int) $this->getParam('hosting_caravan', 0);
@@ -53,13 +69,12 @@ class Form extends Controller
     }
 
     private function setFormData($builder) {
-        $country = (int)$this->getParam('country', 0);
         $description = (string) $this->getParam('description', '');
         $rules = (string) $this->getParam('rules', '');
         $capacity = (string) $this->getParam('count', 0);
         $title = (string) $this->getParam('title', '');
 
-        $builder->setRawData($country, $description, $rules, $capacity, $title);
+        $builder->setRawData($description, $rules, $capacity, $title);
     }
 
     private function setRates($builder)

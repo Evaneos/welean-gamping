@@ -119,6 +119,10 @@ class ParcelFormService
         return $this->currencyManager->getAll();
     }
 
+    public function getCountryById($id) {
+        return $this->countryManager->getById($id);
+    }
+
     /**
      *
      * @return \Gamping\Model\Parcel\Builder\Form
@@ -141,11 +145,13 @@ class ParcelFormService
 
             $builder->saveParcel($this->parcelManager, $this->addressManager);
             $builder->saveActivities($this->activityManager, $this->parcelHasActivityManager);
-
+            $builder->saveCommodities($this->commodityManager, $this->parcelHasCommodityManager);
             $this->db->commit();
+            die("ok"); //throw new \Exception('everything went fine, but rollback anyway');
         }
         catch (Exception $ex) {
             $this->db->rollback();
+            die('there');
         }
     }
 }
