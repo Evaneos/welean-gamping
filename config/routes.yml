@@ -85,7 +85,7 @@ routes:
     searchParcels:
         pattern: "/ajax/parcels-search"
         controller: parcelsSearchController
-        methods: [ post ]
+        methods: [ get, post ]
         output:
             json:
                 view: app/views/search/parcels.json.phtml
