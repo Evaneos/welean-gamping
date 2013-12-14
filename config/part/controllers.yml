@@ -9,6 +9,9 @@ classes:
         call:
             setHomeService: [ @HomeService ]
 
+    parcelController:
+        class: \Gamping\Controllers\Parcel
+
     formController:
         class: \Gamping\Controllers\Form
         interceptor : [ @GoogleAnalytics ]
