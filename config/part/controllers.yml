@@ -20,11 +20,6 @@ classes:
 
     searchController:
         class: \Gamping\Controllers\Search
-        call:
-            setGeographicalService: [ @GeographicalService ]
-
-    searchByCountryController:
-        class: \Gamping\Controllers\Search\SearchByCountry
         props :
             countryManager : @CountryManager
         call:
