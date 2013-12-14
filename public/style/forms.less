@@ -36,7 +36,7 @@
             line-height:@H;
         }
     }
-    textarea, input[type="text"], input[type="number"] {
+    textarea, input[type="text"], input[type="password"], input[type="number"] {
         border:1px solid @GREY;
         .box-shadow(0px 1px 1px rgba(0, 0, 0, .1));
         .border-radius(3px);
@@ -60,7 +60,7 @@
         width:90%;
         min-height:10em;
     }
-    input[type="text"], input[type="number"] {
+    input[type="text"], input[type="number"], input[type="password"] {
         height:@H;
         line-height:@H;
     }
@@ -73,6 +73,7 @@
         .butonize(green);
     }
     label{
+        cursor:pointer;
         &.inline{
             margin-bottom:@SPACER;
             height:@H;
