@@ -19,6 +19,9 @@ class ParcelTile
         return $this;
     }
     
+    /**
+     * @return \Gamping\Model\Parcel\VO
+     */
     public function getParcel()
     {
         return $this->parcel;
@@ -31,6 +34,9 @@ class ParcelTile
         return $this;
     }
     
+    /**
+     * @return \Gamping\Model\Picture\VO
+     */
     public function getParcelPicture()
     {
         return $this->parcelPicture;
@@ -43,6 +49,9 @@ class ParcelTile
         return $this;
     }
     
+    /**
+     * @return \Gamping\Model\User\VO
+     */
     public function getUser()
     {
         return $this->user;
@@ -55,6 +64,9 @@ class ParcelTile
         return $this;
     }
     
+    /**
+     * @return \Gamping\Model\Picture\VO
+     */
     public function getUserPicture()
     {
         return $this->userPicture;
