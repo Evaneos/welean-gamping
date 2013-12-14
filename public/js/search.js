@@ -1,3 +1,4 @@
+// Screen sizing
 function screenResize() {
     jQuery('#map, .semi.right').height(jQuery(window).height() - jQuery('#header').height());
 }
@@ -7,167 +8,179 @@ jQuery(window).resize(function() {
 
 jQuery(document).ready(function() {
     screenResize();
-    var justForIE = document.namespaces;
-
-    var mapOpts = {
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      scaleControl: true,
-      scrollwheel: true
-    }
-    var map = new google.maps.Map(document.getElementById("map"), mapOpts);
-
-    var infoWindow = new google.maps.InfoWindow();
-    var markerBounds = new google.maps.LatLngBounds();
-    var markerArray = [];
-    var pointsArray = [];
-
-    function makeMarker(options){
-        var iconBase = '/images/ico_marker.png';
-        var myMarkerImage = new google.maps.MarkerImage(iconBase);
-        options.center = options.center || options.position;
-        if (options.radius) {
-            var pushPin = new google.maps.Circle({map:map, icon:myMarkerImage});
-        }
-        else {
-            var pushPin = new google.maps.Marker({map:map, icon:myMarkerImage});
-        }
-
-        pushPin.setOptions(options);
-
-        google.maps.event.addListener(pushPin, "click", function(){
-            infoWindow.setOptions(options);
-            infoWindow.open(map, pushPin);
-            if(this.sidebarButton) {
-                this.sidebarButton.button.focus();
-                jQuery('#host-list').find('.host_place').removeClass('focus');;
-                jQuery(this.sidebarButton.button).addClass('focus');
-            }
-        });
-
-        if (options.sidebarItem){
-            pushPin.sidebarButton = new SidebarItem(pushPin, options);
-            pushPin.sidebarButton.addIn("host-list");
-        }
-
-        markerBounds.extend(options.position);
-        markerArray.push(pushPin);
-        pointsArray.push(options.center);
-        return pushPin;
-    }
-
-    google.maps.event.addListener(map, "click", function(){
-        infoWindow.close();
-    });
-
-    function SidebarItem(marker, opts){
-        var tag = opts.sidebarItemType || "div";
-        var image = opts.image || "";
-        var author_image = opts.author_image || "";
-
-        var row = document.createElement(tag);
-        row.className = "host_place";
-
-
-        var imgStr = image=='' ? '' : '<img src="' + image + '" class="bg" />';
-        var imgAuthorStr = author_image=='' ? '' : '<img src="' + author_image + '" class="author" />';
-
-        var html = imgStr + imgAuthorStr + '<div class="in"><h3>' + opts.sidebarItem + '</h3><a href=""><i class="icon-zoom-in"></i> Plus de détails</div>';
-
-        row.innerHTML = html;
-        row.className = opts.sidebarItemClassName || "host_place";
-
-        row.onclick = function(){
-            google.maps.event.trigger(marker, 'click');
-        }
-        row.onmouseover = function(){
-            google.maps.event.trigger(marker, 'mouseover');
-        }
-        row.onmouseout = function(){
-            google.maps.event.trigger(marker, 'mouseout');
-        }
-        this.button = row;
-    }
-
-    SidebarItem.prototype.addIn = function(block){
-        if (block && block.nodeType == 1) {
-            this.div = block;
-        }
-        else {
-            this.div = document.getElementById(block);
-        }
-
-        // this.div.appendChild(this.button);
-        var b = jQuery(this.button).appendTo(this.div);
-           b.css('opacity', 0).css('marginTop', '50px')
-            .delay(500)
-            .animate({opacity:1, marginTop:'10px'}, 400);
-    }
-    SidebarItem.prototype.remove = function(){
-        if(!this.div) {
-            return false;
-        }
-
-        this.div.removeChild(this.button);
-        return true;
-    }
-
-    // Juste get info from server and push the w/ the makeMarker method
-    makeMarker({
-        position: new google.maps.LatLng(43.139904,5.847656),
-        title: "Ollioules",
-        sidebarItem: "Ollioule aka JulieCity",
-        image: 'http://www.gamping.com/wp-content/uploads/2013/11/P10109951-716x287.jpg',
-        content: "La ville de l'olive",
-        host : 'Patricia T.',
-        author_image:'http://www.gamping.com/wp-content/authors/patou0526@yahoo.fr-1161-1384610599.jpg'
-    });
-    makeMarker({
-        position: new google.maps.LatLng(48.857261,2.335968),
-        title: "Paname",
-        sidebarItem: "Paris ville lumière",
-        image: 'http://www.gamping.com/wp-content/uploads/2013/11/P10109951-716x287.jpg',
-        content: "Un petit coin de paradis pour les amoureux du camping",
-        host : 'Patricia T.',
-        author_image:'http://www.gamping.com/wp-content/authors/patou0526@yahoo.fr-1161-1384610599.jpg'
-    });
-    makeMarker({
-        position: new google.maps.LatLng(40.712655,-74.003906),
-        title: "Nouyôrk",
-        sidebarItem: "Nouille Orc",
-        image: 'http://www.gamping.com/wp-content/uploads/2013/11/P10109951-716x287.jpg',
-        content: "Grand espace vert naturel",
-        host : 'Patricia T.',
-        author_image:'http://www.gamping.com/wp-content/authors/patou0526@yahoo.fr-1161-1384610599.jpg'
-    });
-
-    map.fitBounds(markerBounds);
-    // var poly = new google.maps.Polyline({path:pointsArray, map:map});
-    
-    $("[name='country']").change(function(e) {
-		$.ajax({
-			'dataType': 'json',
-			'url': '/ajax/regions-by-country/id/' + e.target.value, 
-			'success' :function(data) {
-				var select = $("[name='region']");
-				select.find('option:not(:first-child)').remove();
-				$.each(data, function(key, value) {
-					$('<option />', { value: value.id, html: value.name }).appendTo(select);
-				});
-			}
-		});
-	});
-    
-    $("[name='region']").change(function(e) {
-    	$.ajax({
-    		'dataType': 'json',
-    		'url': '/ajax/parcels-by-region/id/' + e.target.value,
-    		'success' :function(data) {
-				/*var select = $("[name='region']");
-				select.find('option:not(:first-child)').remove();
-				$.each(data, function(key, value) {
-					$('<option />', { value: value.id, html: value.name }).appendTo(select);
-				});*/
-			}
-    	});
-    });
 })
+
+
+// Async google map load
+function loadScript() {
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&callback=initializeMap';
+    document.body.appendChild(script);
+}
+
+window.onload = loadScript;
+
+
+// Map settings
+var googleMap;
+var infowindow;
+function initializeMap() {
+    var myLatlng = new google.maps.LatLng(45.758796,4.834607);
+
+    // Carte centrée sur le cinéma, zoom 16
+    var myMapOptions = {
+        zoom: 16,
+        center: myLatlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    // Création de la carte
+    googleMap = new google.maps.Map(
+        document.getElementById('map'),
+        myMapOptions
+    );
+    infowindow = new google.maps.InfoWindow({maxWidth: 210});
+    loadData();
+}
+
+
+// Marker management
+var markerList = [];
+var idCounter = 0;
+var markerPremier = [];
+var data;
+
+function makeMarker(data) {
+    idCounter++;
+    var t = idCounter;
+
+    // Create the marker
+    var myMarker = new google.maps.Marker({
+        position: data.position,
+        map: googleMap,
+        title: data.title
+    });
+
+    // Create the sidebar item with information
+    var imgStr = '<img src="' + data.image + '" class="bg" />';
+    var imgAuthorStr = '<img src="' + data.host_picture + '" class="author" />';
+    var row = document.createElement('div');
+    row.className = "host_place";
+    row.id = 'host_marker_'+idCounter;
+    row.innerHTML = imgStr + imgAuthorStr + '<div class="in"><h3>' + data.host_name + '</h3><a href=""><i class="icon-zoom-in"></i> Plus de détails</div>';;
+    row.className = "host_place";
+
+    // Bind sidebar item to marker in gmap
+    row.onclick = function(){
+        var latLng = myMarker.getPosition();
+        googleMap.setCenter(latLng);
+        showMarkerInfo(t);
+        highlightVisibleMarkers();
+    }
+
+    // Bind gmap marker to sidebar item
+    var popupWidth = 210;
+    var imgStr = '<img src="' + data.image + '" class="bg" width= "'+ popupWidth+'" />';
+    var popupString = imgStr + data.host_name;
+
+    google.maps.event.addListener(googleMap, 'zoom_changed', function() {
+        highlightVisibleMarkers();
+    });
+    google.maps.event.addListener(googleMap, 'dragend', function() {
+        highlightVisibleMarkers();
+    });
+
+    // Put the arker on the map
+    jQuery('#host-list').append(row).toggle().slideDown();
+
+    // Store the data in the global array to get them later
+    var markerData = {
+        id: idCounter,
+        marker: myMarker,
+        popup:popupString
+    }
+    markerList[idCounter]=markerData;
+
+    google.maps.event.addListener(myMarker, 'click', function() {
+        showMarkerInfo(t);
+        hightlightSizebox(t);
+        highlightVisibleMarkers();
+    });
+}
+
+function showMarkerInfo(i) {
+    var marker = markerList[i].marker;
+    var id = markerList[i].id;
+    var popup = markerList[i].popup;
+
+    infowindow.close();
+    infowindow.setContent(popup);
+    infowindow.open(googleMap, marker);
+
+    hightlightSizebox(i);
+}
+
+// function displaying data from ajax results
+function loadData() {
+
+    // Clear the current data if any
+    for (var i in markerList) {
+        jQuery('#host_marker_' + markerList[i].id).hide(0, function() {
+            markerList[i].marker.setMap(null);
+        });
+    }
+    markerList = [];
+
+    // Query from ajax here
+    // @TODO
+
+    // Add the marker (here as sample until load is done w/ ajax)
+    for(k=0; k<30; k++) {
+        var myLatlng = new google.maps.LatLng(45.758796 + Math.random(),4.834607 - Math.random());
+        var markerData = {
+            position : myLatlng,
+            title : 'rr',
+            sidebarItem: "Nouille Orc",
+            image: 'http://www.gamping.com/wp-content/uploads/2013/11/P10109951-716x287.jpg',
+            content: "Grand espace vert naturel",
+            host_name : 'Patricia T.',
+            host_picture:'http://www.gamping.com/wp-content/authors/patou0526@yahoo.fr-1161-1384610599.jpg'
+        }
+        makeMarker(markerData);
+    }
+    highlightVisibleMarkers();
+}
+
+function hightlightSizebox(i) {
+    var marker = markerList[i].marker;
+    var id = markerList[i].id;
+    var domId = '#host_marker_' + markerList[i].id;
+
+    jQuery('#host-list .host_place').removeClass('highlighted');
+    jQuery(domId).addClass('highlighted');
+
+    // $('#host-list').animate({
+    //     scrollTop: $(domId).offset().top
+    // }, 2000);
+}
+
+function highlightVisibleMarkers() {
+    for (var i in markerList){
+        var marker = markerList[i].marker;
+        var place = jQuery('#host_marker_' + markerList[i].id);
+        if( googleMap.getBounds() && googleMap.getBounds().contains(marker.getPosition()) ){
+            // place.removeClass('not-visible');
+            // jQuery('#host-list').prepend(place);
+            place.removeClass('not-visible');
+        }
+        else {
+            place.addClass('not-visible');
+        }
+    }
+}
+
+// For testing only
+jQuery('#refresh').click(function(e){
+    loadData();
+});

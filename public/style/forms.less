@@ -1,7 +1,7 @@
 .smart-form{
     .error{
         border:1px solid @RED;
-        background:lighten(@RED, 30%);
+        background:lighten(@RED, 45%);
         margin:@SPACER 0;
         padding:@SPACER/2;
         .border-radius(3px);
@@ -36,12 +36,10 @@
             line-height:@H;
         }
     }
-    input[type="text"], input[type="number"] {
+    textarea, input[type="text"], input[type="number"] {
         border:1px solid @GREY;
         .box-shadow(0px 1px 1px rgba(0, 0, 0, .1));
         .border-radius(3px);
-        height:@H;
-        line-height:@H;
         margin-bottom:@SPACER;
         padding-left:.5em;
         padding-right:.5em;
@@ -52,7 +50,21 @@
         &.small{
             width:20%;
         }
+        &:focus{
+            .box-shadow(0px 1px 5px rgba(0, 0, 0, .3));
+        }
     }
+
+    textarea{
+        resize: none;
+        width:100%;
+        min-height:10em;
+    }
+    input[type="text"], input[type="number"] {
+        height:@H;
+        line-height:@H;
+    }
+
     input[type="number"]{
         text-align:right;
     }
