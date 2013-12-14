@@ -46,7 +46,7 @@ routes:
                 view: app/views/form/form.success.phtml
 
     parcel:
-        pattern: "/parcel"
+        pattern: "/parcel/{id}"
         controller: parcelController
         methods: [ get ]
         scripts:

@@ -5,84 +5,131 @@
 
         <div class="row">
             <div class="col-md-9">
+                <h1 class="h1"><?= $this->parcel->getTitle(); ?></h1>
+
                 <p class="place-info">Saint Sylvain, France (Limousin)</p>
 
                 <p class="allowing">
                     <?= t('Terrain pour :') ?>
-                    <i class="allow-tent not-allowed" title="<?= t('Tentes autorisées') ?>"></i>
-                    <i class="allow-caravan" title="<?= t('Caravanes autorisées') ?>"></i>
-                    <i class="allow-campingcar not-allowed" title="<?= t('Camping car autorisés') ?>"></i>
+                    <i class="allow-tent <?= $this->parcel->hasTents() ? '' : "not-allowed"; ?>" title="<?= t('Tentes autorisées') ?>"></i>
+                    <i class="allow-caravan <?= $this->parcel->hasCaravans() ? '' : "not-allowed"; ?>" title="<?= t('Caravanes autorisées') ?>"></i>
+                    <i class="allow-campingcar <?= $this->parcel->hasCampingCars() ? '' : "not-allowed"; ?>" title="<?= t('Camping car autorisés') ?>"></i>
                 </p>
 
-                <p>L’espace champêtre est aussi composé d’un hébergement en chambres d’hôtes, à disposition une cuisine d’été Salle d’eau avec douche et une terrasse couverte partagée. Situé sur la faille géologique d’Argentat, le site offre des paysages uniques en Corrèze. Proche des pôles touristiques majeurs de la Corrèze et du Lot. Au départ de circuits de petite randonnées a 10km de la vallée de la Dordogne (canoé, parapente, escalade)</p>
+                <p><?= $this->parcel->getDescription(); ?></p>
 
                 <hr />
 
                 <h2 class="h2 services"><?= t('Services') ?></h2>
 
+
+
+
+
+
                 <div class="row">
-                    <div class="col-md-4">
-                        <ul class="available">
-                            <li class="yes">Pin ups</li>
-                            <li>Carmabar</li>
-                            <li class="yes">Couette</li>
-                            <li class="yes">Taxi</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4">
-                        <ul class="available">
-                            <li>Pin ups</li>
-                            <li class="yes">Carmabar</li>
-                            <li>Couette</li>
-                            <li class="yes">Taxi</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4">
-                        <ul class="available">
-                            <li class="yes">Pin ups</li>
-                            <li class="yes">Carmabar</li>
-                            <li class="yes">Couette</li>
-                            <li class="yes">Taxi</li>
-                        </ul>
-                    </div>
+                    <?php
+                    $commodities = $this->commodities;
+                    $commoditiesPacked = array(array());
+                    $pack = 0;
+                    $increment = 0;
+                    foreach($commodities as $commodity) {
+                        if ($increment % 5 === 0) {
+                            $pack++;
+                        }
+                        if (!array_key_exists($pack, $commoditiesPacked)) {
+                            $commoditiesPacked[$pack] = array();
+                        }
+
+                        $commoditiesPacked[$pack][] = $commodity;
+                        $increment++;
+                    }
+
+
+                    foreach($commoditiesPacked as $pack => $commoditiesInPack) {
+                        ?>
+                        <div class="col-md-4">
+                            <ul class="available">
+                                <?php
+                                foreach($commoditiesInPack as $commodity) {
+                                    $list = array();
+                                    if (is_array($list) && in_array($commodity->getId(), $list)) {
+                                        $checked = 'class="yes"';
+                                    }
+                                    else {
+                                        $checked = '';
+                                    }
+                                    ?>
+                                    <li <?= $checked; ?>><?= $commodity->getName(); ?></li>
+                                    <?php
+                                }
+                                ?>
+                            </ul>
+                        </div>
+                        <?php
+                    }
+                    ?>
                 </div>
 
                 <hr />
 
                 <h2 class="h2 services"><?= t('Activités') ?></h2>
 
+
                 <div class="row">
-                    <div class="col-md-4">
-                        <ul class="available">
-                            <li class="yes">Siestes</li>
-                            <li>Natation</li>
-                            <li class="yes">Golf</li>
-                            <li class="yes">Karaté</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4">
-                        <ul class="available">
-                            <li class="yes">Siestes</li>
-                            <li>Natation</li>
-                            <li class="yes">Golf</li>
-                            <li class="yes">Karaté</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4">
-                        <ul class="available">
-                            <li class="yes">Siestes</li>
-                            <li>Natation</li>
-                            <li class="yes">Golf</li>
-                        </ul>
-                    </div>
+                    <?php
+                    $activities = $this->activities;
+                    $activitiesPacked = array(array());
+                    $pack = 0;
+                    $increment = 0;
+                    foreach($activities as $activity) {
+                        if ($increment % 5 === 0) {
+                            $pack++;
+                        }
+                        if (!array_key_exists($pack, $activitiesPacked)) {
+                            $activitiesPacked[$pack] = array();
+                        }
+
+                        $activitiesPacked[$pack][] = $activity;
+                        $increment++;
+                    }
+
+
+                    foreach($activitiesPacked as $pack => $activitiesInPack) {
+                        ?>
+                        <div class="col-md-4">
+                            <ul class="available">
+                                <?php
+                                foreach($activitiesInPack as $activity) {
+                                    $list = array();
+                                    if (is_array($list) && in_array($activity->getId(), $list)) {
+                                        $checked = 'class="yes"';
+                                    }
+                                    else {
+                                        $checked = '';
+                                    }
+                                    ?>
+                                    <li <?= $checked; ?>><?= $activity->getName(); ?></li>
+                                    <?php
+                                }
+                                ?>
+                            </ul>
+                        </div>
+                        <?php
+                    }
+                    ?>
                 </div>
+
+
+
+
             </div>
 
             <div class="col-md-3 r">
 
                 <!-- display price here. Need icon :( -->
 
-                <p class="notice"><em>Les prix sont indicatifs. Contactez l'hôte même si le prix ne vous convient pas.</em></p>
+                <p class="notice"><em><?= t('Les prix sont indicatifs. Contactez l\'hôte même si le prix ne vous convient pas.'); ?></em></p>
 
                 <a href="#" class="contact-host"><?= t("Contacter l'hôte") ?></a>
 
