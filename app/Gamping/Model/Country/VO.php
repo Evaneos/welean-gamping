@@ -4,10 +4,7 @@ namespace Gamping\Model\Country;
 class VO extends \Gamping\AbstractVO {
     const VERSION = 1;
 
-    /**
-     * @Translatable (azeaezz)
-     */
-    protected $name = "";
+    protected $name = 0;
 
     public function setName($value) {
         $this->name = $value;

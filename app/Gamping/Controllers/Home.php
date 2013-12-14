@@ -19,7 +19,7 @@ class Home extends \Gamping\Controller
 
         $countries = $this->countryManager->getAll();
         // foreach($countries as $country) {
-        //     echo $country->getName(true) . '|' . $country->getName(false) . "<br />\n";
+        //     echo $country->getName() . '|' . $country->getName(false) . "<br />\n";
         //     var_dump($country);
         // }
         // die();
