@@ -3,22 +3,37 @@ namespace Gamping;
 
 use Gamping\Response\Html;
 use Symfony\Component\HttpFoundation\Request;
+use Gamping\Layout\Selector;
 
 class ResponseSelector
 {
 
+    private $rootDirectory = '';
+    
     private $outputs = array();
     
     private $layouts = array();
     
+    private $scripts = array();
+    
     private $layoutSelector;
+    
+    public function getRootDirectory()
+    {
+        return $this->rootDirectory;
+    }
+    
+    public function setRootDirectory($rootDirectory)
+    {
+        $this->rootDirectory = $rootDirectory;
+    }
     
     public function getLayoutSelector()
     {
         return $this->layoutSelector;
     }
     
-    public function setLayoutSelector(LayoutSelector $selector)
+    public function setLayoutSelector(Selector $selector)
     {
         $this->layoutSelector = $selector;
     }
@@ -44,8 +59,16 @@ class ResponseSelector
         }
         
         if ($response != null) {
-            $response->setLayout($this->layoutSelector->getLayout($this->layouts[$outputName]));
-            $response->setViewFile($viewName);
+            $layout = $this->layoutSelector->getLayout($this->layouts[$outputName]);
+            
+            foreach ($this->scripts[$outputName] as $section => $scripts) {
+                foreach ($scripts as $script) {
+                    $layout->addJavascriptFile($script, $section);
+                }
+            } 
+            
+            $response->setLayout($layout);
+            $response->setViewFile($this->rootDirectory . DIRECTORY_SEPARATOR . $viewName);
         }
         
         return $response;
@@ -72,9 +95,10 @@ class ResponseSelector
         throw new \RuntimeException('Unable to find a compatible output.');
     }
     
-    public function addOutput($name, $layout, $view)
+    public function addOutput($name, $layout, $view, $scripts)
     {
         $this->layouts[$name] = $layout;
         $this->outputs[$name] = $view;
+        $this->scripts[$name] = $scripts;
     }
 }

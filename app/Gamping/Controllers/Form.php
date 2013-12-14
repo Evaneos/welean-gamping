@@ -20,12 +20,17 @@ class Form extends Controller
 
     protected function executeAction()
     {
-        $builder = $this->formService->getParcelBuilder();
+        $isSubmit = $this->getParam('submit', false);
         
-        $this->setRates($builder);
-        $this->setCommodities($builder);
-        $this->setActivities($builder);
+        if ($isSubmit) {
+            $builder = $this->formService->getParcelBuilder();
+            
+            $this->setRates($builder);
+            $this->setCommodities($builder);
+            $this->setActivities($builder);
+        }
         
+        $this->setData('bodyClass', 'search');
     }
     
     private function setRates($builder)
@@ -35,7 +40,7 @@ class Form extends Controller
         $adultPrice = (float) $this->getParam('adult_price', 0);
         $extraAdultPrice = (float) $this->getParam('extra_adult_price', 0);
         
-        $builder->setAdultRates($currencyCode, $adultPrice, $extraAdultPrice);
+        $builder->setRates($currencyCode, $adultPrice, $extraAdultPrice);
     }
     
     private function setCommodities($builder)

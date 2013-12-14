@@ -1,0 +1,104 @@
+.smart-form{
+    fieldset{
+        &.who{
+            h2{
+                background-image:url(http://www.gamping.com/wp-content/themes/camping/images/ico_who.gif);
+            }
+
+            ul.hosting_type{
+                list-style-type:none;
+                padding:0;
+                margin:0;
+                li{
+                    @SIZE:90px;
+                    float:left;
+                    margin-right:@SPACER;
+                    a{
+                        display:block;
+                        width:@SIZE;
+                        height:@SIZE;
+                        .border-radius(3px);
+                        background:@BROWN_LIGHT;
+                        border:1px solid @GREY;
+                        text-align:center;
+                        background-repeat:no-repeat;
+                        background-position:center center;
+                        line-height: 1.7 * @SIZE;
+                        color:@BROWN;
+                        .transition(all .15s);
+                        &:hover{
+                            text-decoration:none;
+                            background-color:darken(@BROWN_LIGHT, 3%);
+                        }
+                        &.selected{
+                            background-color:@GREEN;
+                            color:@WHITE;
+                        }
+                    }
+                    &.tent a{
+                        background-image:url("@{IMAGE_PATH}/receive_icon1.png");
+                        &.selected{
+                            background-image:url("@{IMAGE_PATH}/receive_icon1_on.png");
+                        }
+                    }
+                    &.caravan a{
+                        background-image:url("@{IMAGE_PATH}/receive_icon2.png");
+                        &.selected{
+                            background-image:url("@{IMAGE_PATH}/receive_icon2_on.png");
+                        }
+                    }
+                    &.campingcar a{
+                        background-image:url("@{IMAGE_PATH}/receive_icon3.png");
+                        &.selected{
+                            background-image:url("@{IMAGE_PATH}/receive_icon3_on.png");
+                        }
+                    }
+
+                }
+            }
+            select{
+                width:300px;
+            }
+        }
+
+        &.situation{
+            h2{
+                background-image:url("@{IMAGE_PATH}/ico_situation.gif");
+            }
+        }
+
+        &.services{
+            h2{
+                background-image:url("@{IMAGE_PATH}/ico_amentities.gif");
+            }
+        }
+
+        &.activities{
+            h2{
+                background-image:url("@{IMAGE_PATH}/ico_activities.gif");
+            }
+        }
+
+        &.prices{
+            h2{
+                background-image:url("@{IMAGE_PATH}/ico_price.gif");
+            }
+        }
+
+        &.address{
+            h2{
+
+                background-image:url("@{IMAGE_PATH}/ico_address.gif");
+            }
+        }
+        &.who, &.situation, &.services, &.activities, &.prices, &.address {
+            h2{
+                background-repeat:no-repeat;
+                background-position:left;
+                padding-left:50px;
+            }
+
+        }
+
+    }
+}

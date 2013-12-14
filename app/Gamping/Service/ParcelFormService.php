@@ -1,4 +1,5 @@
 <?php
+
 namespace Gamping\Service;
 
 use Gamping;
@@ -19,13 +20,19 @@ class ParcelFormService
      */
     private $currencyManager;
 
-    private $manager;
+    /**
+     * 
+     * @var \Gamping\Model\Parcel\Manager
+     */
+    private $parcelManager;
 
-    public function setManager(Gamping\Model\Parcel\Manager $manager)
+    
+    public function setParcelManager($manager)
     {
-        $this->manager = $manager;
+        $this->parcelManager = $manager;
     }
 
+    
     public function setCurrencyManager($currencyManager)
     {
         $this->currencyManager = $currencyManager;
@@ -40,7 +47,7 @@ class ParcelFormService
     {
         $builder = new Form();
         
-        $builder->setParcel($this->manager->getVoForCreation());
+        $builder->setParcel($this->parcelManager->getVoForCreation());
         $builder->setCurrencyManager($this->currencyManager);
         
         return $builder;

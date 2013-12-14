@@ -1,0 +1,6 @@
+classes:
+    ParcelFormService:
+        class: \Gamping\Service\ParcelFormService
+        call:
+            setParcelManager: [ @ParcelManager ]
+            setCurrencyManager: [ @CurrencyManager ]

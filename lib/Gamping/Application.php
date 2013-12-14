@@ -2,6 +2,8 @@
 namespace Gamping;
 
 use Symfony\Component\HttpFoundation\Request;
+use Gamping\Layout\Selector;
+use Gamping\Layout\Builder;
 /**
  * Global application object providing dependency injection for controllers
  * @author thibaud
@@ -48,7 +50,7 @@ class Application
         
     /**
      * 
-     * @var LayoutSelector
+     * @var Layout\Selector
      */
     private $layoutSelector;
     
@@ -114,9 +116,10 @@ class Application
             $view = $this->extractValue($output, 'view', '');
             $layout = $this->extractValue($output, 'layout', '');
             
-            $selector->addOutput($name, $layout, ROOT_DIR . DIRECTORY_SEPARATOR . $view); 
+            $selector->addOutput($name, $layout, $view, $this->extractValue($routeData, 'scripts')); 
         }
         
+        $selector->setRootDirectory(ROOT_DIR);
         $selector->setLayoutSelector($this->getLayoutSelector($routeName));
         
         return $selector;
@@ -125,10 +128,15 @@ class Application
     public function getLayoutSelector()
     {
         $this->loadData();
-        $layoutSelector = new LayoutSelector();
         
-        foreach ($this->data['layouts'] as $layout => $template) {
-            $layoutSelector->addLayout($layout, ROOT_DIR . DIRECTORY_SEPARATOR . $template);
+        $builder = new Builder();
+        $builder->setRootDirectory(ROOT_DIR);
+        
+        $layoutSelector = new Selector();
+        $layoutSelector->setBuilder($builder);
+        
+        foreach ($this->data['layouts'] as $layout => $data) {
+            $layoutSelector->addLayout($layout, $data);
         }
         
         $layoutSelector->setDefaultLayout($this->data['default-layout']);

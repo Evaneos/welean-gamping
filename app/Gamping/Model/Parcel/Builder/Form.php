@@ -16,19 +16,19 @@ class Form
     
     private $commodities = array();
     
-    public function setCurrencyManager(Gamping\Model\Currency\Manager $manager)
+    public function setCurrencyManager($manager)
     {
         $this->currencyManager = $manager;
     }
     
-    public function setParcel(Gamping\Model\Parcel\VO $vo)
+    public function setParcel(\Gamping\Model\Parcel\VO $vo)
     {
         $this->parcel = $vo;
         
         return $this;
     }
     
-    public function setAddress(Gamping\Model\Address\VO $vo)
+    public function setAddress(\Gamping\Model\Address\VO $vo)
     {
         $this->address = $vo;
         
@@ -63,7 +63,7 @@ class Form
         return $this;
     }
     
-    public function setAddress($address, $locality, $zipCode, $city)
+    public function setAddressInformation($address, $locality, $zipCode, $city)
     {
         $this->address->setAddress($address);
         $this->address->setLocality($locality);

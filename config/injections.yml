@@ -4,3 +4,4 @@ include :
     - part/modules.yml
     - part/interceptor.yml
     - part/classes.yml
+    - part/services.yml

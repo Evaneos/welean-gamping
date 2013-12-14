@@ -40,6 +40,7 @@
 
 @import "./layout.less";
 @import "@{PAGES_PATH}/homepage.less";
+@import "@{PAGES_PATH}/add.less";
 
 
 .hostcard{
@@ -78,43 +79,52 @@
     .h1{
         padding-left:@SPACER;
     }
-    .testimonial{
-        padding-left:@SPACER;
-        @SIZE:80px;
-        @COLOR:@GREEN;
+
+}
+.testimonial{
+    padding-left:@SPACER;
+    @SIZE:80px;
+    @COLOR:@GREEN;
+    img{
+        background:@GREEN;
+        width:@SIZE;
+        height:@SIZE;
+        .border-radius(@SIZE);
+        margin-top:10px;
+        border:2px solid @COLOR;
+    }
+    .h3{
+        margin-bottom:.2em;
+        padding-bottom:.2em;
+        border-bottom:2px solid @COLOR;
+    }
+    q{
+        display:block;
+    }
+    &.img-left{
         img{
-            background:@GREEN;
-            width:@SIZE;
-            height:@SIZE;
-            .border-radius(@SIZE);
-            margin-top:10px;
-            border:2px solid @COLOR;
-        }
-        .h3{
-            margin-bottom:.2em;
-            padding-bottom:.2em;
-            border-bottom:2px solid @COLOR;
+            margin-right:@SPACER;
+            float:left;
         }
         q{
-            display:block;
+            margin-left:@SIZE + @SPACER;
         }
-        &.img-left{
-            img{
-                margin-right:@SPACER;
-                float:left;
-            }
-            q{
-                margin-left:@SIZE + @SPACER;
-            }
+    }
+    &.img-right{
+        img{
+            margin-left:@SPACER;
+            float:right;
         }
-        &.img-right{
-            img{
-                margin-left:@SPACER;
-                float:right;
-            }
-            q{
-                margin-right:@SIZE + @SPACER;
-            }
+        q{
+            margin-right:@SIZE + @SPACER;
+        }
+    }
+    &.nopadding{
+        h3{
+            border:none;
+        }
+        q{
+            margin-left:0;
         }
     }
 }
@@ -140,16 +150,25 @@
 }
 
 
-
 .smart-form{
+    .error{
+        border:1px solid @RED;
+        background:lighten(@RED, 30%);
+        margin:@SPACER 0;
+        padding:@SPACER/2;
+        .border-radius(3px);
+        color:@RED;
+        .font(sans);
+    }
     fieldset{
         border-bottom:1px solid @GREY_LIGHT;
         padding:2*@SPACER @SPACER;
         h2{
            margin-bottom:@SPACER;
+           clear:both;
         }
+        @H:36px;
         select{
-            @H:40px;
             clear:both;
             margin:@SPACER 0;
             float:left;
@@ -168,6 +187,40 @@
                 line-height:@H;
             }
         }
+        input[type="text"], input[type="number"] {
+            border:1px solid @GREY;
+            .box-shadow(0px 1px 1px rgba(0, 0, 0, .1));
+            .border-radius(3px);
+            height:@H;
+            line-height:@H;
+            margin-bottom:@SPACER;
+            padding-left:.5em;
+            padding-right:.5em;
+            &.long{
+                display:block;
+                width:90%;
+            }
+            &.small{
+                width:20%;
+            }
+        }
+        input[type="number"]{
+            text-align:right;
+        }
+
+        label{
+            &.inline{
+                margin-bottom:@SPACER;
+                height:@H;
+                line-height:@H;
+                input, select{
+                    margin-right:.5em;
+                }
+            }
+            &.block{
+                display:block;
+            }
+        }
         ul.checkboxlist{
             list-style-type:none;
             padding-left:0;
@@ -178,83 +231,5 @@
                 }
             }
         }
-        &.who{
-            h2{
-                background:url(http://www.gamping.com/wp-content/themes/camping/images/ico_who.gif) left no-repeat;
-                padding-left:50px;
-            }
-            ul.hosting_type{
-                list-style-type:none;
-                padding:0;
-                margin:0;
-                li{
-                    @SIZE:90px;
-                    float:left;
-                    margin-right:@SPACER;
-                    a{
-                        display:block;
-                        width:@SIZE;
-                        height:@SIZE;
-                        .border-radius(3px);
-                        background:@BROWN_LIGHT;
-                        border:1px solid @GREY;
-                        text-align:center;
-                        background-repeat:no-repeat;
-                        background-position:center center;
-                        line-height: 1.7 * @SIZE;
-                        color:@BROWN;
-                        .transition(all .15s);
-                        &:hover{
-                            text-decoration:none;
-                            background-color:darken(@BROWN_LIGHT, 3%);
-                        }
-                        &.selected{
-                            background-color:@GREEN;
-                            color:@WHITE;
-                        }
-                    }
-                    &.tent a{
-                        background-image:url("@{IMAGE_PATH}/receive_icon1.png");
-                        &.selected{
-                            background-image:url("@{IMAGE_PATH}/receive_icon1_on.png");
-                        }
-                    }
-                    &.caravan a{
-                        background-image:url("@{IMAGE_PATH}/receive_icon2.png");
-                        &.selected{
-                            background-image:url("@{IMAGE_PATH}/receive_icon2_on.png");
-                        }
-                    }
-                    &.campingcar a{
-                        background-image:url("@{IMAGE_PATH}/receive_icon3.png");
-                        &.selected{
-                            background-image:url("@{IMAGE_PATH}/receive_icon3_on.png");
-                        }
-                    }
-
-                }
-            }
-            select{
-                width:300px;
-            }
-        }
-        &.situation{
-            h2{
-                background:url("@{IMAGE_PATH}/ico_situation.gif") left no-repeat;
-                padding-left:50px;
-            }
-        }
-        &.services{
-            h2{
-                background:url("@{IMAGE_PATH}/ico_amentities.gif") left no-repeat;
-                padding-left:50px;
-            }
-            ul.checkboxlist{
-
-            }
-        }
-
-
-
     }
 }

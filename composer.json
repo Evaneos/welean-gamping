@@ -10,7 +10,8 @@
         "psr-0": {
             "Gamping\\": "lib",
             "Gamping\\Controller": "app",
-            "Gamping\\Model" : "app"
+            "Gamping\\Model" : "app",
+            "Gamping\\Service" : "app"
         },
         "files": [
             "lib/functions/translation.php"
