@@ -125,8 +125,9 @@ class Form extends Controller
     private function setCountry($builder) {
         $countryId = (int) $this->getParam('country', '');
         $country = $this->formService->getCountryById($countryId);
-
-        $builder->setCountry($country);
+        if ($country) {
+            $builder->setCountry($country);
+        }
     }
 
     private function setHost($builder) {
