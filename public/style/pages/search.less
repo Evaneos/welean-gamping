@@ -43,11 +43,13 @@ body.search{
     }
     #host-list{
         text-align:center;
+        vertical-align:top;
         div.host_place{
+            vertical-align:top;
             @IMG-H:100px;
             @BOX-H:180px;
             @AUTHOR_H:50px;
-
+            display:none;
             width:30%;
             min-width:200px;
             text-align:left;
@@ -60,6 +62,8 @@ body.search{
             position:relative;
             height:@BOX-H;
             text-align:center;
+            cursor:pointer;
+            .transition(all .2s);
             .in{
                 padding-top:@BOX-H - @IMG-H + @AUTHOR_H / 1.5;
                 h2, h3{
@@ -85,11 +89,23 @@ body.search{
                 border:2px solid #fff;
                 .transition(all .2s);
             }
-            &.focus{
-                .box-shadow(1px 4px 3px rgba(50, 50, 50, 0.35));
-                img.author{
-                    top:70px;
-                }
+            &.highlighted{
+                // .box-shadow(1px 4px 3px rgba(50, 50, 50, 0.7));
+                .box-shadow(0 3px 11px rgba(105, 176, 232, 0.7));
+            }
+            &.not-visible{
+                // opacity:.5;
+                // height:120px;
+                // img.author{
+                //     top:20px;
+                // }
+                // .in{
+                //     padding-top:70px;
+                // }
+                // a{
+                //     display:none;
+                // }
+                opacity:.6;
             }
         }
     }
