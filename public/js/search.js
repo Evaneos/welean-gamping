@@ -135,8 +135,11 @@ function loadData() {
     // Query from ajax here
     // @TODO
 
+    var markerBounds = new google.maps.LatLngBounds();
+
     // Add the marker (here as sample until load is done w/ ajax)
-    for(k=0; k<30; k++) {
+    for(k=0; k<10; k++) {
+
         var myLatlng = new google.maps.LatLng(45.758796 + Math.random(),4.834607 - Math.random());
         var markerData = {
             position : myLatlng,
@@ -147,9 +150,13 @@ function loadData() {
             host_name : 'Patricia T.',
             host_picture:'http://www.gamping.com/wp-content/authors/patou0526@yahoo.fr-1161-1384610599.jpg'
         }
+
         makeMarker(markerData);
+        markerBounds.extend(myLatlng);
     }
+
     highlightVisibleMarkers();
+    googleMap.fitBounds(markerBounds);
 }
 
 function hightlightSizebox(i) {
