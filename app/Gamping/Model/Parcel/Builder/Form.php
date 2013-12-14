@@ -4,6 +4,7 @@ namespace Gamping\Model\Parcel\Builder;
 
 use Gamping\Model\Parcel\Manager;
 use Berthe\Paginator;
+
 class Form
 {
     private $currencyManager;
@@ -21,6 +22,12 @@ class Form
     public function setCurrencyManager($manager)
     {
         $this->currencyManager = $manager;
+    }
+
+    public function setHosting($tent, $description, $campingcar) {
+        $this->parcel->allowTents($tent);
+        $this->parcel->allowCaravans($tent);
+        $this->parcel->allowCampingCars($tent);
     }
 
     public function setParcel(\Gamping\Model\Parcel\VO $vo)
@@ -80,15 +87,36 @@ class Form
         $this->address->setCity($city);
     }
 
-    public function setRates($currencyCode, $adultPrice, $extraAdultPrice)
-    {
-        $currency = $this->currencyManager->getByCode($currencyCode);
+    public function setLatLng() {
+        $address = implode(' ', array(
+            $this->address->getAddress(),
+            $this->address->getZipCode(),
+            $this->address->getCity()
+        ));
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, "http://maps.googleapis.com/maps/api/geocode/json?sensor=false&address=" . urlencode($address));
+        curl_setopt($curl, CURLOPT_HEADER, 0);
+        curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
+        $ret = json_decode(curl_exec($curl));
 
-        if ($currency === null) {
-            throw new \RuntimeException(sprintf('Invalid currency code [%s].', $currencyCode));
+        if ($ret->status === 'OK' && count($ret->results) > 0) {
+            $this->parcel->setLatitude($ret->results[0]->geometry->location->lat);
+            $this->parcel->setLongitude($ret->results[0]->geometry->location->lng);
         }
 
-        $this->parcel->setCurrencyCode($currency->getCode());
+    }
+
+    public function setRates($currencyId, $adultPrice, $extraAdultPrice)
+    {
+        $currency = $this->currencyManager->getById($currencyId);
+
+        if ($currency === null) {
+            throw new \RuntimeException(sprintf('Invalid currency code [%s].', $currencyId));
+        }
+
+        $this->parcel->setCurrencyId($currency->getId());
         $this->parcel->setPricePerAdult((float) $adultPrice);
         $this->parcel->setPricePerExtraAdult((float) $extraAdultPrice);
 
@@ -109,6 +137,15 @@ class Form
         return $this;
     }
 
+    public function setRawData($description, $rules, $capacity, $title) {
+        $this->parcel->setDescription($description);
+        $this->parcel->setRules($rules);
+        $this->parcel->setTitle($title);
+        $this->parcel->setCapacity($capacity);
+        $this->parcel->setCreatedAt(new \DateTime());
+        $this->parcel->setUpdatedAt(new \DateTime());
+    }
+
     public function addActivity($id)
     {
         $this->activities[] = $id;
@@ -118,7 +155,7 @@ class Form
 
     public function addCommodity($id)
     {
-        $this->services[] = $id;
+        $this->commodities[] = $id;
 
         return $this;
     }
@@ -152,7 +189,6 @@ class Form
 
             $parcelHasActivityVO->setActivityId($activity->getId());
             $parcelHasActivityVO->setParcelId($this->parcel->getId());
-            $parcelHasActivityVO->setOnline(true);
 
             if (! $parcelHasActivityManager->save($parcelHasActivityVO)) {
                 throw new \RuntimeException(sprintf('Could not save relationship between parcel [%d] and activity [%d].',

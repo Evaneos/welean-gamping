@@ -1,5 +1,5 @@
 <?php
-namespace Gamping\Model\Place;
+namespace Gamping\Model\ParcelHasSituationGeo;
 
 class Validator extends \Berthe\Validation\AbstractValidator {
     protected function doValidateSave(\Berthe\AbstractVO $vo) {

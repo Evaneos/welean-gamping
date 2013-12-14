@@ -6,17 +6,12 @@ class VO extends \Gamping\AbstractVO
 
     const VERSION = 1;
 
-    protected $address_id = 0;
-
-    protected $place_id = 0;
-
-    protected $name = "";
+    protected $name = 0;
 
     protected $description = "";
 
-    public function getName()
-    {
-        return $this->name;
+    public function getName($label = true, $lang = null) {
+        return $label ? $this->getTranslation('name', $lang) : $this->name;
     }
 
     public function setName($value)
@@ -33,28 +28,6 @@ class VO extends \Gamping\AbstractVO
     public function setDescription($description)
     {
         $this->description = $description;
-        return $this;
-    }
-
-    public function getPlaceId()
-    {
-        return $this->place_id;
-    }
-
-    public function setPlaceId($id)
-    {
-        $this->place_id = (int) $id;
-        return $this;
-    }
-
-    public function getAddressId()
-    {
-        return $this->address_id;
-    }
-
-    public function setAddressId($id)
-    {
-        $this->address_id = (int) $id;
         return $this;
     }
 }

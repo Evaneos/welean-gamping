@@ -1,5 +1,5 @@
 <?php
-namespace Gamping\Model\Place;
+namespace Gamping\Model\ParcelHasSituationGeo;
 
 class Storage extends \Berthe\DAL\AbstractStorage {
     const STORAGE_GUID = __NAMESPACE__;

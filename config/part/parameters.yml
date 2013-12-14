@@ -2,9 +2,9 @@ parameters :
     db :
         adapter : PDO_MYSQL
         params :
-            host : localhost
+            host : 192.168.1.8
             port : 3306
-            username : root
+            username : gamping
             password : gamping
             dbname : gamping
     facebook:
@@ -14,6 +14,7 @@ parameters :
     currentLanguage :
         iso2 : fr
         id : 1
+    dateDefaultTimezone : Europe/Paris
     defaultLanguages :
         gamping_com_dev :
             iso2 : en

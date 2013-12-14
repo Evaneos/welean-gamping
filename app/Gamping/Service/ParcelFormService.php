@@ -47,6 +47,8 @@ class ParcelFormService
 
     private $parcelHasCommodityManager;
 
+    private $situationGeoManager;
+
     public function __construct(DbWriter $db)
     {
         $this->db = $db;
@@ -92,6 +94,11 @@ class ParcelFormService
         $this->parcelHasCommodityManager = $manager;
     }
 
+    public function setSituationGeoManager($manager)
+    {
+        $this->situationGeoManager = $manager;
+    }
+
     public function getAllCountries() {
         return $this->countryManager->getAll();
     }
@@ -102,6 +109,18 @@ class ParcelFormService
 
     public function getAllCommodities() {
         return $this->commodityManager->getAll();
+    }
+
+    public function getAllSituationGeo() {
+        return $this->situationGeoManager->getAll();
+    }
+
+    public function getAllCurrencies() {
+        return $this->currencyManager->getAll();
+    }
+
+    public function getCountryById($id) {
+        return $this->countryManager->getById($id);
     }
 
     /**
@@ -126,11 +145,13 @@ class ParcelFormService
 
             $builder->saveParcel($this->parcelManager, $this->addressManager);
             $builder->saveActivities($this->activityManager, $this->parcelHasActivityManager);
-
+            $builder->saveCommodities($this->commodityManager, $this->parcelHasCommodityManager);
+            $this->db->rollback();
+            throw new \Exception('everything went fine, but rollback anyway');
             $this->db->commit();
         }
-        catch (Exception $ex) {
-            $this->db->rollback();
+        catch (\Exception $ex) {
+            // $this->db->rollback();
         }
     }
 }

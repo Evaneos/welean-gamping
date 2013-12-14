@@ -1,3 +1,12 @@
+<?php
+function get($dataContainer, $key) {
+    return isset($dataContainer[$key]) ? $dataContainer[$key] : null;
+};
+
+$data = $this->formData;
+var_dump($this->formData);
+
+?>
 <div class="container">
 
     <div id="content" class="col-md-9">
@@ -10,49 +19,49 @@
                     <h2 class="h2"><?= t('Qui voulez vous recevoir ?'); ?></h2>
                     <div data-form-choices="multiple">
                         <ul class="hosting_type">
-                            <li class="tent"><a href="#" data-name="hosting_tent"><?= t('Tente'); ?></a></li>
-                            <li class="caravan"><a href="#" data-name="hosting_caravan"><?= t('Caravan'); ?></a></li>
-                            <li class="campingcar"><a href="#" data-name="hosting_campingcar"><?= t('Camping car'); ?></a></li>
+                            <li class="tent"><a href="#" data-name="hosting_tent" <?= get($data, 'hosting_tent') == 1 ? 'class="selected"' : '' ?>><?= t('Tente'); ?></a></li>
+                            <li class="caravan"><a href="#" data-name="hosting_caravan" <?= get($data, 'hosting_caravan') == 1 ? 'class="selected"' : '' ?>><?= t('Caravan'); ?></a></li>
+                            <li class="campingcar"><a href="#" data-name="hosting_campingcar" <?= get($data, 'hosting_campingcar') == 1 ? 'class="selected"' : '' ?>><?= t('Camping car'); ?></a></li>
                         </ul>
-                        <input type="hidden" name="hosting_tent" value="0" />
-                        <input type="hidden" name="hosting_caravan" value="0" />
-                        <input type="hidden" name="hosting_campingcar" value="0" />
+                        <input type="hidden" name="hosting_tent" value="<?= get($data, 'hosting_tent') == 1 ? 1 : 0 ?>" />
+                        <input type="hidden" name="hosting_caravan" value="<?= get($data, 'hosting_tent') == 1 ? 1 : 0 ?>" />
+                        <input type="hidden" name="hosting_campingcar" value="<?= get($data, 'hosting_tent') == 1 ? 1 : 0 ?>" />
                     </div>
 
                     <select name="count">
-                        <option value="1"><?= t('1 personne'); ?></option>
-                        <option value="2"><?= t('2 personnes'); ?></option>
-                        <!-- aller jusqu'à 10 -->
+                        <option value="1"><?= '1' . ' ' . t('personne'); ?></option>
+                        <?php
+                        for ($i=1; $i <= 20; $i++) {
+                            ?>
+                            <option value="<?= $i; ?>" <?= get($data, 'count') == $i ? 'selected="selected"' : '' ?>><?= $i . ' ' . t('personnes'); ?></option>
+                            <?php
+                        }
+                        ?>
                     </select>
                 </fieldset>
 
                 <fieldset class="situation col-md-6">
                     <h2 class="h2"><?= t('Situation'); ?></h2>
                     <ul class="checkboxlist">
-                        <li>
-                            <label for="situation_sea">
-                                <input type="checkbox" name="situation_sea" id="situation_sea" />
-                                Mer
-                            </label>
-                        </li>
-                        <li>
-                            <label for="situation_sea">
-                                <input type="checkbox" name="situation_sea" id="situation_sea" />
-                                Ville
-                            </label>
-                        </li>
-                        <li>
-                            <label for="situation_sea">
-                                <input type="checkbox" name="situation_sea" id="situation_sea" />
-                                Montagne
-                            </label>
-                        </li>
-                        <li>
-                            <label for="situation_sea">
-                                <input type="checkbox" name="situation_sea" id="situation_sea" />
-                                Campagne
-                            </label>
-                        </li>
+                        <?php
+                        foreach($this->situationGeos as $situationGeo) {
+                            $situationList = get($data, 'situation_geo');
+                            if (is_array($situationList) && in_array($situationGeo->getId(), $situationList)) {
+                                $checked = 'checked="checked"';
+                            }
+                            else {
+                                $checked = '';
+                            }
+                            ?>
+                            <li>
+                                <label for="situation<?= $situationGeo->getId(); ?>">
+                                    <input type="checkbox" name="situation_geo[]" id="situation<?= $situationGeo->getId(); ?>" value="<?= $situationGeo->getId(); ?>" <?= $checked ?>/>
+                                    <?= $situationGeo->getName(); ?>
+                                </label>
+                            </li>
+                            <?php
+                        }
+                        ?>
                     </ul>
                 </fieldset>
             </div>
@@ -87,10 +96,17 @@
                             <ul class="checkboxlist">
                                 <?php
                                 foreach($commoditiesInPack as $commodity) {
+                                    $list = get($data, 'commodities');
+                                    if (is_array($list) && in_array($commodity->getId(), $list)) {
+                                        $checked = 'checked="checked"';
+                                    }
+                                    else {
+                                        $checked = '';
+                                    }
                                     ?>
                                     <li>
                                         <label for="commodity<?= $commodity->getId(); ?>">
-                                            <input type="checkbox" name="commodities" id="commodity<?= $commodity->getId(); ?>" value="<?= $commodity->getId(); ?>" />
+                                            <input type="checkbox" name="commodities[]" id="commodity<?= $commodity->getId(); ?>" value="<?= $commodity->getId(); ?>" <?= $checked ?> />
                                             <?= $commodity->getName(); ?>
                                         </label>
                                     </li>
@@ -136,10 +152,17 @@
                             <ul class="checkboxlist">
                                 <?php
                                 foreach($activitiesInPack as $activity) {
+                                    $list = get($data, 'activities');
+                                    if (is_array($list) && in_array($activity->getId(), $list)) {
+                                        $checked = 'checked="checked"';
+                                    }
+                                    else {
+                                        $checked = '';
+                                    }
                                     ?>
                                     <li>
                                         <label for="activity<?= $activity->getId(); ?>">
-                                            <input type="checkbox" name="activities" id="activity<?= $activity->getId(); ?>" value="<?= $activity->getId(); ?>" />
+                                            <input type="checkbox" name="activities[]" id="activity<?= $activity->getId(); ?>" value="<?= $activity->getId(); ?>" <?= $checked ?> />
                                             <?= $activity->getName(); ?>
                                         </label>
                                     </li>
@@ -171,9 +194,26 @@
                     <div class="col-md-12">
                         <label for="currency" class="block"><?= t('Devise :'); ?></label>
                         <select name="currency" id="currency">
-                            <option value="eur">&euro; <?= t('Euros'); ?></option>
-                            <option value="dol">&#36; <?= t('Dollar'); ?></option>
+                            <?php
+                            foreach($this->currencies as $currency) {
+                                ?>
+                                <option value="<?= $currency->getId(); ?>"><?= $currency->getHtml() . ' ' . $currency->getName() ?></option>
+                                <?php
+                            }
+                            ?>
                         </select>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="more-infos col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="h2"><?= t('Parlez-nous de votre terrain.'); ?></h2>
+
+                        <input type="text" name="title" class="long" placeholder="<?= t('Titre de votre annonce') ?>" />
+                        <textarea name="description" placeholder="<?= t('Décrivez votre terrain pour vos futurs campeurs...'); ?>"></textarea>
+                        <textarea name="rules" placeholder="<?= t('Listez ici les règles que les campeurs devront respecter...'); ?>"></textarea>
                     </div>
                 </div>
             </fieldset>
@@ -202,14 +242,37 @@
                         </select>
                     </div>
                     <div class="col-md-12">
-                        <input type="text" name="address" id="address" placeholder="<?= t('Adresse'); ?>" class="long" />
-                        <input type="text" name="address" id="address" placeholder="<?= t('Adresse (suite - optionnel)'); ?>" class="long" />
+                        <input type="text" name="address1" id="address1" placeholder="<?= t('Adresse'); ?>" class="long" />
+                        <input type="text" name="address2" id="address2" placeholder="<?= t('Adresse (suite - optionnel)'); ?>" class="long" />
                         <input type="text" name="zip" id="zip" placeholder="<?= t('Code postal'); ?>" class="small" />
                         <input type="text" name="city" id="city" placeholder="<?= t('Ville'); ?>" class="small" />
                     </div>
                 </div>
             </fieldset>
-           <div class="button-row">
+
+            <fieldset class="more-user col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="h2"><?= t('Pour vous joindre'); ?></h2>
+                        <p><?= t('Indiquez les informations relatives à votre compte'); ?></p>
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" class="long" name="firstname" id="firstname" placeholder="<?= t('Votre prénom') ?>" />
+                    </div>
+                    <div class="col-md-5">
+                        <input type="text" class="long" name="lastname" id="lastname" placeholder="<?= t('Votre nom') ?>" />
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-12">
+                        <input type="text" class="long" name="email" id="email" placeholder="<?= t('Votre email') ?>" />
+                    </div>
+                    <div class="col-md-12">
+                        <input type="password" class="long" name="password" id="password" placeholder="<?= t('Votre mot de passe') ?>" />
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="button-row">
                 <button type="submit" name="submit" value="true" class="submit"><?= t('Envoyer !'); ?></button>
             </div>
         </form>

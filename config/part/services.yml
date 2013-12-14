@@ -11,6 +11,7 @@ classes:
             setParcelHasCommodityManager: [ @ParcelHasCommodityManager ]
             setParcelManager: [ @ParcelManager ]
             setCountryManager: [ @CountryManager ]
+            setSituationGeoManager: [ @SituationGeoManager ]
 
     GeographicalService:
         class: \Gamping\Service\GeographicalService
