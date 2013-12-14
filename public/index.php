@@ -14,16 +14,22 @@ $silex['debug'] = true;
 $containerConfig = new \DICIT\Config\YML($injections);
 $container = new \Gamping\Container($containerConfig);
 
+
+// TRANSLATION BLOCK -------------------
 $translationEngine = $container->get('TranslationEngine');
 $host = str_replace('.', '_', strtolower($_SERVER['HTTP_HOST']));
 $langISO2 = $container->getParameter('defaultLanguages.' . $host . '.iso2');
 $langID = $container->getParameter('defaultLanguages.' . $host . '.id');
 $translationEngine->setDefaultLanguage($langISO2);
 define('LANG_ISO2', $langISO2);
-
 $container->setParameter('currentLanguage.iso2', $langISO2);
 $container->setParameter('currentLanguage.id', $langID);
 date_default_timezone_set($container->getParameter('dateDefaultTimezone'));
+
+// DNS BLOCK
+define('WEBSITE_FR', 'http://' . $container->getParameter('websites.fr.url'));
+define('WEBSITE_EN', 'http://' . $container->getParameter('websites.en.url'));
+define('WEBSITE_ES', 'http://' . $container->getParameter('websites.es.url'));
 
 $yaml = new Symfony\Component\Yaml\Yaml();
 
