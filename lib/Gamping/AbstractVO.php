@@ -44,7 +44,14 @@ class AbstractVO extends \Berthe\AbstractVO {
     protected function setProperties($properties) {
         foreach($properties as $key => $value) {
             if (property_exists($this, $key)) {
-                $this->{$key} = $value;
+                switch(1) {
+                    case is_int($this->{$key}) :
+                        $this->{$key} = (int) $value;
+                        break;
+                    default :
+                        $this->{$key} = $value;
+                        break;
+                }
             }
             else {
                 if (preg_match("`translation_(.*)$`i", $key, $match)) {

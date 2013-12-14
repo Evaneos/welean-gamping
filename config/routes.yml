@@ -1,6 +1,6 @@
 default-layout: index
 layouts:
-    index: 
+    index:
         template: app/views/index.phtml
         stylesheets:
             - [ "/style/style.less", less, screen ]
@@ -35,7 +35,7 @@ routes:
         output:
             html:
                 view: app/views/form/form.phtml
-                
+
     search:
         pattern: "/search"
         controller: searchController
@@ -48,7 +48,7 @@ routes:
         output:
             html:
                 view: app/views/search/search.phtml
-                
+
     searchRegions:
         pattern: "/ajax/regions-by-country/id/{id}"
         controller: searchRegionsController
@@ -56,7 +56,7 @@ routes:
         output:
             json:
                 view: app/views/search/regions.json.phtml
-                
+
     searchParcels:
         pattern: "/ajax/parcels-by-region/id/{id}"
         controller: parcelsByRegionController

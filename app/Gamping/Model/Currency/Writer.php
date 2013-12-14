@@ -8,6 +8,7 @@ class Writer extends \Gamping\DAL\AbstractWriter
     {
         $params = array(
             ':name' => $currency->getName(),
+            ':html' => $currency->getHtml(),
             ':code' => $currency->getCode()
         );
 
@@ -22,7 +23,7 @@ class Writer extends \Gamping\DAL\AbstractWriter
     {
         $sql = <<<SQL
             UPDATE currency
-            SET name = :name, code = :code
+            SET name = :name, code = :code, html = :html
             WHERE id = :id
 SQL;
 
@@ -32,8 +33,8 @@ SQL;
     public function insert(\Gamping\AbstractVO $object)
     {
         $sql = <<<SQL
-            INSERT INTO currency (name, code)
-            VALUES (:name, :code)
+            INSERT INTO currency (name, code, html)
+            VALUES (:name, :code, :html)
 SQL;
 
         $ret = (bool) $this->db->query($sql, $this->getParams($object, false));

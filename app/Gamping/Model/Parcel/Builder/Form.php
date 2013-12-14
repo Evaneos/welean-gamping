@@ -23,6 +23,12 @@ class Form
         $this->currencyManager = $manager;
     }
 
+    public function setHosting($tent, $description, $campingcar) {
+        $this->parcel->allowTents($tent);
+        $this->parcel->allowCaravans($tent);
+        $this->parcel->allowCampingCars($tent);
+    }
+
     public function setParcel(\Gamping\Model\Parcel\VO $vo)
     {
         $this->parcel = $vo;
@@ -80,15 +86,15 @@ class Form
         $this->address->setCity($city);
     }
 
-    public function setRates($currencyCode, $adultPrice, $extraAdultPrice)
+    public function setRates($currencyId, $adultPrice, $extraAdultPrice)
     {
-        $currency = $this->currencyManager->getByCode($currencyCode);
+        $currency = $this->currencyManager->getById($currencyId);
 
         if ($currency === null) {
-            throw new \RuntimeException(sprintf('Invalid currency code [%s].', $currencyCode));
+            throw new \RuntimeException(sprintf('Invalid currency code [%s].', $currencyId));
         }
 
-        $this->parcel->setCurrencyCode($currency->getCode());
+        $this->parcel->setCurrencyId($currency->getId());
         $this->parcel->setPricePerAdult((float) $adultPrice);
         $this->parcel->setPricePerExtraAdult((float) $extraAdultPrice);
 
@@ -107,6 +113,13 @@ class Form
         $this->parcel->rules = $rules;
 
         return $this;
+    }
+
+    public function setRawData($country, $description, $rules, $capacity) {
+        $this->parcel->setCountryId($country);
+        $this->parcel->setDescription($description);
+        $this->parcel->setRules($rules);
+        $this->parcel->setCapacity($capacity);
     }
 
     public function addActivity($id)

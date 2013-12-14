@@ -33,7 +33,6 @@ SQL;
         else {
             return false;
         }
-        }
     }
 
     public function delete(\Gamping\AbstractVO $object) {

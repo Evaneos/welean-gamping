@@ -10,6 +10,8 @@ class VO extends \Gamping\AbstractVO
 
     protected $code = "";
 
+    protected $html = "";
+
     public function getName()
     {
         return $this->name;
@@ -30,6 +32,18 @@ class VO extends \Gamping\AbstractVO
     public function setCode($code)
     {
         $this->code = $code;
+
+        return $this;
+    }
+
+    public function getHtml()
+    {
+        return $this->html;
+    }
+
+    public function setHtml($html)
+    {
+        $this->html = $html;
 
         return $this;
     }

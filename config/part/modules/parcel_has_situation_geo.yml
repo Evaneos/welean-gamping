@@ -1,0 +1,30 @@
+classes :
+    ParcelHasSituationGeoManager :
+        class : \Gamping\Model\ParcelHasSituationGeo\Manager
+        call :
+            setStorage : [ @ParcelHasSituationGeoStorage ]
+            setValidator : [ @ParcelHasSituationGeoValidator ]
+        interceptor : [ @ExceptionInterceptor ]
+    ParcelHasSituationGeoValidator :
+        class : \Gamping\Model\ParcelHasSituationGeo\Validator
+    ParcelHasSituationGeoStorage :
+        class : \Gamping\Model\ParcelHasSituationGeo\Storage
+        call :
+            setStoreVolatile : [ @ParcelHasSituationGeoStoreMemcached ]
+            setStorePersistent : [ @ParcelHasSituationGeoStoreDatabase ]
+            setStoreLevel1 : [ @StoreArray ]
+    ParcelHasSituationGeoStoreMemcached :
+        class : \Berthe\DAL\StoreMemcached
+    ParcelHasSituationGeoStoreDatabase :
+        class : \Gamping\DAL\StoreDatabase
+        call :
+            setReader : [ @ParcelHasSituationGeoReader ]
+            setWriter : [ @ParcelHasSituationGeoWriter ]
+    ParcelHasSituationGeoReader :
+        class : \Gamping\Model\ParcelHasSituationGeo\Reader
+        call :
+            setDb : [ @DbReader ]
+    ParcelHasSituationGeoWriter :
+        class : \Gamping\Model\ParcelHasSituationGeo\Writer
+        call :
+            setDb : [ @DbWriter ]

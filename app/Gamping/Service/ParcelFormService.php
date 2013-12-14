@@ -47,6 +47,8 @@ class ParcelFormService
 
     private $parcelHasCommodityManager;
 
+    private $situationGeoManager;
+
     public function __construct(DbWriter $db)
     {
         $this->db = $db;
@@ -92,6 +94,11 @@ class ParcelFormService
         $this->parcelHasCommodityManager = $manager;
     }
 
+    public function setSituationGeoManager($manager)
+    {
+        $this->situationGeoManager = $manager;
+    }
+
     public function getAllCountries() {
         return $this->countryManager->getAll();
     }
@@ -102,6 +109,14 @@ class ParcelFormService
 
     public function getAllCommodities() {
         return $this->commodityManager->getAll();
+    }
+
+    public function getAllSituationGeo() {
+        return $this->situationGeoManager->getAll();
+    }
+
+    public function getAllCurrencies() {
+        return $this->currencyManager->getAll();
     }
 
     /**
