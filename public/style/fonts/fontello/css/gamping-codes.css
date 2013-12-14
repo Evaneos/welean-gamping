@@ -2,5 +2,6 @@
 .icon-user:before { content: '\e800'; } /* '' */
 .icon-left-open:before { content: '\e802'; } /* '' */
 .icon-right-open:before { content: '\e801'; } /* '' */
+.icon-zoom-in:before { content: '\e805'; } /* '' */
 .icon-left-open-1:before { content: '\e804'; } /* '' */
 .icon-right-open-1:before { content: '\e803'; } /* '' */
