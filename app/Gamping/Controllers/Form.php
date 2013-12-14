@@ -34,6 +34,11 @@ class Form extends Controller
             $this->setCountry($builder);
             $builder->setLatLng();
             $this->formService->saveParcelFromBuilder($builder);
+
+            $this->setData('formData', $this->getAllParams());
+        }
+        else {
+            $this->setData('formData', array());
         }
 
         $this->setData('countries', $this->formService->getAllCountries());
