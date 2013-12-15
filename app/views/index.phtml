@@ -45,14 +45,14 @@ less = {env: "development"};
     <div class="container">
         <div class="row">
             <div class="col-md-4 side hidden-xs hidden-sm">
-                <a href="/connect" class="button-discover" title="tilap">Connectez vous !</a>
+                <a href="/connect" class="button-discover" title="<?= t('Connexion') ?>"><?= t('Connexion') ?></a>
             </div>
             <div class="col-md-4" id="site-title">
                 <h1><a href="/" title="Gamping.com"><img src="/images/gamping-logo.png" title="" alt=""/></h1>
-                <div>Le camping chez l'habitant</div>
+                <div><?= t("Le camping chez l'habitant") ?></div>
             </div>
             <div class="col-md-4 side hidden-xs hidden-sm">
-                <a href="/register" class="button-suggest" title="tilap">Proposez votre terrain</a>
+                <a href="/register" class="button-suggest" title="<?= t('Proposez votre terrain') ?>"><?= t('Proposez votre terrain') ?></a>
                 <i class="icon-user"></i>
 
             </div>
@@ -65,7 +65,7 @@ less = {env: "development"};
 <aside id="press" class="container">
     <div class="row">
         <div class="col-md-12">
-            Ils en parlent <img src="/images/press_logos2.gif" title="Gamping dans la presse" alt="Gamping dans la presse">
+            <?= t('Ils en parlent') ?> <img src="/images/press_logos2.gif" title="Gamping" alt="Gamping">
         </div>
     </div>
 </aside>
