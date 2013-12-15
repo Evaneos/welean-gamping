@@ -32,9 +32,9 @@ class VO extends \Gamping\AbstractVO
 
     protected $capacity = 0;
 
-    protected $latitude = 0;
+    protected $latitude = 0.0;
 
-    protected $longitude = 0;
+    protected $longitude = 0.0;
 
     /**
      * Policy applied by the host (no walking around naked...)
