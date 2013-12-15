@@ -52,8 +52,7 @@
                             <ul class="available">
                                 <?php
                                 foreach($commoditiesInPack as $commodity) {
-                                    $list = array();
-                                    if (is_array($list) && in_array($commodity->getId(), $list)) {
+                                    if (array_key_exists($commodity->getId(), $this->phc)) {
                                         $checked = 'class="yes"';
                                     }
                                     else {
@@ -101,8 +100,7 @@
                             <ul class="available">
                                 <?php
                                 foreach($activitiesInPack as $activity) {
-                                    $list = array();
-                                    if (is_array($list) && in_array($activity->getId(), $list)) {
+                                    if (array_key_exists($activity->getId(), $this->pha)) {
                                         $checked = 'class="yes"';
                                     }
                                     else {

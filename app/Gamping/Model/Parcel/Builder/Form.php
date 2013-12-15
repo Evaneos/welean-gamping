@@ -29,8 +29,8 @@ class Form
 
     public function setHosting($tent, $description, $campingcar) {
         $this->parcel->allowTents($tent);
-        $this->parcel->allowCaravans($tent);
-        $this->parcel->allowCampingCars($tent);
+        $this->parcel->allowCaravans($description);
+        $this->parcel->allowCampingCars($campingcar);
     }
 
     public function setParcel(\Gamping\Model\Parcel\VO $vo)
