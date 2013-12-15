@@ -11,9 +11,10 @@
     <div class="semi right">
         <form class="smart-form">
             <select id="country_select" name="country" onchange="loadData()">
-                <option value="">Pays</option>
+                <?php
+                $selectedCountryId = ($this->selectedCountry) ? $this->selectedCountry->getId() : 0; ?>
                 <?php foreach ($this->countries as $country): ?>
-                <option value="<?= $country->getId() ?>"><?= $country->getName() ?></option>
+                <option value="<?= $country->getId() ?>"<?php if($country->getId() == $selectedCountryId) echo ' selected="selected"' ?>><?= $country->getName() ?></option>
                 <?php endforeach;?>
             </select>
             <select id="region_select" name="region">

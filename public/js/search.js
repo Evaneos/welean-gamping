@@ -68,16 +68,16 @@ function makeMarker(data) {
     var row = document.createElement('div');
     row.className = "host_place";
     row.id = 'host_marker_'+idCounter;
-    row.innerHTML = imgStr + imgAuthorStr + '<div class="in"><h3>' + data.host_name + '</h3><a href=""><i class="icon-zoom-in"></i> Plus de détails</div>';;
+    row.innerHTML = imgStr + imgAuthorStr + '<div class="in"><h3>' + data.host_name + '</h3><a href="' + data.url + '"><i class="icon-zoom-in"></i> Plus de détails</div>';;
     row.className = "host_place";
 
     // Bind sidebar item to marker in gmap
-    row.onclick = function(){
+    /*row.onclick = function(){
         var latLng = myMarker.getPosition();
         googleMap.setCenter(latLng);
         showMarkerInfo(t);
         highlightVisibleMarkers();
-    }
+    }*/
 
     // Bind gmap marker to sidebar item
     var popupWidth = 210;
@@ -147,6 +147,7 @@ function loadData() {
             var markerData = {
                 position : myLatlng,
                 title : parcelView.parcel.name,
+                url : parcelView.parcel.url,
                 sidebarItem: "Nouille Orc",
                 image: 'http://www.gamping.com/wp-content/uploads/2013/11/P10109951-716x287.jpg',
                 content: "",

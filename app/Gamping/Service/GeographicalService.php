@@ -130,8 +130,9 @@ class GeographicalService
 
             $view->setParcel($parcel)
                 ->setUser($user);
-
-            $view->setUserPicture($userPictures[$user->getPictureId()]);
+            if($user->getPictureId()){
+                $view->setUserPicture($userPictures[$user->getPictureId()]);
+            }
 
             if (array_key_exists($user->getPictureId(), $userPictures)) {
                 $view->setUserPicture($userPictures[$user->getPictureId()]);

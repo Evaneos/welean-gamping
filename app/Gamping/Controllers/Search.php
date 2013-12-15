@@ -24,10 +24,10 @@ class Search extends Controller
 
         $countries = $this->geographicalService->getAllCountriesWithActiveParcel();
 
-        if($computername > 0)
+        if($computername !== 0)
         {
             $country = $this->countryManager->getByComputername($computername);
-            $this->setData('country', $country);
+            $this->setData('selectedCountry', $country);
         }
 
 

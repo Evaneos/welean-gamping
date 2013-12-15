@@ -12,7 +12,7 @@ foreach ($this->parcelViews as $parcelView) {
         'name' => $parcel->getTitle(),
         'lat' => $parcel->getLatitude(),
         'lng' => $parcel->getLongitude(),
-        'url' => sprintf('/parcel/id/%d/', $parcel->getId()));
+        'url' => sprintf('/parcel/%d', $parcel->getId()));
     $data['user'] = array(
         'id' => $user->getId(), 
         'name' => $user->getFirstname(), 
