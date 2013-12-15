@@ -3,7 +3,7 @@
 -- Server version:               5.5.34-0ubuntu0.13.10.1 - (Ubuntu)
 -- Server OS:                    debian-linux-gnu
 -- HeidiSQL version:             7.0.0.4053
--- Date/time:                    2013-12-15 01:05:08
+-- Date/time:                    2013-12-15 01:22:25
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `address` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=latin1;
 
--- Dumping data for table gamping.address: ~9 rows (approximately)
+-- Dumping data for table gamping.address: ~12 rows (approximately)
 DELETE FROM `address`;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
 INSERT INTO `address` (`id`, `address`, `locality`, `zip_code`, `city`) VALUES
@@ -165,20 +165,17 @@ CREATE TABLE IF NOT EXISTS `parcel` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
 
--- Dumping data for table gamping.parcel: ~9 rows (approximately)
+-- Dumping data for table gamping.parcel: ~12 rows (approximately)
 DELETE FROM `parcel`;
 /*!40000 ALTER TABLE `parcel` DISABLE KEYS */;
 INSERT INTO `parcel` (`id`, `address_id`, `capacity`, `country_id`, `created_at`, `currency_id`, `description`, `hosts_camping_cars`, `hosts_caravans`, `hosts_tents`, `latitude`, `longitude`, `online`, `price_per_adult`, `price_per_extra`, `region_id`, `rules`, `title`, `updated_at`, `user_id`) VALUES
-	(1, 2, 0, 0, NULL, 1, '', 0, 0, 0, '0', '0', 0, 5.00, 3.00, 0, '', '', NULL, 3),
-	(2, NULL, NULL, 1, NULL, 1, 'blabla', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, 1),
-	(3, 3, 0, 0, NULL, 1, '', 0, 0, 0, '0', '0', 0, 5.00, 3.00, 0, '', '', NULL, 3),
-	(7, 9, 5, 2, '2013-12-14', 1, 'c\'est rude', 1, 1, 1, '48.8401983', '2.3938587', 0, 9.00, 3.00, 0, 'azazeazazezeazae', 'chez mwa', '2013-12-14', 3),
-	(32, 34, 5, 1, '2013-12-14', 2, 'description', 1, 1, 1, '48.8413285', '2.3173417', 0, 5.00, 3.00, 0, 'regles', 'titre', '2013-12-14', 3),
+	(7, 9, 5, 1, '2013-12-14', 1, 'c\'est rude', 1, 1, 1, '45.8401983', '1.3938587', 0, 9.00, 3.00, 0, 'azazeazazezeazae', 'chez mwa', '2013-12-14', 3),
+	(32, 34, 5, 2, '2013-12-14', 2, 'description', 1, 1, 1, '40.4167754', '-3.7037902', 0, 5.00, 3.00, 0, 'regles', 'titre', '2013-12-14', 3),
 	(33, 64, 5, 1, '2013-12-14', 2, 'ma description', 1, 1, 1, '48.8408083', '2.3881833', 0, 5.00, 2.00, 0, '', 'mon titre', '2013-12-14', 11),
 	(36, 67, 5, 1, '2013-12-14', 2, 'ma description', 1, 1, 1, '48.8408083', '2.3881833', 0, 5.00, 2.00, 0, '', 'mon titre', '2013-12-14', 11),
 	(37, 68, 5, 1, '2013-12-14', 2, 'ma description', 1, 1, 1, '48.8408083', '2.3881833', 0, 5.00, 2.00, 0, '', 'mon titre', '2013-12-14', 11),
 	(38, 69, 4, 1, '2013-12-15', 2, 'azeazezeazea', 0, 0, 0, '48.8401983', '2.3938587', 0, 4.00, 1.00, 0, '', 'mon titre', '2013-12-15', 12),
-	(39, 71, 6, 1, '2013-12-15', 2, 'description du terrain', 1, 1, 1, '48.8287584', '2.3817486', 0, 3.00, 2.00, 0, 'regles du terrain', 'titre du terrain', '2013-12-15', 14),
+	(39, 71, 6, 2, '2013-12-15', 2, 'description du terrain', 1, 1, 1, '40.8287584', '-3.65', 0, 3.00, 2.00, 0, 'regles du terrain', 'titre du terrain', '2013-12-15', 14),
 	(40, 72, 6, 1, '2013-12-15', 2, 'description du terrain', 0, 1, 0, '48.8287584', '2.3817486', 0, 3.00, 2.00, 0, 'regles du terrain', 'titre du terrain', '2013-12-15', 15),
 	(41, 73, 6, 1, '2013-12-15', 2, 'description du terrain', 0, 1, 0, '48.8287584', '2.3817486', 0, 3.00, 2.00, 0, 'regles du terrain', 'titre du terrain', '2013-12-15', 16);
 /*!40000 ALTER TABLE `parcel` ENABLE KEYS */;
@@ -193,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `parcel_has_activity` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
 
--- Dumping data for table gamping.parcel_has_activity: ~7 rows (approximately)
+-- Dumping data for table gamping.parcel_has_activity: ~10 rows (approximately)
 DELETE FROM `parcel_has_activity`;
 /*!40000 ALTER TABLE `parcel_has_activity` DISABLE KEYS */;
 INSERT INTO `parcel_has_activity` (`id`, `parcel_id`, `activity_id`) VALUES
@@ -219,7 +216,7 @@ CREATE TABLE IF NOT EXISTS `parcel_has_commodity` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=latin1;
 
--- Dumping data for table gamping.parcel_has_commodity: ~13 rows (approximately)
+-- Dumping data for table gamping.parcel_has_commodity: ~22 rows (approximately)
 DELETE FROM `parcel_has_commodity`;
 /*!40000 ALTER TABLE `parcel_has_commodity` DISABLE KEYS */;
 INSERT INTO `parcel_has_commodity` (`id`, `parcel_id`, `commodity_id`) VALUES
@@ -425,7 +422,7 @@ CREATE TABLE IF NOT EXISTS `translation_engine` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=200 DEFAULT CHARSET=latin1;
 
--- Dumping data for table gamping.translation_engine: ~190 rows (approximately)
+-- Dumping data for table gamping.translation_engine: ~199 rows (approximately)
 DELETE FROM `translation_engine`;
 /*!40000 ALTER TABLE `translation_engine` DISABLE KEYS */;
 INSERT INTO `translation_engine` (`id`, `md5key`, `lang`, `k`, `val`) VALUES
@@ -651,7 +648,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
--- Dumping data for table gamping.user: ~6 rows (approximately)
+-- Dumping data for table gamping.user: ~9 rows (approximately)
 DELETE FROM `user`;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`id`, `firstname`, `lastname`, `city`, `country`, `description`, `language`, `email`, `phone`, `password`, `created_at`, `updated_at`, `is_banned`, `picture_id`) VALUES
