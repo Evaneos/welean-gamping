@@ -12,11 +12,11 @@ SELECT
     tComputername.name as translation_computername
 FROM
     {$this->getTableName()}
-LEFT JOIN
+JOIN
     translation as tName
     ON tName.id = {$this->getTableName()}.name
     AND tName.language_id = {$this->getDefaultLanguageId()}
-LEFT JOIN
+JOIN
     translation as tComputername
     ON tComputername.id = country.computername
     AND tComputername.language_id = {$this->getDefaultLanguageId()}
@@ -34,7 +34,7 @@ SELECT
     country.id
 FROM
     country
-LEFT JOIN
+JOIN
     translation as tComputername
     ON tComputername.id = country.computername
     AND tComputername.language_id = ?

@@ -14,6 +14,13 @@ parameters :
     currentLanguage :
         iso2 : fr
         id : 1
+    websites :
+        fr :
+            url : www.gamping.fr.dev
+        en :
+            url : www.gamping.com.dev
+        es :
+            url : www.gamping.es.dev
     dateDefaultTimezone : Europe/Paris
     defaultLanguages :
         gamping_com_dev :

@@ -11,6 +11,15 @@ classes:
 
     parcelController:
         class: \Gamping\Controllers\Parcel
+        props :
+            userManager : @UserManager
+            parcelManager : @ParcelManager
+            activityManager : @ActivityManager
+            commodityManager : @CommodityManager
+            countryManager : @CountryManager
+            regionManager : @RegionManager
+            parcelHasActivityManager : @ParcelHasActivityManager
+            parcelHasCommodityManager : @ParcelHasCommodityManager
 
     formController:
         class: \Gamping\Controllers\Form
